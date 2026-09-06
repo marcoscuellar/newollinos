@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ŌLLIN OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+
+  :root{
+    --graphite:#181A1E; --graphite-2:#1F2227; --slate:#2F343D; --slate-2:#3A404A;
+    --yellow:#FFE14D; --yellow-2:#F5D63A; --yellow-tint:#FFF8D6;
+    --light:#E9EDF2; --white:#FFFFFF; --off:#F6F7F9;
+    --ink:#181A1E; --ink-2:#3A404A; --gray:#6B7280; --gray-2:#9CA3AF;
+    --line:#D9DEE5; --line-dark:#2C3037;
+    --on-dark:#F3F4F6; --on-dark-2:#B8BEC7; --on-dark-3:#7C8390;
+    --serif:"Archivo",ui-sans-serif,system-ui,sans-serif; --sans:"Archivo",ui-sans-serif,system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --maxw:1160px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--white);color:var(--ink);font:16.5px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  h1,h2,h3{font-family:var(--serif);font-weight:800;font-stretch:105%;letter-spacing:-.035em;line-height:1.0;margin:0;text-wrap:balance}
+  p{margin:0}
+  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gray)}
+  .dark .eyebrow{color:var(--on-dark-3)}
+  .hl{color:var(--yellow)}
+  .mark{background:linear-gradient(transparent 62%,var(--yellow) 62%)}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;font:600 14px var(--sans);padding:13px 20px;border-radius:5px;border:1.5px solid var(--yellow);background:var(--yellow);color:var(--graphite);text-decoration:none;cursor:pointer;white-space:nowrap}
+  .btn:hover{background:var(--yellow-2);border-color:var(--yellow-2)}
+  .btn.line{background:transparent;color:var(--on-dark);border-color:var(--on-dark-3)}
+  .btn.line:hover{border-color:var(--on-dark);background:transparent}
+  .btn.ink{background:var(--graphite);border-color:var(--graphite);color:var(--white)}
+  .link{font:600 14px var(--sans);color:var(--ink);text-decoration:none;border-bottom:2px solid var(--yellow);padding-bottom:2px;display:inline-flex;gap:6px;align-items:center}
+
+  /* Ō mark — the O from ŌLLIN with its macron in yellow */
+  .omark{display:inline-flex;flex-direction:column;align-items:center;line-height:1}
+  .omark .bar{display:block;width:.62em;height:.11em;border-radius:.06em;background:var(--yellow);margin-bottom:.06em}
+  .omark .o{font-family:var(--sans);font-weight:800;font-size:1em;line-height:.85;letter-spacing:0}
+
+  /* ===== nav ===== */
+  header.bar{background:var(--graphite);position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line-dark)}
+  .bar-inner{height:70px;display:flex;align-items:center;justify-content:space-between}
+  .logo{display:flex;flex-direction:column;line-height:1}
+  .logo .w{font-family:var(--sans);font-weight:800;font-size:24px;letter-spacing:.01em;color:var(--white)}
+  .logo .w span{font-weight:300;color:var(--on-dark-2);margin-left:6px;padding-left:10px;border-left:1.5px solid var(--on-dark-3)}
+  .logo .t{font-family:var(--mono);font-size:9px;letter-spacing:.3em;color:var(--on-dark-3);margin-top:5px}
+  .bar nav{display:flex;gap:28px;align-items:center}
+  .bar nav a{font-size:14px;color:var(--on-dark-2);text-decoration:none;font-weight:500}
+  .bar nav a:hover{color:var(--white)}
+  .nav-hide{display:none}@media(min-width:800px){.nav-hide{display:inline}}
+
+  /* ===== hero ===== */
+  .hero{background:var(--graphite);color:var(--on-dark);padding:76px 0 74px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;right:-8%;top:0;width:52%;height:100%;background:linear-gradient(135deg,transparent 0%,rgba(255,255,255,.035) 45%,transparent 100%);pointer-events:none}
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:46px;align-items:center;position:relative}
+  @media(min-width:960px){.hero-grid{grid-template-columns:1.1fr .9fr;gap:60px}}
+  .hero h1{font-size:clamp(46px,6.6vw,84px);color:var(--white);margin-top:20px}
+  .hero .lede{margin-top:24px;font-size:19px;line-height:1.5;color:var(--on-dark-2);max-width:46ch}
+  .hero .lede b{color:var(--white);font-weight:600}
+  .hero .actions{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero .under{margin-top:28px;font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;color:var(--on-dark-3)}
+
+  .card{background:var(--graphite-2);border:1px solid var(--line-dark);border-radius:12px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+  .card-top{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line-dark)}
+  .card-top .lab{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--on-dark-3)}
+  .vchip{display:inline-flex;flex-direction:column;align-items:center;gap:5px;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--on-dark-2)}
+  .vchip .omark{font-size:26px;color:var(--white)}
+  .co{display:flex;gap:14px;align-items:center;padding:18px 18px 14px;border-bottom:1px solid var(--line-dark)}
+  .co .ic{width:44px;height:44px;border-radius:8px;background:var(--slate);display:flex;align-items:center;justify-content:center;flex:none}
+  .co .ic svg{width:20px;height:20px;stroke:var(--on-dark-2)}
+  .co .nm{font-family:var(--serif);font-size:19px;font-weight:700;letter-spacing:-.02em;color:var(--white)}
+  .co .mt{font-size:12.5px;color:var(--on-dark-3);margin-top:2px}
+  .row{display:flex;gap:14px;padding:13px 18px;border-bottom:1px solid var(--line-dark)}
+  .row:last-of-type{border-bottom:0}
+  .row .ic{width:22px;flex:none;padding-top:2px}.row .ic svg{width:18px;height:18px;stroke:var(--yellow)}
+  .row .k{font-weight:600;font-size:13.5px;color:var(--white)}
+  .row .v{font-size:13px;color:var(--on-dark-2);margin-top:2px;line-height:1.45}
+  .row .s{font-family:var(--mono);font-size:10.5px;color:var(--on-dark-3);margin-top:5px}
+  .row.held .v{color:var(--on-dark-3);font-style:italic}
+  .card-foot{padding:11px 18px;background:var(--graphite);font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--on-dark-3);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .card-foot b{color:var(--yellow);font-weight:500}
+  .ex{margin-top:10px;text-align:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--on-dark-3)}
+
+  /* ===== 4-step strip ===== */
+  .strip{background:var(--light);border-bottom:1px solid var(--line)}
+  .strip-inner{display:grid;grid-template-columns:1fr;gap:18px;padding:30px 0;align-items:center}
+  @media(min-width:900px){.strip-inner{grid-template-columns:repeat(4,1fr) auto}}
+  .step{display:flex;gap:14px;align-items:flex-start;position:relative}
+  .step .ic{width:40px;height:40px;border-radius:50%;background:var(--white);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex:none}
+  .step .ic svg{width:18px;height:18px;stroke:var(--ink)}
+  .step .t{font-weight:700;font-size:14px}
+  .step .d{font-size:12.5px;color:var(--gray);margin-top:2px;line-height:1.4}
+  .strip .tail{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--gray);text-transform:uppercase;padding-left:22px;border-left:1px solid var(--line);line-height:1.8}
+  @media(max-width:899px){.strip .tail{border-left:0;padding-left:0}}
+
+  /* ===== sections ===== */
+  section{padding:88px 0}
+  .head h2{font-size:clamp(34px,4.6vw,56px);margin-top:16px}
+  .head p{margin-top:18px;font-size:17.5px;color:var(--ink-2);max-width:56ch;line-height:1.55}
+  .head p b{color:var(--ink);font-weight:600}
+
+  /* haystack */
+  .hay{display:grid;grid-template-columns:1fr;gap:36px;align-items:start}
+  @media(min-width:960px){.hay{grid-template-columns:1fr 1.15fr;gap:56px}}
+  .cols{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:640px){.cols{grid-template-columns:1fr 1fr}}
+  .col{border-radius:10px;padding:24px 22px}
+  .col.them{background:var(--off);border:1px solid var(--line)}
+  .col.us{background:var(--yellow-tint);border:1px solid #F1E29A}
+  .col h3{font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.01em}
+  .col.us h3 .w{font-weight:700}.col.us h3 .o{font-weight:300;color:var(--gray);margin-left:5px;padding-left:8px;border-left:1.5px solid var(--gray-2)}
+  .col ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:11px}
+  .col li{display:flex;gap:11px;align-items:flex-start;font-size:14px;color:var(--ink-2);line-height:1.4}
+  .col li i{flex:none;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-top:-1px}
+  .col.them li i{background:var(--light);color:var(--gray)}
+  .col.us li i{background:var(--yellow);color:var(--graphite)}
+  .col li i svg{width:11px;height:11px}
+  .col.us li{color:var(--ink);font-weight:500}
+
+  /* pillars */
+  .pillars{background:var(--off);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .pgrid{display:grid;grid-template-columns:1fr;gap:18px;align-items:stretch}
+  @media(min-width:960px){.pgrid{grid-template-columns:1fr 1fr 1fr 1fr}}
+  .pcard{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:26px 24px 22px;display:flex;flex-direction:column}
+  .pcard.intro{background:transparent;border:0;padding-left:0}
+  .pcard .ic{width:44px;height:44px;border-radius:50%;background:var(--light);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+  .pcard .ic svg{width:20px;height:20px;stroke:var(--ink)}
+  .pcard h3{font-size:22px}
+  .pcard p{margin-top:10px;font-size:14.5px;color:var(--ink-2);line-height:1.5;flex:1}
+  .pcard .link{margin-top:20px;align-self:flex-start}
+  .pcard.hot{border-color:var(--graphite);background:var(--graphite);color:var(--on-dark)}
+  .pcard.hot .ic{background:var(--yellow)}.pcard.hot .ic svg{stroke:var(--graphite)}
+  .pcard.hot h3{color:var(--white)}.pcard.hot p{color:var(--on-dark-2)}
+  .pcard.hot .link{color:var(--white)}
+  .pcard.hot .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--yellow);margin-bottom:8px}
+
+  /* mushroom */
+  .mush{background:var(--graphite);color:var(--on-dark)}
+  .mush .head h2{color:var(--white)}.mush .head p{color:var(--on-dark-2)}.mush .head p b{color:var(--white)}
+  .mgrid{margin-top:48px;display:grid;grid-template-columns:1fr;gap:34px;align-items:center}
+  @media(min-width:940px){.mgrid{grid-template-columns:1.05fr .95fr;gap:60px}}
+  .tree{display:flex;flex-direction:column;align-items:center}
+  .tree .lvl{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .tree .con{width:2px;height:24px;background:var(--on-dark-3)}
+  .tree .con.dash{background:repeating-linear-gradient(to bottom,var(--on-dark-3) 0 4px,transparent 4px 8px)}
+  .pnode{background:var(--graphite-2);border:1px solid var(--line-dark);border-radius:9px;padding:12px 15px;min-width:196px;position:relative}
+  .pnode.hot{border-color:var(--yellow);box-shadow:0 0 0 3px rgba(255,225,77,.16)}
+  .pnode .nm{font-weight:700;font-size:14px;color:var(--white)}.pnode .tt{font-size:12px;color:var(--on-dark-2);margin-top:1px}
+  .pnode .r{margin-top:8px;display:flex;gap:8px;align-items:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase}
+  .pnode .r b{color:var(--yellow);font-weight:500}.pnode .r i{font-style:normal;color:var(--on-dark-3)}
+  .pnode .found{position:absolute;top:-10px;right:10px;background:var(--yellow);color:var(--graphite);font-family:var(--mono);font-size:9px;letter-spacing:.14em;padding:2px 8px;border-radius:100px;font-weight:600}
+  .mlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:20px}
+  .mlist li{display:flex;gap:16px;align-items:flex-start}
+  .mlist .k{flex:none;width:36px;height:36px;border-radius:50%;background:var(--yellow);color:var(--graphite);display:flex;align-items:center;justify-content:center;font:700 14px var(--mono)}
+  .mlist h3{font-family:var(--sans);font-size:17px;font-weight:700;color:var(--white)}
+  .mlist p{margin-top:4px;font-size:14.5px;color:var(--on-dark-2);line-height:1.5}
+  .mush .legend{margin-top:26px;display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-3)}
+  .mush .legend span{display:flex;align-items:center;gap:8px}
+  .mush .legend i{width:24px;height:0;border-top:2px solid var(--on-dark-3)}
+  .mush .legend i.d{border-top-style:dashed}
+
+  /* execution platform */
+  .exec{background:var(--off);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .egrid{margin-top:46px;display:grid;grid-template-columns:1fr;gap:34px;align-items:start}
+  @media(min-width:940px){.egrid{grid-template-columns:.95fr 1.05fr;gap:60px}}
+  .pname{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);background:var(--yellow);padding:5px 10px;border-radius:4px;font-weight:500}
+  .pname i{font-style:normal;opacity:.55;font-weight:400;letter-spacing:.1em}
+  .elist{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-direction:column;gap:16px}
+  .elist li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--ink-2);line-height:1.5}
+  .elist li > i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--yellow);display:inline-flex;align-items:center;justify-content:center;margin-top:2px}
+  .elist li > i svg{width:11px;height:11px;stroke:var(--graphite)}
+  .elist li b{color:var(--ink);font-weight:700}
+  .elist li span i{display:inline;width:auto;height:auto;border-radius:0;background:none;margin:0;font-style:italic;color:inherit}
+
+  .app{background:var(--graphite);border-radius:12px;padding:14px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);display:grid;grid-template-columns:1fr;gap:12px;font-size:12px}
+  
+  .app .lbl{font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--on-dark-3);margin-bottom:8px}
+  .upnext{display:grid;grid-template-columns:1fr;gap:8px}
+  @media(min-width:640px){.upnext{grid-template-columns:repeat(3,1fr)}}
+  .un{background:var(--graphite-2);border:1px solid var(--line-dark);border-radius:8px;padding:10px 12px;display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+  .un.on{border-color:var(--yellow)}
+  .un[data-profile]{cursor:pointer;transition:border-color .25s ease,background .25s ease,transform .25s ease}
+  .un[data-profile]:hover{background:#24282e}
+  .un[data-profile]:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+  .un .n{font-weight:700;color:var(--white);font-size:12.5px}.un .t{color:var(--on-dark-2);font-size:11px;margin-top:2px}
+  .un .co{display:block;margin-top:6px;padding:0;border:0;font-size:10.5px;color:var(--on-dark-3)}
+  .ready{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;background:var(--yellow);color:var(--graphite);padding:2px 6px;border-radius:3px;font-weight:600;flex:none}
+  .ccard{background:var(--white);color:var(--ink);border-radius:9px;padding:16px 18px;position:relative}
+  .ccard .touch{font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--gray)}.ccard .touch b{color:var(--ink);font-weight:500}
+  .ccard .vf{position:absolute;top:14px;right:16px;font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;color:var(--gray);text-align:center}
+  .ccard .vf .omark{font-size:26px;color:var(--ink);margin-bottom:5px}
+  .ccard h4{font-family:var(--serif);font-weight:800;font-size:26px;letter-spacing:-.03em;margin:8px 0 2px;text-transform:uppercase;line-height:1}
+  .ccard .role{font-weight:600;font-size:12.5px}.ccard .role span{color:#5a6b1c;font-weight:700}
+  .ccard .meta{font-family:var(--mono);font-size:9.5px;color:var(--gray);margin-top:4px;letter-spacing:.04em}
+  .know{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+  .know .h{font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--gray);margin-bottom:6px}
+  .know .h b{color:var(--ink);font-weight:500}
+  .kr{display:grid;grid-template-columns:58px 1fr;gap:10px;padding:6px 0;border-bottom:1px solid var(--line-2,#EEF0F3);font-size:11.5px;line-height:1.4}
+  .kr:last-child{border-bottom:0}
+  .kr .k{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--gray);padding-top:3px}
+  .kr .v{color:var(--ink-2)}.kr .v.dim{color:var(--gray-2)}
+  .kr .eng{font-family:var(--mono);font-size:8px;letter-spacing:.12em;color:var(--gray);margin-left:6px;white-space:nowrap}
+  .draft{margin-top:12px;background:var(--off);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+  .draft .g{font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;color:var(--gray)}
+  .draft p{margin:6px 0 0;font-size:11.5px;line-height:1.45;color:var(--ink-2)}
+  .draft .aud{margin-top:8px;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--gray);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .draft .aud b{color:var(--ink);font-weight:500}
+  .next{margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .next .nt{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;color:var(--gray);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  .next .nt span{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0;padding:4px 9px;border-radius:100px;background:var(--light);color:var(--ink)}
+  .next .nt span.on{background:var(--graphite);color:var(--white)}
+  .go{font:700 12.5px var(--sans);background:var(--yellow);color:var(--graphite);padding:9px 16px;border-radius:6px;white-space:nowrap}
+  .app .foot{grid-column:1/-1;font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--on-dark-3);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:2px 4px 0}
+  .app .foot b{color:var(--yellow);font-weight:500}
+
+  /* positioning */
+  .pos{background:var(--white)}
+  .pos .stmt{max-width:64ch}
+  .pos .stmt p{font-size:clamp(20px,2.6vw,28px);line-height:1.3;font-weight:600;letter-spacing:-.015em;color:var(--ink)}
+  .pos .stmt p + p{margin-top:18px}
+  .pos .stmt p.q{color:var(--ink-2);font-weight:500}
+  .pos .close{margin-top:34px;padding-top:24px;border-top:2px solid var(--graphite);display:grid;grid-template-columns:1fr;gap:6px}
+  @media(min-width:640px){.pos .close{grid-template-columns:1fr 1fr;gap:20px}}
+  .pos .close p{font-weight:800;font-stretch:105%;letter-spacing:-.03em;font-size:clamp(22px,3vw,32px);line-height:1.05}
+  .pos .close p b{background:linear-gradient(transparent 62%,var(--yellow) 62%);font-weight:800}
+
+
+
+  /* ===== drop shadows ===== */
+  .hero .card{box-shadow:0 2px 4px rgba(0,0,0,.35),0 24px 48px -16px rgba(0,0,0,.7),0 60px 90px -40px rgba(0,0,0,.6)}
+  .app{box-shadow:0 2px 4px rgba(0,0,0,.35),0 24px 48px -16px rgba(0,0,0,.7),0 60px 90px -40px rgba(0,0,0,.6)}
+  .app .ccard{box-shadow:0 12px 28px -14px rgba(0,0,0,.6)}
+  .app .un{box-shadow:0 8px 18px -10px rgba(0,0,0,.6)}
+  .mush .pnode{box-shadow:0 2px 3px rgba(0,0,0,.3),0 14px 26px -12px rgba(0,0,0,.7)}
+  .mush .pnode.hot{box-shadow:0 2px 3px rgba(0,0,0,.3),0 20px 36px -14px rgba(0,0,0,.8),0 0 0 3px rgba(255,225,77,.16)}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:1fr;gap:0;align-items:center}
+  @media(min-width:960px){.stats{grid-template-columns:1fr 1fr 1fr 1.3fr}}
+  .stats .lbl{grid-column:1/-1;background:var(--yellow);color:var(--graphite);font-family:var(--sans);font-size:15px;font-weight:800;letter-spacing:.01em;text-transform:uppercase;line-height:1.15;padding:12px 18px;margin-bottom:28px;border-radius:3px}
+  .stats .lbl br{display:none}
+  .stat{padding:8px 34px;border-left:1px solid var(--line)}
+  .stat .fig{font-family:var(--serif);font-size:54px;font-weight:800;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+  .stat .fig small{font-size:24px;font-weight:500}
+  .stat .cap{margin-top:8px;font-size:13.5px;color:var(--ink-2);font-weight:500;line-height:1.35}
+  .stat .cite{margin-top:5px;font-family:var(--mono);font-size:10px;color:var(--gray)}
+  .quote{padding:8px 0 8px 34px;border-left:1px solid var(--line);font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+  .quote .who{margin-top:8px;font-family:var(--mono);font-size:10.5px;color:var(--gray)}
+  .quote .slot{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-2);margin-top:6px}
+  @media(max-width:959px){.stat,.quote{border-left:0;padding-left:0;padding-top:18px}}
+
+  /* rules */
+  .rules-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+  .rgrid{margin-top:34px;display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:860px){.rgrid{grid-template-columns:repeat(3,1fr)}}
+  .rule{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:22px 22px 20px;display:flex;gap:16px;align-items:flex-start}
+  .rule .ic{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex:none}
+  .rule .ic svg{width:19px;height:19px;stroke:var(--ink)}
+  .rule h3{font-family:var(--sans);font-size:17px;font-weight:700}
+  .rule h3 b{font-weight:700}
+  .rule p{margin-top:5px;font-size:14px;color:var(--ink-2);line-height:1.45}
+
+  /* cta */
+  .cta{background:var(--graphite);color:var(--on-dark);padding:88px 0;position:relative;overflow:hidden}
+  .cta::after{content:"";position:absolute;right:-6%;bottom:-30%;width:40%;height:160%;background:linear-gradient(160deg,transparent,rgba(255,255,255,.05) 50%,transparent);transform:rotate(12deg);pointer-events:none}
+  .cta-grid{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;position:relative}
+  @media(min-width:900px){.cta-grid{grid-template-columns:1.2fr auto}}
+  .cta h2{font-size:clamp(40px,5.6vw,68px);color:var(--white);margin-top:14px}
+  .cta p{margin-top:16px;font-size:17px;color:var(--on-dark-2);max-width:48ch}
+  .cta .actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .cta .fine{margin-top:22px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--on-dark-3)}
+  footer{background:var(--graphite);border-top:1px solid var(--line-dark);padding:24px 0 36px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--on-dark-3);text-transform:uppercase}
+  .foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  :focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+
+
+/* ===== MOTION PASS · Motion.dev ===== */
+html.motion-ready .motion-reveal{opacity:0;transform:translateY(22px)}
+html.motion-ready .hero .eyebrow,
+html.motion-ready .hero h1,
+html.motion-ready .hero .lede,
+html.motion-ready .hero .actions,
+html.motion-ready .hero .under{opacity:0;transform:translateY(18px)}
+html.motion-ready .hero .card{opacity:0;transform:translateY(28px) scale(.975);transform-origin:50% 58%}
+.hero .hl{display:inline-block;position:relative}
+.hero .hl::after{content:"";position:absolute;left:-.03em;right:-.03em;bottom:.02em;height:.09em;background:var(--yellow);border-radius:99px;transform:scaleX(0);transform-origin:left center;opacity:.95}
+html.motion-ready .hero .hl::after{animation:motionUnderline .65s .72s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes motionUnderline{to{transform:scaleX(1)}}
+
+/* Verified account card: each intelligence row becomes a completed check. */
+.hero .row{position:relative;transition:border-color .25s ease,background-color .25s ease}
+.hero .row::after{content:"✓";position:absolute;right:16px;top:14px;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);color:var(--graphite);font:800 10px var(--mono);opacity:0;transform:scale(.55)}
+.hero .row.motion-verified{background:rgba(255,225,77,.035)}
+.hero .row.motion-verified::after{opacity:1;transform:scale(1);transition:opacity .22s ease,transform .35s cubic-bezier(.2,.9,.2,1.35)}
+.hero .row.held::after{content:"—";background:var(--slate);color:var(--on-dark-2)}
+.hero .vchip{position:relative}
+.hero .vchip.motion-pulse::before{content:"";position:absolute;inset:-7px -9px;border:1px solid var(--yellow);border-radius:8px;animation:verifiedPulse 1.25s ease-out forwards;pointer-events:none}
+@keyframes verifiedPulse{0%{opacity:.8;transform:scale(.86)}100%{opacity:0;transform:scale(1.22)}}
+
+/* Four checks become a scroll-led verification rail. */
+.strip-inner{position:relative}
+@media(min-width:900px){
+  .strip-inner::before{content:"";position:absolute;left:22px;right:174px;top:50px;height:2px;background:linear-gradient(90deg,var(--yellow) 0 var(--check-progress,0%),var(--line) var(--check-progress,0%) 100%);z-index:0;transition:background .18s linear}
+  .strip-inner .step{z-index:1}
+}
+.strip .step .ic{transition:background-color .28s ease,border-color .28s ease,transform .4s cubic-bezier(.2,.9,.2,1.25);box-shadow:0 0 0 0 rgba(255,225,77,0)}
+.strip .step.motion-active .ic{background:var(--yellow);border-color:var(--yellow);transform:scale(1.08);box-shadow:0 0 0 7px rgba(255,225,77,.13)}
+.strip .step.motion-active .t{color:var(--ink)}
+
+/* Haystack: visual filter field behind the comparison cards. */
+#why{position:relative;overflow:hidden}
+#why .wrap{position:relative;z-index:1}
+.signal-field{position:absolute;inset:10% 0 6%;pointer-events:none;overflow:hidden;opacity:.42}
+.signal-dot{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--gray-2);opacity:.28;will-change:transform,opacity}
+.signal-dot.hot{width:8px;height:8px;background:var(--yellow);opacity:1;box-shadow:0 0 0 7px rgba(255,225,77,.12)}
+
+/* Mushroom grows outward from the seed contact. */
+.mush .pnode{will-change:transform,opacity}
+html.motion-ready .mush .pnode{opacity:0;transform:translateY(12px) scale(.94)}
+.mush .con{transform-origin:top center;will-change:transform,opacity}
+html.motion-ready .mush .con{opacity:0;transform:scaleY(0)}
+.mush .found{transition:transform .3s ease}
+.mush .pnode.hot.motion-node-live .found{animation:tagPop .45s .12s cubic-bezier(.2,.9,.2,1.3) both}
+@keyframes tagPop{from{opacity:0;transform:translateY(5px) scale(.9)}to{opacity:1;transform:none}}
+
+/* GO behaves like a live workspace. */
+.app .un{transition:border-color .28s ease,transform .28s ease,opacity .28s ease}
+.app .ccard{will-change:transform,opacity}
+.app .know .kr,.app .draft,.app .next{will-change:transform,opacity}
+html.motion-ready .app .know .kr,
+html.motion-ready .app .draft,
+html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
+.app .ready{transition:transform .3s cubic-bezier(.2,.9,.2,1.3),background-color .25s ease}
+.app .go{display:inline-block;cursor:pointer;transition:box-shadow .25s ease}
+.app .go.motion-ready-go{box-shadow:0 0 0 7px rgba(255,225,77,.13)}
+
+/* Micro-interactions */
+.btn,.link,.pcard,.rule{will-change:transform}
+@media(hover:hover) and (pointer:fine){
+  .btn:hover{transform:translateY(-2px)}
+  .link:hover{transform:translateX(3px)}
+}
+
+/* Stats count-up baseline */
+.stat .fig{font-variant-numeric:tabular-nums}
+
+/* Scroll progress: nearly invisible, useful system feedback. */
+.motion-progress{position:fixed;left:0;top:0;width:100%;height:2px;z-index:30;pointer-events:none;transform-origin:0 50%;transform:scaleX(0);background:var(--yellow)}
+
+/* Accessibility: preserve every piece of content with motion disabled. */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  html.motion-ready .motion-reveal,
+  html.motion-ready .hero .eyebrow,
+  html.motion-ready .hero h1,
+  html.motion-ready .hero .lede,
+  html.motion-ready .hero .actions,
+  html.motion-ready .hero .under,
+  html.motion-ready .hero .card,
+  html.motion-ready .mush .pnode,
+  html.motion-ready .mush .con,
+  html.motion-ready .app .know .kr,
+  html.motion-ready .app .draft,
+  html.motion-ready .app .next{opacity:1!important;transform:none!important}
+  .signal-field,.motion-progress{display:none!important}
+}
+
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-inner">
+    <div class="logo"><div class="w">ŌLLIN<span>OS</span></div><div class="t">INTELLIGENCE FOR REAL WORK</div></div>
+    <nav>
+      <a class="nav-hide" href="#why">Why</a>
+      <a class="nav-hide" href="#product">Product</a>
+      <a class="nav-hide" href="#mushroom">Mushroom</a>
+      <a class="nav-hide" href="#execute">GO</a>
+      <a class="nav-hide" href="#rules">Rules</a>
+      <a class="nav-hide" href="#run">Contact</a>
+      <a class="btn" href="#run">Get started →</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero dark">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Sales intelligence · Verified before it reaches you</p>
+        <h1>Stop<br>the <span class="hl">noise.</span></h1>
+        <p class="lede">ŌLLIN OS finds the right accounts, the right people, and the reason to reach out right now.</p>
+        <p class="lede" style="margin-top:14px;font-size:17px">Every signal is cross-checked before it reaches your team, so they spend less time researching and more time having the right conversations.</p>
+        <div class="actions">
+          <a class="btn" href="#run">Bring us an account. We'll run it live. →</a>
+          <a class="btn line" href="#mushroom">Whole Account Mapping</a>
+        </div>
+        <p class="under">REAL SIGNALS. REAL PEOPLE. YOUR CALL.</p>
+      </div>
+
+      <div>
+        <div class="card" aria-label="Example verified account card">
+          <div class="card-top"><span class="lab">ACCOUNT INTELLIGENCE</span><span class="vchip" title="Verified"><span class="omark" aria-hidden="true"><i class="bar"></i><span class="o">O</span></span>VERIFIED</span></div>
+          <div class="co">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg></div>
+            <div><div class="nm">Meridian Logistics</div><div class="mt">Logistics · 640 employees · Series C</div></div>
+          </div>
+          <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></div><div><div class="k">Why now</div><div class="v">$60M Series C announced. East Coast hiring has tripled in 30 days, with no regional operations leader in seat.</div><div class="s">SEC filing · ATS · company sources</div></div></div>
+          <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><div><div class="k">Right person</div><div class="v">Daniel Reyes — VP, Operations. Owns the buildout and appears directly responsible for regional expansion.</div><div class="s">Org chart · LinkedIn · hiring activity</div></div></div>
+          <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1.1-4.3A8 8 0 1 1 21 12z"/></svg></div><div><div class="k">Right message</div><div class="v">Expansion is moving faster than regional hiring. Lead with the operational pressure that creates — not a generic sales pitch.</div><div class="s">Generated only from verified signals above</div></div></div>
+          <div class="row held"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><div><div class="k">Direct line</div><div class="v">Not verified — withheld.</div><div class="s">If we can't verify it, we don't invent it</div></div></div>
+          <div class="card-foot"><span>FAILED A CHECK? <b>IT DOESN'T REACH YOU.</b></span><span>NOTHING SENDS <b>WITHOUT YOUR APPROVAL.</b></span></div>
+        </div>
+        <p class="ex">Example card · illustrative data</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4 CHECKS ============ -->
+  <div class="strip">
+    <div class="wrap strip-inner">
+      <div class="step"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h8"/></svg></div><div><div class="t">1. Source found</div><div class="d">A credible first-party or primary source.</div></div></div>
+      <div class="step"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div><div><div class="t">2. Cross-checked</div><div class="d">Confirmed against an independent signal.</div></div></div>
+      <div class="step"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><div><div class="t">3. Live-confirmed</div><div class="d">Checked against the current system of record.</div></div></div>
+      <div class="step"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><div class="t">4. Engine QA</div><div class="d">Final audit before the intelligence reaches your team.</div></div></div>
+      <div class="tail">High confidence.<br>Zero guesswork.</div>
+    </div>
+  </div>
+
+  <!-- ============ HAYSTACK ============ -->
+  <section id="why">
+    <div class="wrap hay">
+      <div class="head">
+        <p class="eyebrow">The difference</p>
+        <h2>The haystack is their product. <span class="mark">The needle is ours.</span></h2>
+        <p>Most sales platforms give your team more data to sort through. <b>ŌLLIN OS does the sorting first.</b></p>
+        <p style="margin-top:12px">We find the signal, verify it, connect it to the right person, and show your team why the account matters now. What reaches them is ready to use — not another list to investigate.</p>
+      </div>
+      <div class="cols">
+        <div class="col them">
+          <h3>Traditional sales intelligence</h3>
+          <ul>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></i>Massive contact lists</li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></i>Verification stops at contact accuracy</li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></i>Missing context left for reps to research</li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></i>Individual contacts without the full buying picture</li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></i>More information for your team to sort</li>
+          </ul>
+        </div>
+        <div class="col us">
+          <h3><span class="w">ŌLLIN</span><span class="o">OS</span></h3>
+          <ul>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Every signal shows its source</li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Critical facts are cross-checked before they reach you</li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Unknowns stay unknown</li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Accounts, people, and relationships are mapped together</li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>Your team decides what happens next</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PILLARS ============ -->
+  <section id="product" class="pillars">
+    <div class="wrap pgrid">
+      <div class="pcard intro">
+        <p class="eyebrow">Built for real work</p>
+        <h2 style="font-size:clamp(34px,4vw,48px);margin-top:14px">From insight to impact.</h2>
+        <p>Verification, the whole account, and a human on the trigger — then a place to run it. One system. That's ŌLLIN OS.</p>
+        <a class="link" href="#run" style="margin-top:22px;align-self:flex-start">Run it on your account →</a>
+      </div>
+      <div class="pcard">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></div>
+        <h3>Verified Insights</h3>
+        <p>Every claim runs four checks and arrives with its source attached. Nothing to re-read, re-find, or second-guess.</p>
+        <a class="link" href="#why">How the four checks work →</a>
+      </div>
+      <div class="pcard hot">
+        <div class="tag">MUSHROOM · MUSHROOM OUT THE ACCOUNT</div>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M12 11.5 6 17M12 11.5l6 5.5"/></svg></div>
+        <h3>Whole Account Mapping</h3>
+        <p>The VP didn't answer? The director under her, the manager under him, finance, talent — every reporting line labeled verified or inferred. Every person with their own reason to reply. <b style="color:var(--white)">Never single-threaded again.</b></p>
+        <a class="link" href="#mushroom">See Mushroom →</a>
+      </div>
+      <div class="pcard">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+        <h3>It prepares. You decide.</h3>
+        <p>ŌLLIN OS does the research, the checking, and the draft. Your team makes the call. The relationship was always yours.</p>
+        <a class="link" href="#rules">The rules →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MUSHROOM ============ -->
+  <section id="mushroom" class="mush dark">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Mushroom · Map the whole account</p>
+        <h2>The VP didn't answer? <span class="hl">Don't get single-threaded.</span></h2>
+        <p>ŌLLIN finds the person you started with — then maps the people around them. <b>Buyers, blockers, influencers, and operators, with reporting lines and roles clearly labeled.</b> So when one contact goes quiet, your team already knows where to go next.</p>
+      </div>
+      <div class="mgrid">
+        <div>
+          <div class="tree" aria-hidden="true">
+            <div class="lvl"><div class="pnode"><div class="nm">Rachel Okafor</div><div class="tt">Chief Operating Officer</div><div class="r"><b>econ. buyer</b><i>· verified</i></div></div></div>
+            <div class="con"></div>
+            <div class="lvl"><div class="pnode hot"><span class="found">FOUND FIRST</span><div class="nm">Daniel Reyes</div><div class="tt">VP, Operations</div><div class="r"><b>champion</b><i>· verified</i></div></div></div>
+            <div class="con"></div>
+            <div class="lvl">
+              <div class="pnode"><div class="nm">Priya Natarajan</div><div class="tt">Director, Regional Ops</div><div class="r"><b>evaluator</b><i>· verified</i></div></div>
+              <div class="pnode"><div class="nm">Tom Lindqvist</div><div class="tt">Dir. Finance &amp; Planning</div><div class="r"><b>blocker</b><i>· verified</i></div></div>
+            </div>
+            <div class="con dash"></div>
+            <div class="lvl"><div class="pnode"><div class="nm">Marcus Bell</div><div class="tt">Sr. Manager, East Coast</div><div class="r"><b>influencer</b><i>· line inferred · held</i></div></div></div>
+          </div>
+          <div class="legend"><span><i></i> confirmed</span><span><i class="d"></i> inferred — clearly marked</span></div>
+        </div>
+        <ul class="mlist">
+          <li><span class="k">1</span><div><h3>Start with the person you found</h3><p>One contact is the seed. ŌLLIN builds outward from there.</p></div></li>
+          <li><span class="k">2</span><div><h3>Mushroom the account</h3><p>Map the buyers, blockers, influencers, and operators around them — not just more names.</p></div></li>
+          <li><span class="k">3</span><div><h3>Know what's verified</h3><p>Confirmed relationships stay solid. Inferred ones are clearly marked. No guesswork presented as fact.</p></div></li>
+          <li><span class="k">4</span><div><h3>Give every person a reason to engage</h3><p>Different roles care about different things. ŌLLIN helps your team approach each person with the context that actually matters to them.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXECUTION ============ -->
+  <section id="execute" class="exec">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">ŌLLIN GO · Where the work runs</p>
+        <h2>ŌLLIN OS finds it. <span class="mark">ŌLLIN GO runs it.</span></h2>
+        <p>Everything ŌLLIN OS finds lands in <span class="pname">ŌLLIN GO <i>· go.ollinos.com</i></span> — the workspace where your outreach actually runs. One card per contact: the company, the person, the evidence, the reason to act, and a ready draft. Your team reviews it, adjusts it, and sends it from there.</p>
+      </div>
+      <div class="egrid">
+        <div>
+          <ul class="elist">
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><span><b>One card, everything on it.</b> What we know about the org, what we know about the contact, and the draft — every line tagged with the engine that found it.</span></li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><span><b>Multi-touch, mapped to the account.</b> Each contact in the org gets their own angle and their own sequence — coordinated, not copy-pasted.</span></li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><span><b>Grounded in facts. Audited.</b> Every draft shows how many verified facts it stands on and passes an audit before it's ready. "Unable to verify" and "not tracked yet" are shown as-is — never filled in.</span></li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><span><b>Approval is not send.</b> It arrives prepared with the next touch already scheduled. A person hits <i>Let's go</i>. Always.</span></li>
+          </ul>
+        </div>
+        <div class="app" aria-label="Example of the execution workspace">
+          <div>
+            <div class="lbl">UP NEXT</div>
+            <div class="upnext">
+              <div class="un on" data-profile="meridian" role="button" tabindex="0"><div><div class="n">Daniel Reyes</div><div class="t">VP, Operations</div><div class="co">Meridian Logistics</div></div><span class="ready">READY</span></div>
+              <div class="un" data-profile="northstar" role="button" tabindex="0"><div><div class="n">Amara Singh</div><div class="t">VP, Talent Acquisition</div><div class="co">Northstar Health</div></div><span class="ready">READY</span></div>
+              <div class="un" data-profile="forgeworks" role="button" tabindex="0"><div><div class="n">Lucas Bennett</div><div class="t">Director, Supply Chain</div><div class="co">ForgeWorks Manufacturing</div></div><span class="ready">READY</span></div>
+            </div>
+          </div>
+          <div class="ccard">
+            <div class="touch">FIRST TOUCH · <b>TOUCH 1</b></div>
+            <div class="vf"><span class="omark" aria-hidden="true"><i class="bar"></i><span class="o">O</span></span>VERIFIED</div>
+            <h4 data-go="name">Daniel Reyes</h4>
+            <div class="role"><span data-go="title">VP, Operations</span> · <span data-go="company">Meridian Logistics ↗</span></div>
+            <div class="meta" data-go="meta">d.reyes@meridian-logistics.com · FIND ON LINKEDIN · BOSTON, MA · 500–1000</div>
+            <div class="know">
+              <div class="h"><b>01</b> WHAT WE KNOW · THE ORG</div>
+              <div class="kr"><div class="k">SIGNAL</div><div class="v" data-go="signal1">$60M Series C; East Coast ops hiring up 3× in 30 days<span class="eng">ENGINE 02 · SIGNALS</span></div></div>
+              <div class="kr"><div class="k">MONEY</div><div class="v" data-go="money">Series C closed 12 days ago<span class="eng">ENGINE 01 · TIMING</span></div></div>
+              <div class="kr"><div class="k">BUYER</div><div class="v dim" data-go="buyer">not tracked yet</div></div>
+              <div class="kr"><div class="k">SIGNAL</div><div class="v" data-go="signal2">Second signal: 3 open regional ops roles on live ATS<span class="eng">SIGNAL</span></div></div>
+            </div>
+            <div class="know">
+              <div class="h"><b>02</b> WHAT WE KNOW · THE CONTACT</div>
+              <div class="kr"><div class="k">WHY</div><div class="v" data-go="why">Owns the East Coast buildout; no regional leader in seat<span class="eng">COMPANY INTEL</span></div></div>
+              <div class="kr"><div class="k">HOOK</div><div class="v" data-go="hook">Expansion is outrunning regional hiring</div></div>
+            </div>
+            <div class="draft">
+              <div class="g" data-go="grounded">GROUNDED IN 5 FACTS</div>
+              <p data-go="draft">Running Operations at a company scaling a whole region means you're hiring for a team that doesn't exist yet, on a clock you didn't set…</p>
+              <div class="aud"><span data-go="audit">498 CHARS · 78 WORDS · <b>AUDITED ✓</b></span><span>OPEN EMAIL · COPY</span></div>
+            </div>
+            <div class="next">
+              <div class="nt">NEXT TOUCH IN <span>1 day</span><span class="on">3 days</span><span>5 days</span></div>
+              <span class="go">Let's go »</span>
+            </div>
+          </div>
+          <div class="foot"><span>NOTHING SENDS WITHOUT YOUR APPROVAL</span><span><b>EXAMPLE DATA</b> · NOT REAL CONTACTS</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section>
+    <div class="wrap stats">
+      <div class="lbl">Same hustle.<br>No wasted swings.</div>
+      <div class="stat"><div class="fig">60<small>%</small></div><div class="cap">of a seller's time goes to work that isn't selling</div><div class="cite">Salesforce · State of Sales, 7th ed.</div></div>
+      <div class="stat"><div class="fig">14.6<small> hrs</small></div><div class="cap">a week spent searching, before admin takes 3.6 more</div><div class="cite">Bullhorn · GRID 2026</div></div>
+      <div class="stat"><div class="fig">3.5–4.5<small>×</small></div><div class="cap">more likely to have grown revenue — firms running AI</div><div class="cite">Bullhorn · GRID 2026</div></div>
+      <div class="quote">“The AI is smart on this one, and the data it finds—and how it validates itself—this is one of a kind.”<div class="who">— Sr. Executive at Bullhorn</div><div class="slot">PUBLISHED WITH PERMISSION</div></div>
+    </div>
+  </section>
+
+  <!-- ============ RULES ============ -->
+  <section id="rules" style="background:var(--off);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="rules-head">
+        <div class="head" style="max-width:60ch">
+          <p class="eyebrow">The rules</p>
+          <h2 style="font-size:clamp(34px,4.4vw,52px)">Three things it will never do.</h2>
+          <p>Not guardrails we added. The way it was built.</p>
+        </div>
+        <a class="link" href="#run">How the engine audits itself →</a>
+      </div>
+      <div class="rgrid">
+        <div class="rule"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h3>Never <b>invents</b></h3><p>Verifiable sources only. No made-up companies, people, or facts. Empty beats plausible.</p></div></div>
+        <div class="rule"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h8"/></svg></div><div><h3>Never <b>softens</b></h3><p>A claim that fails a check is dropped — not hedged, not "likely." You see the real signal, including the unknowns.</p></div></div>
+        <div class="rule"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><div><h3>Never <b>sends on its own</b></h3><p>ŌLLIN OS prepares. Your team reviews and decides. Always. Approval is not send.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CORE POSITIONING ============ -->
+  <section class="pos">
+    <div class="wrap">
+      <p class="eyebrow">Core positioning</p>
+      <div class="stmt" style="margin-top:18px">
+        <p class="q">Your reps shouldn't spend their day researching who to call, whether the information is right, or what matters to the account.</p>
+        <p>ŌLLIN OS does that work first.</p>
+        <p class="q">It turns scattered sales data into verified, actionable account intelligence so your team can spend more time selling and less time sorting.</p>
+      </div>
+      <div class="close">
+        <p>Verification is <b>the mechanism.</b></p>
+        <p>Better decisions are <b>the product.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section id="run" class="cta dark">
+    <div class="wrap cta-grid">
+      <div>
+        <p class="eyebrow">30 minutes · your account · the engines running live</p>
+        <h2>Bring an account.</h2>
+        <p>Name one you're working right now. You'll watch the four checks, see every source, and get the card. Then you go sell.</p>
+        <p class="fine">NO LIST · NO NEWSLETTER · NO TRACKER · A PERSON REPLIES WITHIN ONE BUSINESS DAY</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="#run">Bring an account. We'll run it live. →</a>
+        <a class="btn line" href="#run">Email direct</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot"><span>ŌLLIN OS · Turn information into action</span><span>ŌLLIN, like the glyph: always in motion</span></div>
+</footer>
+
+
+<script type="module">
+  import { animate, inView, scroll, stagger } from "https://cdn.jsdelivr.net/npm/motion@13.2.0/+esm";
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.documentElement.classList.add("motion-ready");
+
+  // Page progress — tiny, product-like system feedback.
+  const progress = document.createElement("div");
+  progress.className = "motion-progress";
+  document.body.prepend(progress);
+  if (!reduce) scroll(p => progress.style.transform = `scaleX(${p})`);
+
+  // Hero: headline first, then the product proves the claim.
+  if (!reduce) {
+    const heroItems = [
+      ".hero .eyebrow", ".hero h1", ".hero .lede:nth-of-type(2)",
+      ".hero .lede:nth-of-type(3)", ".hero .actions", ".hero .under"
+    ].map(s => document.querySelector(s)).filter(Boolean);
+    animate(heroItems, { opacity:[0,1], y:[18,0] }, { duration:.58, delay:stagger(.075), ease:[.22,1,.36,1] });
+    const heroCard = document.querySelector(".hero .card");
+    animate(heroCard, { opacity:[0,1], y:[28,0], scale:[.975,1] }, { duration:.8, delay:.28, ease:[.22,1,.36,1] });
+
+    const rows = [...document.querySelectorAll(".hero .row")];
+    rows.forEach((row,i) => setTimeout(() => row.classList.add("motion-verified"), 760 + i*360));
+    setTimeout(() => document.querySelector(".hero .vchip")?.classList.add("motion-pulse"), 760 + rows.length*360);
+  }
+
+  // General editorial reveals.
+  const revealTargets = document.querySelectorAll("section:not(.hero) .head, .cols, .pgrid .pcard, .mlist li, .elist li, .rules-head, .rule, .pos .stmt p, .pos .close p, .cta-grid > *");
+  revealTargets.forEach(el => el.classList.add("motion-reveal"));
+  if (!reduce) {
+    inView(".motion-reveal", el => {
+      animate(el, { opacity:[0,1], y:[22,0] }, { duration:.62, ease:[.22,1,.36,1] });
+    }, { margin:"0px 0px -34% 0px", amount:.28 });
+  }
+
+  // Four checks: the rail fills and each check locks in.
+  const strip = document.querySelector(".strip-inner");
+  const checks = [...document.querySelectorAll(".strip .step")];
+  if (!reduce && strip) {
+    inView(strip, () => {
+      checks.forEach((step,i) => setTimeout(() => {
+        step.classList.add("motion-active");
+        strip.style.setProperty("--check-progress", `${((i+1)/checks.length)*100}%`);
+      }, i*260));
+    }, { margin:"0px 0px -22% 0px", amount:.58 });
+  } else {
+    checks.forEach(step => step.classList.add("motion-active"));
+    strip?.style.setProperty("--check-progress","100%");
+  }
+
+  // Haystack → needle: many weak signals compress into one strong signal.
+  const why = document.querySelector("#why");
+  if (why && !reduce) {
+    const field = document.createElement("div");
+    field.className = "signal-field";
+    for(let i=0;i<34;i++){
+      const dot=document.createElement("i");
+      dot.className="signal-dot" + (i===17 ? " hot" : "");
+      dot.style.left=`${4 + ((i*37)%92)}%`;
+      dot.style.top=`${8 + ((i*53)%82)}%`;
+      field.appendChild(dot);
+    }
+    why.prepend(field);
+    const dots=[...field.children];
+    inView(why, () => {
+      dots.forEach((dot,i) => {
+        const hot=dot.classList.contains("hot");
+        animate(dot,
+          hot ? { scale:[.8,1.15,1], opacity:[0,1,1] } : { x:[0,(50-(i%10)*10)], y:[0,(25-(i%7)*8)], opacity:[.25,.08] },
+          { duration:hot?1.1:1.4, delay:i*.012, ease:[.22,1,.36,1] }
+        );
+      });
+    }, { margin:"0px 0px -26% 0px", amount:.52 });
+    scroll(p => {
+      field.style.transform=`translateY(${(p-.5)*22}px)`;
+    }, { target:why, offset:["start end","end start"] });
+  }
+
+  // Mushroom: draw the org outward from the seed person.
+  const mush = document.querySelector("#mushroom");
+  if (mush) {
+    const nodes=[...mush.querySelectorAll(".pnode")];
+    const seed=mush.querySelector(".pnode.hot");
+    const lines=[...mush.querySelectorAll(".con")];
+    if (!reduce) inView(mush, () => {
+      if(seed){ animate(seed,{opacity:[0,1],y:[12,0],scale:[.94,1]},{duration:.5,ease:[.22,1,.36,1]}); seed.classList.add("motion-node-live"); }
+      const others=nodes.filter(n=>n!==seed);
+      setTimeout(() => lines.forEach((line,i)=>animate(line,{opacity:[0,1],scaleY:[0,1]},{duration:.35,delay:i*.22,ease:"easeOut"})),250);
+      setTimeout(() => animate(others,{opacity:[0,1],y:[12,0],scale:[.94,1]},{duration:.52,delay:stagger(.16),ease:[.22,1,.36,1]}),420);
+    }, { margin:"0px 0px -26% 0px", amount:.52 });
+    else { nodes.forEach(n=>{n.style.opacity=1;n.style.transform="none"}); lines.forEach(l=>{l.style.opacity=1;l.style.transform="none"}); }
+  }
+
+  // ŌLLIN GO: rotate through genuinely different accounts so the workspace feels alive.
+  const app = document.querySelector(".app");
+  if (app) {
+    const profiles = {
+      meridian: {
+        name:"Daniel Reyes", title:"VP, Operations", company:"Meridian Logistics ↗",
+        meta:"d.reyes@meridian-logistics.com · FIND ON LINKEDIN · BOSTON, MA · 500–1000",
+        signal1:'$60M Series C; East Coast ops hiring up 3× in 30 days<span class="eng">ENGINE 02 · SIGNALS</span>',
+        money:'Series C closed 12 days ago<span class="eng">ENGINE 01 · TIMING</span>',
+        buyer:'not tracked yet', buyerDim:true,
+        signal2:'Second signal: 3 open regional ops roles on live ATS<span class="eng">SIGNAL</span>',
+        why:'Owns the East Coast buildout; no regional leader in seat<span class="eng">COMPANY INTEL</span>',
+        hook:'Expansion is outrunning regional hiring', grounded:'GROUNDED IN 5 FACTS',
+        draft:"Running Operations at a company scaling a whole region means you're hiring for a team that doesn't exist yet, on a clock you didn't set…",
+        audit:'498 CHARS · 78 WORDS · <b>AUDITED ✓</b>'
+      },
+      northstar: {
+        name:"Amara Singh", title:"VP, Talent Acquisition", company:"Northstar Health ↗",
+        meta:"a.singh@northstar-health.com · FIND ON LINKEDIN · CHICAGO, IL · 1000–5000",
+        signal1:'6 new clinic openings announced; 47 clinical roles opened in 21 days<span class="eng">ENGINE 02 · SIGNALS</span>',
+        money:'Acquisition financing closed 3 weeks ago<span class="eng">ENGINE 01 · TIMING</span>',
+        buyer:'CHRO identified and verified<span class="eng">MUSHROOM · ORG MAP</span>', buyerDim:false,
+        signal2:'Recruiting headcount appears flat while hiring demand rises<span class="eng">SIGNAL</span>',
+        why:'Owns talent acquisition through a multi-site expansion<span class="eng">COMPANY INTEL</span>',
+        hook:'Hiring volume is rising faster than recruiting capacity', grounded:'GROUNDED IN 6 FACTS',
+        draft:'Six clinic openings can turn recruiting into a throughput problem fast. Your hiring demand is climbing while the team responsible for filling it appears unchanged…',
+        audit:'512 CHARS · 82 WORDS · <b>AUDITED ✓</b>'
+      },
+      forgeworks: {
+        name:"Lucas Bennett", title:"Director, Supply Chain", company:"ForgeWorks Manufacturing ↗",
+        meta:"l.bennett@forgeworks-mfg.com · FIND ON LINKEDIN · DALLAS, TX · 500–1000",
+        signal1:'New Texas plant announced; 28 operations and maintenance roles posted in 14 days<span class="eng">ENGINE 02 · SIGNALS</span>',
+        money:'$42M capex expansion disclosed this quarter<span class="eng">ENGINE 01 · TIMING</span>',
+        buyer:'COO identified and verified<span class="eng">MUSHROOM · ORG MAP</span>', buyerDim:false,
+        signal2:'Plant Manager role remains open ahead of the production ramp<span class="eng">SIGNAL</span>',
+        why:'Leads supplier and launch readiness for the new facility<span class="eng">COMPANY INTEL</span>',
+        hook:'The site launch has a leadership gap before production ramps', grounded:'GROUNDED IN 5 FACTS',
+        draft:'A new plant creates a narrow window where supplier readiness, staffing, and launch ownership all collide. With the Plant Manager seat still open, that pressure likely lands across your team…',
+        audit:'526 CHARS · 84 WORDS · <b>AUDITED ✓</b>'
+      }
+    };
+
+    const queue=[...app.querySelectorAll(".un[data-profile]")];
+    const ccard=app.querySelector(".ccard");
+    const fields={};
+    app.querySelectorAll("[data-go]").forEach(el=>fields[el.dataset.go]=el);
+    let activeKey="meridian";
+    let autoTimer=null;
+
+    const renderProfile=(key, userInitiated=false) => {
+      const p=profiles[key]; if(!p || key===activeKey && userInitiated===false && ccard.dataset.ready) return;
+      activeKey=key; ccard.dataset.ready="1";
+      queue.forEach(q=>q.classList.toggle("on",q.dataset.profile===key));
+      const apply=()=>{
+        fields.name.textContent=p.name; fields.title.textContent=p.title; fields.company.textContent=p.company;
+        fields.meta.textContent=p.meta; fields.signal1.innerHTML=p.signal1; fields.money.innerHTML=p.money;
+        fields.buyer.innerHTML=p.buyer; fields.buyer.classList.toggle("dim",!!p.buyerDim);
+        fields.signal2.innerHTML=p.signal2; fields.why.innerHTML=p.why; fields.hook.textContent=p.hook;
+        fields.grounded.textContent=p.grounded; fields.draft.textContent=p.draft; fields.audit.innerHTML=p.audit;
+      };
+      if(reduce){ apply(); return; }
+      animate(ccard,{opacity:[1,.38],y:[0,5]},{duration:.16,ease:"easeOut"}).then(()=>{
+        apply();
+        animate(ccard,{opacity:[.38,1],y:[5,0]},{duration:.34,ease:[.22,1,.36,1]});
+      });
+    };
+
+    queue.forEach(q=>{
+      const activate=()=>{ clearInterval(autoTimer); renderProfile(q.dataset.profile,true); };
+      q.addEventListener("click",activate);
+      q.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();activate();} });
+    });
+
+    const detailRows=[...app.querySelectorAll(".know .kr")];
+    const draft=app.querySelector(".draft");
+    const next=app.querySelector(".next");
+    if (!reduce) inView(app, () => {
+      animate(detailRows,{opacity:[0,1],y:[8,0]},{duration:.38,delay:stagger(.075),ease:[.22,1,.36,1]});
+      setTimeout(()=>draft && animate(draft,{opacity:[0,1],y:[8,0]},{duration:.48,ease:[.22,1,.36,1]}),520);
+      setTimeout(()=>{
+        if(next) animate(next,{opacity:[0,1],y:[8,0]},{duration:.42,ease:[.22,1,.36,1]});
+        app.querySelector(".go")?.classList.add("motion-ready-go");
+      },820);
+      const keys=["meridian","northstar","forgeworks"]; let i=0;
+      clearInterval(autoTimer);
+      autoTimer=setInterval(()=>{ i=(i+1)%keys.length; renderProfile(keys[i]); },3400);
+    }, { margin:"0px 0px -28% 0px", amount:.48 });
+    else [...detailRows,draft,next].filter(Boolean).forEach(el=>{el.style.opacity=1;el.style.transform="none"});
+  }
+
+  // Count-up statistics without changing their final copy.
+  const statValues=[
+    { el:document.querySelectorAll(".stat .fig")[0], end:60, suffix:"%", decimals:0 },
+    { el:document.querySelectorAll(".stat .fig")[1], end:14.6, suffix:" hrs", decimals:1 },
+    { el:document.querySelectorAll(".stat .fig")[2], start:3.5, end:4.5, range:true }
+  ];
+  statValues.forEach(cfg => {
+    if(!cfg.el) return;
+    const original=cfg.el.innerHTML;
+    if(reduce) return;
+    inView(cfg.el, () => {
+      const state={v:cfg.start??0};
+      animate(state,{v:cfg.end},{duration:1.25,ease:[.22,1,.36,1],onUpdate:()=>{
+        if(cfg.range){ cfg.el.innerHTML=`3.5–${state.v.toFixed(1)}<small>×</small>`; }
+        else { cfg.el.innerHTML=`${state.v.toFixed(cfg.decimals)}<small>${cfg.suffix}</small>`; }
+      },onComplete:()=>cfg.el.innerHTML=original});
+    }, { margin:"0px 0px -18% 0px", amount:.9 });
+  });
+
+  // Spring-like micro-interaction, only where a pointer exists.
+  if (!reduce && window.matchMedia("(hover:hover) and (pointer:fine)").matches) {
+    document.querySelectorAll(".pcard:not(.intro), .rule").forEach(card => {
+      card.addEventListener("mouseenter",()=>animate(card,{y:-5},{duration:.28,ease:[.22,1,.36,1]}));
+      card.addEventListener("mouseleave",()=>animate(card,{y:0},{duration:.3,ease:[.22,1,.36,1]}));
+    });
+  }
+</script>
+
+</body>
+</html>
