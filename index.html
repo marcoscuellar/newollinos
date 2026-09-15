@@ -70,17 +70,36 @@
   .nav-hide{display:none}@media(min-width:800px){.nav-hide{display:inline}}
 
   /* ===== hero ===== */
-  .hero{background:var(--graphite);color:var(--on-dark);padding:104px 0 96px;position:relative;overflow:hidden}
-  @media(min-width:960px){.hero{padding:116px 0 112px}}
+  .hero{background:var(--graphite);color:var(--on-dark);padding:72px 0 80px;position:relative;overflow:hidden;display:flex;align-items:center}
+  @media(min-width:960px){.hero{padding:120px 0 112px;min-height:min(86vh,860px)}}
+  /* the stage: a fine system grid, fading out toward the edges, and a slightly deeper floor */
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+    background-size:72px 72px;background-position:center top;
+    -webkit-mask-image:radial-gradient(ellipse 70% 78% at 50% 42%,#000 20%,transparent 100%);mask-image:radial-gradient(ellipse 70% 78% at 50% 42%,#000 20%,transparent 100%)}
+  .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:38%;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(0,0,0,.28))}
+  .hero .wrap{width:100%}
   .hero::before{content:"";position:absolute;right:-8%;top:0;width:52%;height:100%;background:linear-gradient(135deg,transparent 0%,rgba(255,255,255,.035) 45%,transparent 100%);pointer-events:none}
-  .hero-grid{position:relative;max-width:1100px;margin:0 auto;text-align:center}
-  .hero h1{font-size:clamp(42px,6.6vw,96px);line-height:.96;letter-spacing:-.04em;color:var(--white);margin-top:26px}
-  .hero h1 .w{display:inline-block;will-change:transform,opacity,filter}
-  .hero .lede{margin:30px auto 0;font-size:clamp(17px,1.5vw,21px);line-height:1.5;color:var(--on-dark-2);max-width:54ch}
+  .hero-grid{position:relative;z-index:1;max-width:1120px;margin:0 auto;text-align:center}
+  .hero .eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--on-dark-2);letter-spacing:.3em;font-size:10.5px}
+  .hero .eyebrow::before,.hero .eyebrow::after{content:"";width:28px;height:1px;background:var(--on-dark-3);opacity:.7}
+  .hero .eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 4px rgba(255,225,77,.14);display:inline-block}
+  @media(max-width:520px){.hero .eyebrow{letter-spacing:.22em;font-size:10px}.hero .eyebrow::before,.hero .eyebrow::after{display:none}}
+  .hero h1{font-size:clamp(42px,6.8vw,100px);line-height:.98;letter-spacing:-.045em;color:var(--white);margin-top:30px;text-wrap:balance}
+  .hero h1 .line{display:block;overflow:hidden;padding:.04em 0 .14em;margin-bottom:-.14em}
+  .hero h1 .line>span{display:block;will-change:transform}
+  .hero h1 .hl{color:var(--yellow)}
+  /* a hairline, not a marker: draws from the centre once the headline has landed */
+  .hero .hero-rule{width:72px;height:1px;margin:34px auto 0;background:var(--yellow);transform-origin:50% 50%}
+  .hero .lede{margin:30px auto 0;font-size:clamp(17px,1.4vw,20px);line-height:1.6;color:var(--on-dark-2);max-width:56ch;font-weight:400}
   .hero .lede b{color:var(--white);font-weight:600}
-  .hero .actions{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-  .hero .under{margin-top:34px;font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;color:var(--on-dark-3)}
-  @media(max-width:480px){.hero .under{font-size:9.5px;letter-spacing:.2em}}
+  .hero .actions{margin-top:38px;display:flex;gap:10px 28px;flex-wrap:wrap;justify-content:center;align-items:center}
+  .hero .actions .btn{padding:15px 24px;font-size:14.5px;box-shadow:0 10px 30px -12px rgba(255,225,77,.45)}
+  .hero .actions .more{display:inline-flex;align-items:center;gap:8px;font:600 14px var(--sans);color:var(--on-dark);text-decoration:none;padding:6px 2px;border-bottom:1px solid transparent;transition:border-color .2s ease,gap .2s ease}
+  .hero .actions .more:hover{border-bottom-color:var(--on-dark-3);gap:12px}
+  .hero .actions .more span{color:var(--yellow)}
+  .hero .under{margin-top:44px;font-family:var(--mono);font-size:10px;letter-spacing:.34em;color:var(--on-dark-3)}
+  @media(max-width:480px){.hero .under{font-size:9px;letter-spacing:.2em}}
 
   .card{background:var(--graphite-2);border:1px solid var(--line-dark);border-radius:12px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
   .card-top{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line-dark)}
@@ -329,15 +348,11 @@
 /* ===== MOTION PASS · Motion.dev ===== */
 html.motion-ready .motion-reveal{opacity:0;transform:translateY(22px)}
 html.motion-ready .hero .eyebrow,
-html.motion-ready .hero h1,
 html.motion-ready .hero .lede,
 html.motion-ready .hero .actions,
 html.motion-ready .hero .under{opacity:0;transform:translateY(18px)}
-.hero .hl{display:inline-block;position:relative}
-@media(max-width:640px){.hero .hl{display:inline}.hero .hl::after{display:none}}
-.hero .hl::after{content:"";position:absolute;left:-.03em;right:-.03em;bottom:.02em;height:.09em;background:var(--yellow);border-radius:99px;transform:scaleX(0);transform-origin:left center;opacity:.95}
-html.motion-ready .hero .hl::after{animation:motionUnderline .7s 1.25s cubic-bezier(.22,1,.36,1) forwards}
-@keyframes motionUnderline{to{transform:scaleX(1)}}
+html.motion-ready .hero h1 .line>span{transform:translateY(112%)}
+html.motion-ready .hero .hero-rule{transform:scaleX(0)}
 
 /* Verified account card: each intelligence row becomes a completed check. */
 @keyframes verifiedPulse{0%{opacity:.8;transform:scale(.86)}100%{opacity:0;transform:scale(1.22)}}
@@ -398,7 +413,8 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   html.motion-ready .motion-reveal,
   html.motion-ready .hero .eyebrow,
-  html.motion-ready .hero h1,
+  html.motion-ready .hero h1 .line>span,
+  html.motion-ready .hero .hero-rule,
   html.motion-ready .hero .lede,
   html.motion-ready .hero .actions,
   html.motion-ready .hero .under,
@@ -433,12 +449,13 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
   <!-- ============ HERO ============ -->
   <section class="hero dark">
     <div class="wrap hero-grid">
-      <p class="eyebrow">Not another AI sales tool</p>
-      <h1>The haystack is their product.<br><span class="hl">The needle is ours.</span></h1>
+      <p class="eyebrow"><i aria-hidden="true"></i>Not another AI sales tool</p>
+      <h1><span class="line"><span>The haystack is their product.</span></span><span class="line"><span class="hl">The needle is ours.</span></span></h1>
+      <div class="hero-rule" aria-hidden="true"></div>
       <p class="lede">ŌLLIN finds the accounts showing movement, verifies why they matter, and maps the people worth reaching—before your team wastes a swing.</p>
       <div class="actions">
         <a class="btn" href="#run">Bring us an account. We'll run it live. →</a>
-        <a class="btn line" href="#mushroom">Whole Account Mapping</a>
+        <a class="more" href="#mushroom">See whole-account mapping <span>→</span></a>
       </div>
       <p class="under">REAL SIGNALS. REAL PEOPLE. YOUR CALL.</p>
     </div>
@@ -748,32 +765,15 @@ var OLLIN_CONTACT_EMAIL = 'marcos@ollinos.com';
   document.body.prepend(progress);
   if (!reduce) scroll(p => progress.style.transform = `scaleX(${p})`);
 
-  // Hero: the headline lands one word at a time — out of the blur, into focus —
-  // then the yellow line draws under the needle and the rest of the copy follows.
+  // Hero: an editorial reveal. Each headline line rises out of its own mask,
+  // the hairline draws from the centre, then the copy settles in beneath.
   if (!reduce) {
-    const h1 = document.querySelector(".hero h1");
-    const splitWords = (node) => {
-      [...node.childNodes].forEach(n => {
-        if (n.nodeType === 3) {
-          const frag = document.createDocumentFragment();
-          n.textContent.split(/(\s+)/).forEach(part => {
-            if (!part) return;
-            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(" ")); return; }
-            const w = document.createElement("span"); w.className = "w"; w.textContent = part; w.style.opacity = "0";
-            frag.appendChild(w);
-          });
-          n.replaceWith(frag);
-        } else if (n.nodeType === 1 && n.tagName !== "BR") splitWords(n);
-      });
-    };
-    splitWords(h1);
-    h1.style.opacity = "1"; h1.style.transform = "none";
-    const words = [...h1.querySelectorAll(".w")];
-    animate(document.querySelector(".hero .eyebrow"), { opacity:[0,1], y:[14,0] }, { duration:.5, ease:[.22,1,.36,1] });
-    animate(words, { opacity:[0,1], y:[28,0], scale:[.94,1], filter:["blur(12px)","blur(0px)"] },
-      { duration:.72, delay:stagger(.065, { startDelay:.18 }), ease:[.22,1,.36,1] });
+    const ease = [.22,1,.36,1];
+    animate(".hero .eyebrow", { opacity:[0,1], y:[10,0] }, { duration:.6, ease });
+    animate(".hero h1 .line>span", { y:["112%","0%"] }, { duration:1.05, delay:stagger(.14, { startDelay:.12 }), ease });
+    animate(".hero .hero-rule", { scaleX:[0,1] }, { duration:.7, delay:.95, ease });
     const rest = [".hero .lede", ".hero .actions", ".hero .under"].map(s => document.querySelector(s)).filter(Boolean);
-    animate(rest, { opacity:[0,1], y:[18,0] }, { duration:.6, delay:stagger(.1, { startDelay:1.0 }), ease:[.22,1,.36,1] });
+    animate(rest, { opacity:[0,1], y:[16,0] }, { duration:.7, delay:stagger(.11, { startDelay:1.05 }), ease });
   }
 
   // General editorial reveals.
