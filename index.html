@@ -3,7 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ŌLLIN OS</title>
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="28" y="10" width="44" height="11" fill="%23D4FF00"/><circle cx="50" cy="62" r="27" stroke="%230B0C10" stroke-width="13" fill="none"/></svg>'>
+<title>ŌLLIN OS — Stop sorting. Start selling.</title>
+<meta name="description" content="ŌLLIN OS is an AI sales intelligence platform that turns hiring activity, company changes, market signals, and account data into verified research, mapped decision-makers, and grounded outreach.">
+<meta property="og:title" content="ŌLLIN OS — Stop sorting. Start selling.">
+<meta property="og:description" content="Find the right account, the right person, and the reason to reach out now.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ollinos.com/">
+<meta property="og:site_name" content="ŌLLIN OS">
+<meta property="og:image" content="https://ollinos.com/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ŌLLIN OS — Stop sorting. Start selling.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ŌLLIN OS — Stop sorting. Start selling.">
+<meta name="twitter:description" content="Find the right account, the right person, and the reason to reach out now.">
+<meta name="twitter:image" content="https://ollinos.com/assets/og-cover.png">
+<meta name="robots" content="index,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -58,7 +74,7 @@
   .hero::before{content:"";position:absolute;right:-8%;top:0;width:52%;height:100%;background:linear-gradient(135deg,transparent 0%,rgba(255,255,255,.035) 45%,transparent 100%);pointer-events:none}
   .hero-grid{display:grid;grid-template-columns:1fr;gap:46px;align-items:center;position:relative}
   @media(min-width:960px){.hero-grid{grid-template-columns:1.1fr .9fr;gap:60px}}
-  .hero h1{font-size:clamp(46px,6.6vw,84px);color:var(--white);margin-top:20px}
+  .hero h1{font-size:clamp(32px,3.5vw,50px);color:var(--white);margin-top:20px}
   .hero .lede{margin-top:24px;font-size:19px;line-height:1.5;color:var(--on-dark-2);max-width:46ch}
   .hero .lede b{color:var(--white);font-weight:600}
   .hero .actions{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
@@ -84,6 +100,28 @@
   .card-foot{padding:11px 18px;background:var(--graphite);font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--on-dark-3);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
   .card-foot b{color:var(--yellow);font-weight:500}
   .ex{margin-top:10px;text-align:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--on-dark-3)}
+
+  /* ---- the example card is white so it stands out from the graphite hero (hero only) ---- */
+  .hero .card{background:var(--white);border-color:var(--line);color:var(--ink)}
+  .hero .card-top{border-bottom-color:var(--line)}
+  .hero .card-top .lab{color:var(--gray)}
+  .hero .vchip{color:var(--ink-2)}
+  .hero .vchip .omark{color:var(--ink)}
+  .hero .co{border-bottom-color:var(--line)}
+  .hero .co .ic{background:var(--light)}
+  .hero .co .ic svg{stroke:var(--ink-2)}
+  .hero .co .nm{color:var(--ink)}
+  .hero .co .mt{color:var(--gray)}
+  .hero .row{border-bottom-color:var(--line)}
+  .hero .row .ic svg{stroke:var(--ink)}
+  .hero .row .k{color:var(--ink)}
+  .hero .row .v{color:var(--ink-2)}
+  .hero .row .s{color:var(--gray)}
+  .hero .row.held .v{color:var(--gray)}
+  .hero .row.motion-verified{background:var(--yellow-tint)}
+  .hero .row.held::after{background:var(--light);color:var(--gray)}
+  .hero .card-foot{background:var(--off);color:var(--gray);border-top:1px solid var(--line)}
+  .hero .card-foot b{color:var(--ink)}
 
   /* ===== 4-step strip ===== */
   .strip{background:var(--light);border-bottom:1px solid var(--line)}
@@ -267,8 +305,37 @@
   /* cta */
   .cta{background:var(--graphite);color:var(--on-dark);padding:88px 0;position:relative;overflow:hidden}
   .cta::after{content:"";position:absolute;right:-6%;bottom:-30%;width:40%;height:160%;background:linear-gradient(160deg,transparent,rgba(255,255,255,.05) 50%,transparent);transform:rotate(12deg);pointer-events:none}
-  .cta-grid{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;position:relative}
-  @media(min-width:900px){.cta-grid{grid-template-columns:1.2fr auto}}
+  /* CTA · signup celebrate (after examples.motion.dev/ui/sections/cta-signup-celebrate) */
+  .cta-wrap{max-width:660px;margin:0 auto;text-align:center;position:relative}
+  .cta .cta-wrap > p{margin-left:auto;margin-right:auto}
+  .cs{margin-top:28px}
+  .cs-pill{display:flex;align-items:center;gap:8px;max-width:560px;margin:0 auto;padding:6px 6px 6px 22px;border-radius:999px;background:var(--graphite-2);border:1.5px solid var(--line-dark);transition:border-color .2s ease,box-shadow .2s ease}
+  .cs-pill:focus-within{border-color:var(--yellow);box-shadow:0 0 0 4px rgba(255,225,77,.14)}
+  .cs-pill input[type=email]{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--white);font:500 16px var(--sans);padding:12px 0}
+  .cs-pill input[type=email]::placeholder{color:var(--on-dark-3)}
+  .cs-pill input[type=email]:read-only{color:var(--on-dark-2)}
+  .cs-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .cs-go{flex:none;border-radius:999px;padding:13px 22px;transition:background .3s ease,border-color .3s ease,color .3s ease,transform .2s ease}
+  .cs-go .cs-ic{display:none;width:16px;height:16px;align-items:center;justify-content:center}
+  .cs-go .cs-ic svg{width:16px;height:16px;stroke:currentColor;fill:none}
+  .cs-go.is-sent{background:var(--white);border-color:var(--white);color:var(--graphite)}
+  .cs-go.is-sent .cs-ic{display:inline-flex}
+  .cs-go:disabled{cursor:default}
+  .cs-go:disabled:not(.is-sent){opacity:.7}
+  .cta .cs-msg{min-height:22px;margin:14px auto 0;font-size:14.5px;line-height:1.5;color:var(--on-dark-2);max-width:48ch}
+  .cta .cs-msg b{color:var(--white);font-weight:600}
+  .cta .cs-msg.err{color:#FFB4A8}
+  .cta .cs-msg a{color:var(--white)}
+  .cta .cs-direct{margin:10px auto 0;font-size:13px;color:var(--on-dark-3)}
+  .cta .cs-direct a{color:var(--on-dark-2);text-decoration:none;border-bottom:1px solid var(--on-dark-3)}
+  .cs-particle{position:fixed;width:7px;height:7px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--yellow);pointer-events:none;z-index:40;will-change:transform,opacity}
+  .cs-pill.shake{animation:csShake .4s ease}
+  @keyframes csShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  @media(max-width:520px){
+    .cs-pill{flex-direction:column;align-items:stretch;padding:8px;border-radius:22px}
+    .cs-pill input[type=email]{padding:10px 14px}
+    .cs-go{width:100%;justify-content:center}
+  }
   .cta h2{font-size:clamp(40px,5.6vw,68px);color:var(--white);margin-top:14px}
   .cta p{margin-top:16px;font-size:17px;color:var(--on-dark-2);max-width:48ch}
   .cta .actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
@@ -394,15 +461,14 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
   <section class="hero dark">
     <div class="wrap hero-grid">
       <div>
-        <p class="eyebrow">Sales intelligence · Verified before it reaches you</p>
-        <h1>Stop<br>the <span class="hl">noise.</span></h1>
-        <p class="lede">ŌLLIN OS finds the right accounts, the right people, and the reason to reach out right now.</p>
-        <p class="lede" style="margin-top:14px;font-size:17px">Every signal is cross-checked before it reaches your team, so they spend less time researching and more time having the right conversations.</p>
+        <p class="eyebrow">Verified AI sales intelligence</p>
+        <h1>Find the right account, the right person, and the reason to reach out <span class="hl">now.</span></h1>
+        <p class="lede">ŌLLIN OS is an AI sales intelligence platform that turns hiring activity, company changes, market signals, and account data into verified research, mapped decision-makers, and grounded outreach.</p>
         <div class="actions">
           <a class="btn" href="#run">Bring us an account. We'll run it live. →</a>
           <a class="btn line" href="#mushroom">Whole Account Mapping</a>
         </div>
-        <p class="under">REAL SIGNALS. REAL PEOPLE. YOUR CALL.</p>
+        <p class="under">STOP SORTING. START SELLING.</p>
       </div>
 
       <div>
@@ -410,10 +476,10 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
           <div class="card-top"><span class="lab">ACCOUNT INTELLIGENCE</span><span class="vchip" title="Verified"><span class="omark" aria-hidden="true"><i class="bar"></i><span class="o">O</span></span>VERIFIED</span></div>
           <div class="co">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg></div>
-            <div><div class="nm">Meridian Logistics</div><div class="mt">Logistics · 640 employees · Series C</div></div>
+            <div><div class="nm">Aldervane Freight</div><div class="mt">Logistics · 640 employees · Series C</div></div>
           </div>
           <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></div><div><div class="k">Why now</div><div class="v">$60M Series C announced. East Coast hiring has tripled in 30 days, with no regional operations leader in seat.</div><div class="s">SEC filing · ATS · company sources</div></div></div>
-          <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><div><div class="k">Right person</div><div class="v">Daniel Reyes — VP, Operations. Owns the buildout and appears directly responsible for regional expansion.</div><div class="s">Org chart · LinkedIn · hiring activity</div></div></div>
+          <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><div><div class="k">Right person</div><div class="v">Omar Reyes — VP, Operations. Owns the buildout and appears directly responsible for regional expansion.</div><div class="s">Org chart · LinkedIn · hiring activity</div></div></div>
           <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1.1-4.3A8 8 0 1 1 21 12z"/></svg></div><div><div class="k">Right message</div><div class="v">Expansion is moving faster than regional hiring. Lead with the operational pressure that creates — not a generic sales pitch.</div><div class="s">Generated only from verified signals above</div></div></div>
           <div class="row held"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><div><div class="k">Direct line</div><div class="v">Not verified — withheld.</div><div class="s">If we can't verify it, we don't invent it</div></div></div>
           <div class="card-foot"><span>FAILED A CHECK? <b>IT DOESN'T REACH YOU.</b></span><span>NOTHING SENDS <b>WITHOUT YOUR APPROVAL.</b></span></div>
@@ -510,16 +576,16 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
       <div class="mgrid">
         <div>
           <div class="tree" aria-hidden="true">
-            <div class="lvl"><div class="pnode"><div class="nm">Rachel Okafor</div><div class="tt">Chief Operating Officer</div><div class="r"><b>econ. buyer</b><i>· verified</i></div></div></div>
+            <div class="lvl"><div class="pnode"><div class="nm">Nadia Cole</div><div class="tt">Chief Operating Officer</div><div class="r"><b>econ. buyer</b><i>· verified</i></div></div></div>
             <div class="con"></div>
-            <div class="lvl"><div class="pnode hot"><span class="found">FOUND FIRST</span><div class="nm">Daniel Reyes</div><div class="tt">VP, Operations</div><div class="r"><b>champion</b><i>· verified</i></div></div></div>
+            <div class="lvl"><div class="pnode hot"><span class="found">FOUND FIRST</span><div class="nm">Omar Reyes</div><div class="tt">VP, Operations</div><div class="r"><b>champion</b><i>· verified</i></div></div></div>
             <div class="con"></div>
             <div class="lvl">
-              <div class="pnode"><div class="nm">Priya Natarajan</div><div class="tt">Director, Regional Ops</div><div class="r"><b>evaluator</b><i>· verified</i></div></div>
-              <div class="pnode"><div class="nm">Tom Lindqvist</div><div class="tt">Dir. Finance &amp; Planning</div><div class="r"><b>blocker</b><i>· verified</i></div></div>
+              <div class="pnode"><div class="nm">Priya Anand</div><div class="tt">Director, Regional Ops</div><div class="r"><b>evaluator</b><i>· verified</i></div></div>
+              <div class="pnode"><div class="nm">Leo Fontaine</div><div class="tt">Dir. Finance &amp; Planning</div><div class="r"><b>blocker</b><i>· verified</i></div></div>
             </div>
             <div class="con dash"></div>
-            <div class="lvl"><div class="pnode"><div class="nm">Marcus Bell</div><div class="tt">Sr. Manager, East Coast</div><div class="r"><b>influencer</b><i>· line inferred · held</i></div></div></div>
+            <div class="lvl"><div class="pnode"><div class="nm">Marcus Vale</div><div class="tt">Sr. Manager, East Coast</div><div class="r"><b>influencer</b><i>· line inferred · held</i></div></div></div>
           </div>
           <div class="legend"><span><i></i> confirmed</span><span><i class="d"></i> inferred — clearly marked</span></div>
         </div>
@@ -554,17 +620,17 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
           <div>
             <div class="lbl">UP NEXT</div>
             <div class="upnext">
-              <div class="un on" data-profile="meridian" role="button" tabindex="0"><div><div class="n">Daniel Reyes</div><div class="t">VP, Operations</div><div class="co">Meridian Logistics</div></div><span class="ready">READY</span></div>
-              <div class="un" data-profile="northstar" role="button" tabindex="0"><div><div class="n">Amara Singh</div><div class="t">VP, Talent Acquisition</div><div class="co">Northstar Health</div></div><span class="ready">READY</span></div>
-              <div class="un" data-profile="forgeworks" role="button" tabindex="0"><div><div class="n">Lucas Bennett</div><div class="t">Director, Supply Chain</div><div class="co">ForgeWorks Manufacturing</div></div><span class="ready">READY</span></div>
+              <div class="un on" data-profile="aldervane" role="button" tabindex="0"><div><div class="n">Omar Reyes</div><div class="t">VP, Operations</div><div class="co">Aldervane Freight</div></div><span class="ready">READY</span></div>
+              <div class="un" data-profile="verrida" role="button" tabindex="0"><div><div class="n">Sofia Marin</div><div class="t">VP, Talent Acquisition</div><div class="co">Verrida Health</div></div><span class="ready">READY</span></div>
+              <div class="un" data-profile="kestrelbrook" role="button" tabindex="0"><div><div class="n">Dana Rivera</div><div class="t">Director, Supply Chain</div><div class="co">Kestrelbrook Devices</div></div><span class="ready">READY</span></div>
             </div>
           </div>
           <div class="ccard">
             <div class="touch">FIRST TOUCH · <b>TOUCH 1</b></div>
             <div class="vf"><span class="omark" aria-hidden="true"><i class="bar"></i><span class="o">O</span></span>VERIFIED</div>
-            <h4 data-go="name">Daniel Reyes</h4>
-            <div class="role"><span data-go="title">VP, Operations</span> · <span data-go="company">Meridian Logistics ↗</span></div>
-            <div class="meta" data-go="meta">d.reyes@meridian-logistics.com · FIND ON LINKEDIN · BOSTON, MA · 500–1000</div>
+            <h4 data-go="name">Omar Reyes</h4>
+            <div class="role"><span data-go="title">VP, Operations</span> · <span data-go="company">Aldervane Freight ↗</span></div>
+            <div class="meta" data-go="meta">o.reyes@aldervane.example · FIND ON LINKEDIN · BOSTON, MA · 500–1000</div>
             <div class="know">
               <div class="h"><b>01</b> WHAT WE KNOW · THE ORG</div>
               <div class="kr"><div class="k">SIGNAL</div><div class="v" data-go="signal1">$60M Series C; East Coast ops hiring up 3× in 30 days<span class="eng">ENGINE 02 · SIGNALS</span></div></div>
@@ -639,19 +705,22 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
     </div>
   </section>
 
-  <!-- ============ CTA ============ -->
+  <!-- ============ CTA · signup celebrate ============ -->
   <section id="run" class="cta dark">
-    <div class="wrap cta-grid">
-      <div>
-        <p class="eyebrow">30 minutes · your account · the engines running live</p>
-        <h2>Bring an account.</h2>
-        <p>Name one you're working right now. You'll watch the four checks, see every source, and get the card. Then you go sell.</p>
-        <p class="fine">NO LIST · NO NEWSLETTER · NO TRACKER · A PERSON REPLIES WITHIN ONE BUSINESS DAY</p>
-      </div>
-      <div class="actions">
-        <a class="btn" href="#run">Bring an account. We'll run it live. →</a>
-        <a class="btn line" href="#run">Email direct</a>
-      </div>
+    <div class="wrap cta-wrap">
+      <p class="eyebrow">30 minutes · your account · the engines running live</p>
+      <h2>Bring an account.</h2>
+      <p>Name one you're working right now. You'll watch the four checks, see every source, and get the card. Then you go sell.</p>
+      <form class="cs" id="csForm" novalidate>
+        <div class="cs-pill" id="csPill">
+          <input id="csEmail" name="email" type="email" autocomplete="email" placeholder="you@company.com" aria-label="Work email" required>
+          <input class="cs-hp" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn cs-go" type="submit" id="csSend"><span class="cs-ic" aria-hidden="true"><svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="cs-tx">Bring an account →</span></button>
+        </div>
+        <p class="cs-msg" id="csMsg" aria-live="polite"></p>
+      </form>
+      <p class="fine">NO LIST · NO NEWSLETTER · NO TRACKER · A PERSON REPLIES WITHIN ONE BUSINESS DAY</p>
+      <p class="cs-direct">Prefer email? <a href="mailto:marcos@ollinos.com">marcos@ollinos.com</a></p>
     </div>
   </section>
 </main>
@@ -661,8 +730,59 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
 </footer>
 
 
+<script>
+/* ---- contact pill · POST /api/contact (Vercel function, sends via Resend to marcos@ollinos.com) ---- */
+var OLLIN_BOOKING_URL   = '';             /* optional scheduler link. When set, the masthead button points at it. */
+var OLLIN_FORM_ENDPOINT = '/api/contact'; /* POST {email, source, website}. 200 = the email to Marcos was sent. */
+var OLLIN_CONTACT_EMAIL = 'marcos@ollinos.com';
+(function(){
+  if(OLLIN_BOOKING_URL){ var m=document.querySelector('header.bar .btn'); if(m){ m.href=OLLIN_BOOKING_URL; m.target='_blank'; m.rel='noopener'; } }
+  var form=document.getElementById('csForm'); if(!form) return;
+  var pill=document.getElementById('csPill'), email=document.getElementById('csEmail'),
+      btn=document.getElementById('csSend'), tx=btn.querySelector('.cs-tx'), ic=btn.querySelector('.cs-ic'),
+      msg=document.getElementById('csMsg'), hp=form.querySelector('input[name="website"]');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;   /* deliberately loose, matches the server */
+  var sent=false;
+  function A(){ return (typeof window.__ollinAnimate==='function' && !reduce) ? window.__ollinAnimate : null; }
+  function shake(){ pill.classList.remove('shake'); void pill.offsetWidth; pill.classList.add('shake'); email.focus(); }
+  function burst(){
+    if(reduce) return;
+    var r=btn.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2, an=A(), N=12;
+    for(var i=0;i<N;i++){
+      var p=document.createElement('i'); p.className='cs-particle'; p.style.left=cx+'px'; p.style.top=cy+'px'; document.body.appendChild(p);
+      var ang=(Math.PI*2)*(i/N)+(Math.random()*.5), d=60+Math.random()*70, x=Math.cos(ang)*d, y=Math.sin(ang)*d-30, dur=.8+Math.random()*.3;
+      if(an){ an(p,{x:[0,x],y:[0,y],scale:[1,.2],opacity:[1,0]},{duration:dur,ease:[.22,1,.36,1]}).then((function(el){return function(){el.remove()}})(p)); }
+      else { p.style.transition='transform '+dur+'s cubic-bezier(.22,1,.36,1),opacity '+dur+'s ease';
+             (function(el,x,y){ requestAnimationFrame(function(){ el.style.transform='translate('+x+'px,'+y+'px) scale(.2)'; el.style.opacity='0'; }); setTimeout(function(){el.remove()},dur*1000+100); })(p,x,y); }
+    }
+  }
+  function celebrate(addr){
+    sent=true; btn.disabled=true; btn.classList.add('is-sent'); tx.textContent='Received'; email.readOnly=true;
+    msg.classList.remove('err'); msg.innerHTML='Received. A person replies within one business day at <b></b>.';
+    msg.querySelector('b').textContent=addr;
+    burst();
+    var an=A(); if(an){ an(msg,{opacity:[0,1],y:[8,0]},{duration:.45,ease:[.22,1,.36,1]}); an(ic,{scale:[.4,1]},{duration:.45,ease:[.22,1,.36,1]}); }
+  }
+  function fail(){
+    btn.disabled=false; tx.textContent='Bring an account →';
+    msg.classList.add('err'); msg.innerHTML='Couldn’t send — email <a href="mailto:'+OLLIN_CONTACT_EMAIL+'">'+OLLIN_CONTACT_EMAIL+'</a> directly.';
+  }
+  form.addEventListener('submit',function(e){
+    e.preventDefault(); if(sent) return;
+    var v=email.value.trim(); if(!EMAIL.test(v)){ shake(); return; }
+    btn.disabled=true; tx.textContent='Sending…'; msg.classList.remove('err'); msg.textContent='';
+    fetch(OLLIN_FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({email:v,source:'ollin',website:hp?hp.value:''})})
+    .then(function(r){ if(!r.ok) throw new Error('status '+r.status); celebrate(v); })
+    .catch(function(){ fail(); });
+  });
+})();
+</script>
+
 <script type="module">
   import { animate, inView, scroll, stagger } from "https://cdn.jsdelivr.net/npm/motion@13.2.0/+esm";
+  window.__ollinAnimate = animate;
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   document.documentElement.classList.add("motion-ready");
@@ -689,7 +809,7 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
   }
 
   // General editorial reveals.
-  const revealTargets = document.querySelectorAll("section:not(.hero) .head, .cols, .pgrid .pcard, .mlist li, .elist li, .rules-head, .rule, .pos .stmt p, .pos .close p, .cta-grid > *");
+  const revealTargets = document.querySelectorAll("section:not(.hero) .head, .cols, .pgrid .pcard, .mlist li, .elist li, .rules-head, .rule, .pos .stmt p, .pos .close p, .cta-wrap > *");
   revealTargets.forEach(el => el.classList.add("motion-reveal"));
   if (!reduce) {
     inView(".motion-reveal", el => {
@@ -759,9 +879,9 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
   const app = document.querySelector(".app");
   if (app) {
     const profiles = {
-      meridian: {
-        name:"Daniel Reyes", title:"VP, Operations", company:"Meridian Logistics ↗",
-        meta:"d.reyes@meridian-logistics.com · FIND ON LINKEDIN · BOSTON, MA · 500–1000",
+      aldervane: {
+        name:"Omar Reyes", title:"VP, Operations", company:"Aldervane Freight ↗",
+        meta:"o.reyes@aldervane.example · FIND ON LINKEDIN · BOSTON, MA · 500–1000",
         signal1:'$60M Series C; East Coast ops hiring up 3× in 30 days<span class="eng">ENGINE 02 · SIGNALS</span>',
         money:'Series C closed 12 days ago<span class="eng">ENGINE 01 · TIMING</span>',
         buyer:'not tracked yet', buyerDim:true,
@@ -771,9 +891,9 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
         draft:"Running Operations at a company scaling a whole region means you're hiring for a team that doesn't exist yet, on a clock you didn't set…",
         audit:'498 CHARS · 78 WORDS · <b>AUDITED ✓</b>'
       },
-      northstar: {
-        name:"Amara Singh", title:"VP, Talent Acquisition", company:"Northstar Health ↗",
-        meta:"a.singh@northstar-health.com · FIND ON LINKEDIN · CHICAGO, IL · 1000–5000",
+      verrida: {
+        name:"Sofia Marin", title:"VP, Talent Acquisition", company:"Verrida Health ↗",
+        meta:"s.marin@verrida.example · FIND ON LINKEDIN · CHICAGO, IL · 1000–5000",
         signal1:'6 new clinic openings announced; 47 clinical roles opened in 21 days<span class="eng">ENGINE 02 · SIGNALS</span>',
         money:'Acquisition financing closed 3 weeks ago<span class="eng">ENGINE 01 · TIMING</span>',
         buyer:'CHRO identified and verified<span class="eng">MUSHROOM · ORG MAP</span>', buyerDim:false,
@@ -783,9 +903,9 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
         draft:'Six clinic openings can turn recruiting into a throughput problem fast. Your hiring demand is climbing while the team responsible for filling it appears unchanged…',
         audit:'512 CHARS · 82 WORDS · <b>AUDITED ✓</b>'
       },
-      forgeworks: {
-        name:"Lucas Bennett", title:"Director, Supply Chain", company:"ForgeWorks Manufacturing ↗",
-        meta:"l.bennett@forgeworks-mfg.com · FIND ON LINKEDIN · DALLAS, TX · 500–1000",
+      kestrelbrook: {
+        name:"Dana Rivera", title:"Director, Supply Chain", company:"Kestrelbrook Devices ↗",
+        meta:"d.rivera@kestrelbrook.example · FIND ON LINKEDIN · DALLAS, TX · 500–1000",
         signal1:'New Texas plant announced; 28 operations and maintenance roles posted in 14 days<span class="eng">ENGINE 02 · SIGNALS</span>',
         money:'$42M capex expansion disclosed this quarter<span class="eng">ENGINE 01 · TIMING</span>',
         buyer:'COO identified and verified<span class="eng">MUSHROOM · ORG MAP</span>', buyerDim:false,
@@ -801,7 +921,7 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
     const ccard=app.querySelector(".ccard");
     const fields={};
     app.querySelectorAll("[data-go]").forEach(el=>fields[el.dataset.go]=el);
-    let activeKey="meridian";
+    let activeKey="aldervane";
     let autoTimer=null;
 
     const renderProfile=(key, userInitiated=false) => {
@@ -838,7 +958,7 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
         if(next) animate(next,{opacity:[0,1],y:[8,0]},{duration:.42,ease:[.22,1,.36,1]});
         app.querySelector(".go")?.classList.add("motion-ready-go");
       },820);
-      const keys=["meridian","northstar","forgeworks"]; let i=0;
+      const keys=["aldervane","verrida","kestrelbrook"]; let i=0;
       clearInterval(autoTimer);
       autoTimer=setInterval(()=>{ i=(i+1)%keys.length; renderProfile(keys[i]); },3400);
     }, { margin:"0px 0px -28% 0px", amount:.48 });
