@@ -70,15 +70,17 @@
   .nav-hide{display:none}@media(min-width:800px){.nav-hide{display:inline}}
 
   /* ===== hero ===== */
-  .hero{background:var(--graphite);color:var(--on-dark);padding:76px 0 74px;position:relative;overflow:hidden}
+  .hero{background:var(--graphite);color:var(--on-dark);padding:104px 0 96px;position:relative;overflow:hidden}
+  @media(min-width:960px){.hero{padding:116px 0 112px}}
   .hero::before{content:"";position:absolute;right:-8%;top:0;width:52%;height:100%;background:linear-gradient(135deg,transparent 0%,rgba(255,255,255,.035) 45%,transparent 100%);pointer-events:none}
-  .hero-grid{display:grid;grid-template-columns:1fr;gap:46px;align-items:center;position:relative}
-  @media(min-width:960px){.hero-grid{grid-template-columns:1.1fr .9fr;gap:60px}}
-  .hero h1{font-size:clamp(46px,5.4vw,72px);color:var(--white);margin-top:20px}
-  .hero .lede{margin-top:24px;font-size:19px;line-height:1.5;color:var(--on-dark-2);max-width:46ch}
+  .hero-grid{position:relative;max-width:1100px;margin:0 auto;text-align:center}
+  .hero h1{font-size:clamp(42px,6.6vw,96px);line-height:.96;letter-spacing:-.04em;color:var(--white);margin-top:26px}
+  .hero h1 .w{display:inline-block;will-change:transform,opacity,filter}
+  .hero .lede{margin:30px auto 0;font-size:clamp(17px,1.5vw,21px);line-height:1.5;color:var(--on-dark-2);max-width:54ch}
   .hero .lede b{color:var(--white);font-weight:600}
-  .hero .actions{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
-  .hero .under{margin-top:28px;font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;color:var(--on-dark-3)}
+  .hero .actions{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .hero .under{margin-top:34px;font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;color:var(--on-dark-3)}
+  @media(max-width:480px){.hero .under{font-size:9.5px;letter-spacing:.2em}}
 
   .card{background:var(--graphite-2);border:1px solid var(--line-dark);border-radius:12px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
   .card-top{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line-dark)}
@@ -102,26 +104,6 @@
   .ex{margin-top:10px;text-align:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--on-dark-3)}
 
   /* ---- the example card is white so it stands out from the graphite hero (hero only) ---- */
-  .hero .card{background:var(--white);border-color:var(--line);color:var(--ink)}
-  .hero .card-top{border-bottom-color:var(--line)}
-  .hero .card-top .lab{color:var(--gray)}
-  .hero .vchip{color:var(--ink-2)}
-  .hero .vchip .omark{color:var(--ink)}
-  .hero .co{border-bottom-color:var(--line)}
-  .hero .co .ic{background:var(--light)}
-  .hero .co .ic svg{stroke:var(--ink-2)}
-  .hero .co .nm{color:var(--ink)}
-  .hero .co .mt{color:var(--gray)}
-  .hero .row{border-bottom-color:var(--line)}
-  .hero .row .ic svg{stroke:var(--ink)}
-  .hero .row .k{color:var(--ink)}
-  .hero .row .v{color:var(--ink-2)}
-  .hero .row .s{color:var(--gray)}
-  .hero .row.held .v{color:var(--gray)}
-  .hero .row.motion-verified{background:var(--yellow-tint)}
-  .hero .row.held::after{background:var(--light);color:var(--gray)}
-  .hero .card-foot{background:var(--off);color:var(--gray);border-top:1px solid var(--line)}
-  .hero .card-foot b{color:var(--ink)}
 
   /* ===== 4-step strip ===== */
   .strip{background:var(--light);border-bottom:1px solid var(--line)}
@@ -269,7 +251,6 @@
 
 
   /* ===== drop shadows ===== */
-  .hero .card{box-shadow:0 2px 4px rgba(0,0,0,.35),0 24px 48px -16px rgba(0,0,0,.7),0 60px 90px -40px rgba(0,0,0,.6)}
   .app{box-shadow:0 2px 4px rgba(0,0,0,.35),0 24px 48px -16px rgba(0,0,0,.7),0 60px 90px -40px rgba(0,0,0,.6)}
   .app .ccard{box-shadow:0 12px 28px -14px rgba(0,0,0,.6)}
   .app .un{box-shadow:0 8px 18px -10px rgba(0,0,0,.6)}
@@ -352,20 +333,13 @@ html.motion-ready .hero h1,
 html.motion-ready .hero .lede,
 html.motion-ready .hero .actions,
 html.motion-ready .hero .under{opacity:0;transform:translateY(18px)}
-html.motion-ready .hero .card{opacity:0;transform:translateY(28px) scale(.975);transform-origin:50% 58%}
 .hero .hl{display:inline-block;position:relative}
+@media(max-width:640px){.hero .hl{display:inline}.hero .hl::after{display:none}}
 .hero .hl::after{content:"";position:absolute;left:-.03em;right:-.03em;bottom:.02em;height:.09em;background:var(--yellow);border-radius:99px;transform:scaleX(0);transform-origin:left center;opacity:.95}
-html.motion-ready .hero .hl::after{animation:motionUnderline .65s .72s cubic-bezier(.22,1,.36,1) forwards}
+html.motion-ready .hero .hl::after{animation:motionUnderline .7s 1.25s cubic-bezier(.22,1,.36,1) forwards}
 @keyframes motionUnderline{to{transform:scaleX(1)}}
 
 /* Verified account card: each intelligence row becomes a completed check. */
-.hero .row{position:relative;transition:border-color .25s ease,background-color .25s ease}
-.hero .row::after{content:"✓";position:absolute;right:16px;top:14px;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);color:var(--graphite);font:800 10px var(--mono);opacity:0;transform:scale(.55)}
-.hero .row.motion-verified{background:rgba(255,225,77,.035)}
-.hero .row.motion-verified::after{opacity:1;transform:scale(1);transition:opacity .22s ease,transform .35s cubic-bezier(.2,.9,.2,1.35)}
-.hero .row.held::after{content:"—";background:var(--slate);color:var(--on-dark-2)}
-.hero .vchip{position:relative}
-.hero .vchip.motion-pulse::before{content:"";position:absolute;inset:-7px -9px;border:1px solid var(--yellow);border-radius:8px;animation:verifiedPulse 1.25s ease-out forwards;pointer-events:none}
 @keyframes verifiedPulse{0%{opacity:.8;transform:scale(.86)}100%{opacity:0;transform:scale(1.22)}}
 
 /* Four checks become a scroll-led verification rail. */
@@ -428,7 +402,6 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
   html.motion-ready .hero .lede,
   html.motion-ready .hero .actions,
   html.motion-ready .hero .under,
-  html.motion-ready .hero .card,
   html.motion-ready .mush .pnode,
   html.motion-ready .mush .con,
   html.motion-ready .app .know .kr,
@@ -460,32 +433,14 @@ html.motion-ready .app .next{opacity:0;transform:translateY(8px)}
   <!-- ============ HERO ============ -->
   <section class="hero dark">
     <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow">Verified sales intelligence</p>
-        <h1>Stop sorting.<br>Start <span class="hl">selling.</span></h1>
-        <p class="lede">ŌLLIN finds the accounts showing movement, verifies why they matter, and maps the people worth reaching—before your team wastes a swing.</p>
-        <div class="actions">
-          <a class="btn" href="#run">Bring us an account. We'll run it live. →</a>
-          <a class="btn line" href="#mushroom">Whole Account Mapping</a>
-        </div>
-        <p class="under">REAL SIGNALS. REAL PEOPLE. YOUR CALL.</p>
+      <p class="eyebrow">Not another AI sales tool</p>
+      <h1>The haystack is their product.<br><span class="hl">The needle is ours.</span></h1>
+      <p class="lede">ŌLLIN finds the accounts showing movement, verifies why they matter, and maps the people worth reaching—before your team wastes a swing.</p>
+      <div class="actions">
+        <a class="btn" href="#run">Bring us an account. We'll run it live. →</a>
+        <a class="btn line" href="#mushroom">Whole Account Mapping</a>
       </div>
-
-      <div>
-        <div class="card" aria-label="Example verified account card">
-          <div class="card-top"><span class="lab">ACCOUNT INTELLIGENCE</span><span class="vchip" title="Verified"><span class="omark" aria-hidden="true"><i class="bar"></i><span class="o">O</span></span>VERIFIED</span></div>
-          <div class="co">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg></div>
-            <div><div class="nm">Aldervane Freight</div><div class="mt">Logistics · 640 employees · Series C</div></div>
-          </div>
-          <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></div><div><div class="k">Why now</div><div class="v">$60M Series C announced. East Coast hiring has tripled in 30 days, with no regional operations leader in seat.</div><div class="s">SEC filing · ATS · company sources</div></div></div>
-          <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><div><div class="k">Right person</div><div class="v">Omar Reyes — VP, Operations. Owns the buildout and appears directly responsible for regional expansion.</div><div class="s">Org chart · LinkedIn · hiring activity</div></div></div>
-          <div class="row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1.1-4.3A8 8 0 1 1 21 12z"/></svg></div><div><div class="k">Right message</div><div class="v">Expansion is moving faster than regional hiring. Lead with the operational pressure that creates — not a generic sales pitch.</div><div class="s">Generated only from verified signals above</div></div></div>
-          <div class="row held"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><div><div class="k">Direct line</div><div class="v">Not verified — withheld.</div><div class="s">If we can't verify it, we don't invent it</div></div></div>
-          <div class="card-foot"><span>FAILED A CHECK? <b>IT DOESN'T REACH YOU.</b></span><span>NOTHING SENDS <b>WITHOUT YOUR APPROVAL.</b></span></div>
-        </div>
-        <p class="ex">Example card · illustrative data</p>
-      </div>
+      <p class="under">REAL SIGNALS. REAL PEOPLE. YOUR CALL.</p>
     </div>
   </section>
 
@@ -793,19 +748,32 @@ var OLLIN_CONTACT_EMAIL = 'marcos@ollinos.com';
   document.body.prepend(progress);
   if (!reduce) scroll(p => progress.style.transform = `scaleX(${p})`);
 
-  // Hero: headline first, then the product proves the claim.
+  // Hero: the headline lands one word at a time — out of the blur, into focus —
+  // then the yellow line draws under the needle and the rest of the copy follows.
   if (!reduce) {
-    const heroItems = [
-      ".hero .eyebrow", ".hero h1", ".hero .lede:nth-of-type(2)",
-      ".hero .lede:nth-of-type(3)", ".hero .actions", ".hero .under"
-    ].map(s => document.querySelector(s)).filter(Boolean);
-    animate(heroItems, { opacity:[0,1], y:[18,0] }, { duration:.58, delay:stagger(.075), ease:[.22,1,.36,1] });
-    const heroCard = document.querySelector(".hero .card");
-    animate(heroCard, { opacity:[0,1], y:[28,0], scale:[.975,1] }, { duration:.8, delay:.28, ease:[.22,1,.36,1] });
-
-    const rows = [...document.querySelectorAll(".hero .row")];
-    rows.forEach((row,i) => setTimeout(() => row.classList.add("motion-verified"), 760 + i*360));
-    setTimeout(() => document.querySelector(".hero .vchip")?.classList.add("motion-pulse"), 760 + rows.length*360);
+    const h1 = document.querySelector(".hero h1");
+    const splitWords = (node) => {
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(part => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(" ")); return; }
+            const w = document.createElement("span"); w.className = "w"; w.textContent = part; w.style.opacity = "0";
+            frag.appendChild(w);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && n.tagName !== "BR") splitWords(n);
+      });
+    };
+    splitWords(h1);
+    h1.style.opacity = "1"; h1.style.transform = "none";
+    const words = [...h1.querySelectorAll(".w")];
+    animate(document.querySelector(".hero .eyebrow"), { opacity:[0,1], y:[14,0] }, { duration:.5, ease:[.22,1,.36,1] });
+    animate(words, { opacity:[0,1], y:[28,0], scale:[.94,1], filter:["blur(12px)","blur(0px)"] },
+      { duration:.72, delay:stagger(.065, { startDelay:.18 }), ease:[.22,1,.36,1] });
+    const rest = [".hero .lede", ".hero .actions", ".hero .under"].map(s => document.querySelector(s)).filter(Boolean);
+    animate(rest, { opacity:[0,1], y:[18,0] }, { duration:.6, delay:stagger(.1, { startDelay:1.0 }), ease:[.22,1,.36,1] });
   }
 
   // General editorial reveals.
