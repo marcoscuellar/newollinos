@@ -1,6 +1,10 @@
 # ŌLLIN OS — site handover
 
-Single-page site. Working file: `index.html` (from `ollin-os-motion-yellow-line-fixed.html`).
+Single-page site. Working file: `index.html` — the fixed ŌLLIN OS page, kept in step with `main` of `marcoscuellar/OLLINOS` (same page, same rules). `api/contact.js` is the one serverless function: the signup pill POSTs to it and it emails marcos@ollinos.com through Resend. It needs `RESEND_API_KEY` set on this Vercel project; without it the pill falls back to showing the address.
+
+## Hard rules (from the OLLINOS repo — do not violate)
+- Sample data uses only the approved fictional roster: Verrida Health, Kestrelbrook Devices, Marrowfield Platforms, Aldervane Freight; Dana Rivera, Marcus Vale, Priya Anand, Leo Fontaine, Nadia Cole, Omar Reyes, Sofia Marin, Grace Kim. Sample emails use `.example`. `scripts/check-sample-data.sh` must PASS before a deploy.
+- ŌLLIN always carries the macron. No hype language. No letter-scramble animation. The stamp reads VERIFIED.
 
 ## Direction
 Graphite + signal-yellow identity. The site should feel like an intelligent operating system doing real work, not a generic AI/SaaS landing page. Motion explains the product; it is never decoration.
@@ -10,7 +14,7 @@ Core motion philosophy: **Data appears → gets checked → becomes useful → p
 ## Motion already in place
 - Hero entrance sequencing
 - Animated verification flow inside the hero intelligence card
-- "Stop the noise" emphasis
+- Hero headline emphasis (the yellow underline device on "now.")
 - Scroll-triggered section reveals
 - Four-check verification progression
 - Haystack → signal/needle treatment
@@ -29,9 +33,9 @@ Animations originally fired too early. Triggers were moved so a section enters t
 Headline: **ŌLLIN OS finds it. ŌLLIN GO runs it.**
 
 "Up Next" shows three separate company scenarios (not three contacts at one company):
-1. Meridian Logistics — VP, Operations
-2. Northstar Health — VP, Talent Acquisition
-3. ForgeWorks Manufacturing — Director, Supply Chain
+1. Aldervane Freight — Omar Reyes, VP, Operations
+2. Verrida Health — Sofia Marin, VP, Talent Acquisition
+3. Kestrelbrook Devices — Dana Rivera, Director, Supply Chain
 
 Selecting a company swaps the white intelligence card: contact, company, signal, timing/money event, buyer context, secondary signal, why this person, hook, outreach draft. Profiles auto-rotate once the GO section is visible and are also clickable. **Keep this behavior** — it proves ŌLLIN is not producing a canned template.
 
