@@ -3,13 +3,20 @@
    hop, and it exists so the confirmation can honestly say "Received" instead of
    handing the visitor a mailto: and hoping they remember to hit send.
 
+   Two emails go out per submit:
+     1. the notification to CONTACT_TO (reply-to: the visitor) — required; if
+        this fails the page shows the direct address instead of "Received"
+     2. the auto-reply to the visitor (reply-to: CONTACT_TO) — best effort; a
+        failure here is logged and never turns a received submission into an
+        error on the page, because the notification already landed
+
    Env vars (Vercel → the ŌLLIN OS site project → Settings → Environment Variables):
      RESEND_API_KEY  required — https://resend.com/api-keys
      CONTACT_TO      optional — defaults to marcos@ollinos.com
      CONTACT_FROM    optional — defaults to Resend's shared onboarding sender,
-                     which only delivers to the Resend account's own address.
-                     Once ollinos.com is verified in Resend, set this to
-                     something like "OLLIN <hello@ollinos.com>" to lift that.
+                     which only delivers to the Resend account's own address
+                     (so the auto-reply cannot reach a visitor until this is
+                     set to a verified domain, e.g. "ŌLLIN OS <hello@ollinos.com>").
 
    With RESEND_API_KEY unset this returns 500, and the page falls back to
    showing the direct address — a visible failure, never a silent drop. */
@@ -62,25 +69,43 @@ module.exports = async (req, res) => {
     'source: ' + source,
   ].join('\n');
 
+  /* What the visitor gets back, straight away. Plain text on purpose: it
+     reads as a note from a person, and nothing in it is a claim we can't keep.
+     Reply-to is the inbox the notification went to, so their answer and your
+     notification land in the same thread on your side. */
+  const ack = [
+    'Got it.',
+    '',
+    'Reply to this email with the account you are already working: the company,',
+    'and the person if you have one. We run the four checks on it and send back',
+    'what holds up and what does not.',
+    '',
+    'Nothing is sent to anyone. You see the work first.',
+    '',
+    'Marcos',
+    'ŌLLIN OS · ollinos.com',
+  ].join('\n');
+
   /* don't let a hanging upstream hold the function open to its own timeout */
   const ctl = new AbortController();
   const bail = setTimeout(() => ctl.abort(), 8000);
+  const send = (payload) => fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + process.env.RESEND_API_KEY,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+    signal: ctl.signal,
+  });
 
   try {
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + process.env.RESEND_API_KEY,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: FROM,
-        to: [TO],
-        reply_to: email,          /* so hitting reply reaches them, not Resend */
-        subject: 'Bring an account — ' + email,
-        text: text,
-      }),
-      signal: ctl.signal,
+    const r = await send({
+      from: FROM,
+      to: [TO],
+      reply_to: email,          /* so hitting reply reaches them, not Resend */
+      subject: 'Bring an account — ' + email,
+      text: text,
     });
 
     if (!r.ok) {
@@ -88,6 +113,22 @@ module.exports = async (req, res) => {
          echo configuration detail we shouldn't hand to the page */
       console.error('contact: resend returned', r.status, await r.text().catch(() => ''));
       return res.status(502).json({ error: 'could not send' });
+    }
+
+    /* The notification landed, so the submission counts as received whatever
+       happens next. The auto-reply is best effort: log a failure, never
+       surface it. */
+    try {
+      const a = await send({
+        from: FROM,
+        to: [email],
+        reply_to: TO,
+        subject: 'Got it — bring the account',
+        text: ack,
+      });
+      if (!a.ok) console.error('contact: auto-reply returned', a.status, await a.text().catch(() => ''));
+    } catch (e) {
+      console.error('contact: auto-reply failed —', e && e.message);
     }
 
     return res.status(200).json({ ok: true });
