@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Campaigns: approve tonight, send tomorrow | ŌLLIN</title>
-<meta name="description" content="Approve outreach tonight and it leaves on its morning. Cancel any time before it goes. Nothing sends without your yes.">
+<title>Campaigns: every touch with a reason | ŌLLIN</title>
+<meta name="description" content="It takes eight touches to win a meeting, and random emails get ignored. ŌLLIN GO builds every touch from a verified fact and sends only with your yes.">
 <link rel="canonical" href="https://www.ollinos.com/campaigns">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ŌLLIN">
 <meta property="og:url" content="https://www.ollinos.com/campaigns">
-<meta property="og:title" content="Campaigns: approve tonight, send tomorrow | ŌLLIN">
-<meta property="og:description" content="Approve outreach tonight and it leaves on its morning. Cancel any time before it goes. Nothing sends without your yes.">
+<meta property="og:title" content="Campaigns: every touch with a reason | ŌLLIN">
+<meta property="og:description" content="It takes eight touches to win a meeting, and random emails get ignored. ŌLLIN GO builds every touch from a verified fact and sends only with your yes.">
 <meta property="og:image" content="https://www.ollinos.com/assets/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Campaigns: approve tonight, send tomorrow | ŌLLIN">
-<meta name="twitter:description" content="Approve outreach tonight and it leaves on its morning. Cancel any time before it goes. Nothing sends without your yes.">
+<meta name="twitter:title" content="Campaigns: every touch with a reason | ŌLLIN">
+<meta name="twitter:description" content="It takes eight touches to win a meeting, and random emails get ignored. ŌLLIN GO builds every touch from a verified fact and sends only with your yes.">
 <meta name="twitter:image" content="https://www.ollinos.com/assets/og-cover.png">
 <link rel="icon" type="image/svg+xml" href="/assets/pulse.svg">
 <link rel="stylesheet" href="/nav.css">
@@ -34,6 +34,25 @@ a{color:#181a1e}a:hover{color:#3f4550}
 .dmuted{color:#b8bec7}
 .vdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#ffe14d;flex:0 0 8px}
 .odot{display:inline-block;width:8px;height:8px;border-radius:50%;border:1px solid #8b929d;box-sizing:border-box;flex:0 0 8px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.camp{padding:clamp(24px,4vw,44px);display:flex;flex-direction:column;gap:22px}
+.camp-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.camp-who{font-family:Archivo,sans-serif;font-weight:700;font-size:26px;letter-spacing:-.02em;margin-top:8px}
+.camp-who .dmuted{font-family:Inter,sans-serif;font-weight:400;font-size:15px;letter-spacing:0}
+.camp-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.camp-row{display:grid;grid-template-columns:minmax(150px,.7fr) minmax(0,1.1fr) minmax(0,1.6fr);gap:24px;padding:20px 0;border-top:1px solid #2c3037;align-items:start}
+.camp-touch{display:flex;gap:12px;align-items:center}
+.camp-touch .num{color:#fff}
+.camp-touch b{display:block;font-size:15px}
+.camp-touch span:not(.num){display:block;font-size:13px;color:#b8bec7}
+.camp-k{color:#8b929d;display:block;margin-bottom:8px}
+.camp-f{display:flex;gap:10px;align-items:center;font-size:15px}
+.camp-src{display:block;color:#8b929d;margin-top:6px}
+.camp-draft p{margin:0;background:#22252b;border-radius:10px;padding:12px 14px;font-size:15px;line-height:1.55;color:#e3e6ea}
+.camp-held{color:#b8bec7}
+.camp-held .num{color:#8b929d}
+.camp-held .camp-draft p{background:transparent;border:1px dashed #3a3f47;color:#b8bec7}
+@media(max-width:860px){.camp-row{grid-template-columns:1fr;gap:12px}}
 </style>
 <style>html,body{background:#fff}</style>
 </head>
@@ -47,25 +66,66 @@ a{color:#181a1e}a:hover{color:#3f4550}
 <div class="panel fp-hero">
 <div class="fp-hero-text">
 <div class="lbl muted">ŌLLIN GO · Campaigns</div>
-<h1 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 600; font-size: clamp(40px, 4.6vw, 64px); line-height: 1.04; letter-spacing: -0.045em">Approve tonight.<br>It goes out in the morning.</h1>
-<p class="muted" style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 580px">Every email waits for your yes. Cancel any time before it leaves.</p>
+<h1 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 600; font-size: clamp(40px, 4.6vw, 64px); line-height: 1.04; letter-spacing: -0.045em">It takes eight touches.<br>Make every one count.</h1>
+<p class="muted" style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 580px">Random emails get ignored. ŌLLIN GO runs the whole campaign: every touch built from a verified fact, sent on its morning, and only with your yes.</p>
 <a class="opener-cta" href="/#contact">Let’s talk</a>
 </div>
 <div class="fp-hero-img"><img src="/assets/walk.jpg" alt="A woman walks out of an office lobby with her coffee, on her way in" style="object-position: center 30%"></div>
 </div>
 </section>
-
-<section class="wrap">
+<section class="wrap" style="padding-top: 76px; display: flex; flex-direction: column; gap: 40px">
+<div class="sec-head">
+<div class="sec-rule"><span>01</span><span>Why campaigns</span></div>
+<h2 class="h2">Persistence wins. Random gets ignored.</h2>
+<p class="muted" style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 640px">The two go hand in hand. You have to keep showing up, and every touch needs a real reason to be there.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+<div class="panel" style="flex: 1 1 380px; min-width: 0; padding: clamp(28px, 4vw, 48px); display: flex; flex-direction: column; gap: 14px">
+<div aria-hidden="true" style="display: flex; align-items: baseline; font-family: Archivo, sans-serif; font-weight: 700; font-size: clamp(84px, 9vw, 132px); line-height: .95; letter-spacing: -0.065em">8<span style="font-size: .42em; margin-left: 8px; letter-spacing: -0.04em">touches</span></div>
+<p style="margin: 0; font-size: 19px; line-height: 1.5; max-width: 420px"><span class="sr-only">8 touches </span>is what most sellers need to turn a new prospect into a first meeting.</p>
+<h3 class="h3" style="font-size: 26px; margin-top: 8px">Even top performers need 5.</h3>
+<a href="https://www.rainsalestraining.com/sales-research/sales-prospecting-research" style="font-size: 12px; color: #3f4550; text-underline-offset: 4px; margin-top: 10px">Source: RAIN Group · Top Performance in Sales Prospecting</a>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #62666d; line-height: 1.6">489 sellers surveyed · June–July 2017</span>
+</div>
+<div class="panel" style="flex: 1 1 380px; min-width: 0; padding: clamp(28px, 4vw, 48px); display: flex; flex-direction: column; gap: 14px">
+<div aria-hidden="true" style="display: flex; align-items: baseline; font-family: Archivo, sans-serif; font-weight: 700; font-size: clamp(84px, 9vw, 132px); line-height: .95; letter-spacing: -0.065em">73<span style="font-size: .42em; margin-left: 8px; letter-spacing: -0.04em">%</span></div>
+<p style="margin: 0; font-size: 19px; line-height: 1.5; max-width: 420px"><span class="sr-only">73% </span>of B2B buyers actively avoid suppliers who send irrelevant outreach.</p>
+<h3 class="h3" style="font-size: 26px; margin-top: 8px">So every touch needs a real reason.</h3>
+<a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-sales-survey-finds-61-percent-of-b2b-buyers-prefer-a-rep-free-buying-experience" style="font-size: 12px; color: #3f4550; text-underline-offset: 4px; margin-top: 10px">Source: Gartner · June 2025</a>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #62666d; line-height: 1.6">632 B2B buyers · surveyed Aug–Sep 2024</span>
+</div>
+</div>
+</section>
+<section class="wrap" style="padding-top: 76px; display: flex; flex-direction: column; gap: 40px">
+<div class="sec-head">
+<div class="sec-rule"><span>02</span><span>What goes out</span></div>
+<h2 class="h2">Every touch has a reason. You can see it.</h2>
+<p class="muted" style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 640px">ŌLLIN GO builds each touch from a fact ŌLLIN OS checked, shows you where it came from, and writes the draft. You edit, approve, or skip.</p>
+</div>
+<div class="panel dark camp">
+<div class="camp-head"><div><div class="lbl dmuted">Campaign · Aldervane Freight</div><div class="camp-who">Omar Reyes <span class="dmuted">· VP, Operations</span></div></div><div class="lbl" style="color: #8b929d">Example data · not real contacts</div></div>
+<ol class="camp-list"><li class="camp-row"><div class="camp-touch"><span class="num">1</span><div><b>Email</b><span>Approved · queued</span></div></div>
+<div class="camp-fact"><span class="lbl camp-k">Built from</span><div class="camp-f"><span class="vdot"></span><span>Opened a second regional hub in Q3</span></div><span class="lbl camp-src">Press release</span></div>
+<div class="camp-draft"><span class="lbl camp-k">Draft</span><p>Omar, congrats on the new hub. With a second site running, how are you keeping operations in step?</p></div></li><li class="camp-row"><div class="camp-touch"><span class="num">2</span><div><b>LinkedIn</b><span>You send it</span></div></div>
+<div class="camp-fact"><span class="lbl camp-k">Built from</span><div class="camp-f"><span class="vdot"></span><span>Hiring 4 operations managers this month</span></div><span class="lbl camp-src">Job posts</span></div>
+<div class="camp-draft"><span class="lbl camp-k">Draft</span><p>Saw you’re adding four operations managers. If any of those seats need cover while you hire, we can help.</p></div></li><li class="camp-row"><div class="camp-touch"><span class="num">3</span><div><b>Email</b><span>Approved · queued</span></div></div>
+<div class="camp-fact"><span class="lbl camp-k">Built from</span><div class="camp-f"><span class="vdot"></span><span>Both facts, one thread</span></div><span class="lbl camp-src">Press release + job posts</span></div>
+<div class="camp-draft"><span class="lbl camp-k">Draft</span><p>Omar, with four operations managers starting across both hubs, how are you keeping the work in step between sites?</p></div></li><li class="camp-row camp-held"><div class="camp-touch"><span class="num">4</span><div><b>Not written</b><span>Held back</span></div></div>
+<div class="camp-fact"><span class="lbl camp-k">Built from</span><div class="camp-f"><span class="odot"></span><span>Routing technology budget</span></div><span class="lbl camp-src">Unable to verify</span></div>
+<div class="camp-draft"><span class="lbl camp-k">Why</span><p>ŌLLIN won’t build a touch around a fact it couldn’t check. A gap stays a gap.</p></div></li></ol>
+</div>
+</section>
+<section class="wrap" style="padding-top: 76px">
 <div class="panel dark" style="padding: clamp(20px, 4vw, 48px); display: flex; flex-wrap: wrap; gap: 32px; align-items: stretch">
 <div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 18px; justify-content: center">
-<div class="lbl dmuted">In ŌLLIN GO</div>
+<div class="sec-rule"><span>03</span><span>When it goes out</span></div>
 <h2 class="h2 h2-panel">One tap to approve. It waits for its morning.</h2>
 <p class="dmuted" style="margin: 0; font-size: 16px; line-height: 1.6; max-width: 420px">Review the card, hit Approve &amp; queue, and the email leaves at your hour on its due day. Changed your mind? Cancel any time until it leaves.</p>
 <div class="lbl" style="color: #8b929d">Example data · not real contacts</div>
 </div>
 <div style="flex: 1.3 1 460px; min-width: 0; background: #22252b; border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 22px 35px rgba(0,0,0,.25)">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
-<span class="lbl" style="color: #8b929d">Touch 2 · Email</span>
+<span class="lbl" style="color: #8b929d">Touch 3 · Email</span>
 <span class="lbl" style="background: #2c3037; color: #ffffff; padding: 6px 10px; border-radius: 6px">Queued</span>
 </div>
 <div>
@@ -91,31 +151,6 @@ Omar, with four operations managers starting across both hubs, how are you keepi
 </div>
 </div>
 </section>
-
-<section class="wrap" style="padding-top: 76px; display: flex; flex-direction: column; gap: 40px">
-<div class="sec-head">
-<div class="sec-rule"><span>01</span><span>How it works</span></div>
-<h2 class="h2">Three steps. Then you go sell.</h2>
-</div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
-<article class="panel" style="padding: 32px; display: flex; flex-direction: column; gap: 14px">
-<span class="num">1</span>
-<h3 class="h3">Review the card.</h3>
-<p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">The facts, their sources, why this person would care, and a draft. Rewrite it, or ask ŌLLIN for another angle.</p>
-</article>
-<article class="panel" style="padding: 32px; display: flex; flex-direction: column; gap: 14px">
-<span class="num">2</span>
-<h3 class="h3">Approve &amp; queue.</h3>
-<p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">One tap. The draft locks, and the email waits for its due morning. Nothing else is sent.</p>
-</article>
-<article class="panel" style="padding: 32px; display: flex; flex-direction: column; gap: 14px">
-<span class="num">3</span>
-<h3 class="h3">It leaves in the morning.</h3>
-<p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">At your hour, a few minutes apart, so a morning spreads out instead of landing all at once.</p>
-</article>
-</div>
-</section>
-
 <section class="wrap" style="padding-top: 76px">
 <div style="display: flex; flex-wrap: wrap; gap: 20px">
 <div class="panel" style="flex: 1 1 520px; min-width: 0; padding: clamp(24px, 4vw, 44px); display: flex; flex-direction: column; gap: 20px">
@@ -123,7 +158,7 @@ Omar, with four operations managers starting across both hubs, how are you keepi
 <h2 class="h2 h2-panel">Your queue, spread out.</h2>
 <div style="display: flex; flex-direction: column">
 <div style="display: grid; grid-template-columns: 80px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid #dde1e6"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px">7:30</span><div><div style="font-weight: 600">Dana Rivera</div><div class="muted" style="font-size: 13px">Director, Supply Chain · Kestrelbrook Devices</div></div><span class="lbl muted">Touch 2</span></div>
-<div style="display: grid; grid-template-columns: 80px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid #dde1e6"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px">7:34</span><div><div style="font-weight: 600">Omar Reyes</div><div class="muted" style="font-size: 13px">VP, Operations · Aldervane Freight</div></div><span class="lbl muted">Touch 2</span></div>
+<div style="display: grid; grid-template-columns: 80px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid #dde1e6"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px">7:34</span><div><div style="font-weight: 600">Omar Reyes</div><div class="muted" style="font-size: 13px">VP, Operations · Aldervane Freight</div></div><span class="lbl muted">Touch 3</span></div>
 <div style="display: grid; grid-template-columns: 80px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid #dde1e6"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px">7:39</span><div><div style="font-weight: 600">Sofia Marin</div><div class="muted" style="font-size: 13px">VP, Talent Acquisition · Verrida Health</div></div><span class="lbl muted">Touch 4</span></div>
 <div style="display: grid; grid-template-columns: 80px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid #dde1e6; color: #5f6672"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px">Held</span><div><div style="font-weight: 600">Priya Anand</div><div style="font-size: 13px">Address not confirmed yet, so it waits.</div></div><span class="lbl">Not sent</span></div>
 </div>
@@ -135,10 +170,9 @@ Omar, with four operations managers starting across both hubs, how are you keepi
 </div>
 </div>
 </section>
-
 <section class="wrap" style="padding-top: 76px; display: flex; flex-direction: column; gap: 40px">
 <div class="sec-head">
-<div class="sec-rule"><span>02</span><span>It knows when not to send</span></div>
+<div class="sec-rule"><span>04</span><span>It knows when not to send</span></div>
 <h2 class="h2">Approved isn’t a blank check.</h2>
 <p class="muted" style="margin: 0; font-size: 17px; line-height: 1.6">Every queued email gets checked again before it leaves. If any of these is true, it stays put.</p>
 </div>
@@ -151,11 +185,10 @@ Omar, with four operations managers starting across both hubs, how are you keepi
 <div class="panel" style="padding: 22px; font-size: 15px; line-height: 1.5"><b>You paused sending.</b><div class="muted">One switch stops every morning.</div></div>
 </div>
 </section>
-
 <section class="wrap" style="padding-top: 76px">
 <div class="panel dark" style="padding: clamp(24px, 5vw, 64px); display: flex; flex-wrap: wrap; gap: 48px">
 <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
-<div class="sec-rule"><span>03</span><span>The cadence reacts</span></div>
+<div class="sec-rule"><span>05</span><span>The cadence reacts</span></div>
 <h2 class="h2">It notices. You decide.</h2>
 <p class="dmuted" style="margin: 0; font-size: 16px; line-height: 1.6">When someone responds, or doesn’t, GO proposes the next move with its reason. You accept with one tap. Nothing moves on its own.</p>
 </div>
@@ -166,15 +199,6 @@ Omar, with four operations managers starting across both hubs, how are you keepi
 </div>
 </div>
 </section>
-
-<section class="wrap" style="padding-top: 76px">
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
-<div style="border-top: 1px solid #d9dee5; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><h3 class="h3">Never sends without your yes.</h3><p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">Every email is approved by a person, one by one.</p></div>
-<div style="border-top: 1px solid #d9dee5; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><h3 class="h3">Cancel until it leaves.</h3><p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">Pull any queued email back with one tap.</p></div>
-<div style="border-top: 1px solid #d9dee5; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><h3 class="h3">Every claim has a source.</h3><p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">Drafts are built only from facts that were checked.</p></div>
-</div>
-</section>
-
 <section id="talk" class="wrap" style="padding-top: 76px">
 <div class="panel dark" style="padding: clamp(28px, 5vw, 64px); display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end; justify-content: space-between">
 <div style="display: flex; flex-direction: column; gap: 18px; max-width: 620px">
