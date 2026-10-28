@@ -1,0 +1,32 @@
+# ŌLLIN OS — www.ollinos.com
+# Search engines and AI assistants may read the public site.
+# The contact endpoint is a form handler, not a page.
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# AI assistants (listed by name so the choice is explicit)
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://www.ollinos.com/sitemap.xml

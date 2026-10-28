@@ -1,0 +1,23 @@
+# ŌLLIN OS
+
+> ŌLLIN OS is sales intelligence software. It finds the accounts showing
+> movement, verifies why they matter, and maps the people worth reaching.
+> ŌLLIN OS finds it. ŌLLIN GO runs it. Nothing sends without your approval.
+
+## What it does
+- Finds account signals. Every signal shows its source.
+- Checks every claim before it is used. "Unable to verify" is shown as-is, never guessed.
+- Maps the whole account: the director, the manager, finance, talent. Every reporting line is labelled verified or inferred, so a deal is never single-threaded.
+- Prepares the evidence, the reason to act, and a ready draft. Your team reviews it, adjusts it, and sends it.
+
+## Three things it will never do
+- Never invents: verifiable sources only. No made-up companies, people or facts.
+- Never softens: a claim that fails a check is dropped, not hedged.
+- Never sends on its own: ŌLLIN OS prepares. Your team reviews and decides.
+
+## Who it is for
+Sales teams that want fewer wasted swings: a real reason to reach out, and the right people to reach.
+
+## Contact
+- Website: https://www.ollinos.com/
+- Email: marcos@ollinos.com
