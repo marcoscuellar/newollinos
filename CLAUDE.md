@@ -6,6 +6,24 @@ Single-page site. Working file: `index.html` — the fixed ŌLLIN OS page, kept 
 - Sample data uses only the approved fictional roster: Verrida Health, Kestrelbrook Devices, Marrowfield Platforms, Aldervane Freight; Dana Rivera, Marcus Vale, Priya Anand, Leo Fontaine, Nadia Cole, Omar Reyes, Sofia Marin, Grace Kim. Sample emails use `.example`. `scripts/check-sample-data.sh` must PASS before a deploy.
 - ŌLLIN always carries the macron. No hype language. No letter-scramble animation. The stamp reads VERIFIED.
 
+## Brand + layout (Signal Pulse, Oct 28 2026)
+- Brand book: `brand/ollin-signal-pulse-brand-book.md` in the ŌLLIN OS / GO project. Life is black and white; **yellow is the signal only** (Pulse, verified facts, the one action).
+- Type: **Archivo** (display 800/700/500), **Inter** (text), **IBM Plex Mono** (labels, stats, sources only). Google Fonts.
+- Colour tokens: Night Black `#181A1E`, White, Signal Yellow `#FFE14D`. No other accents.
+- Layout: ELIPAN panels — rounded white / Night Black panels inset from the edges, rows of 2–3, shadows not outlines, no side-line accents.
+- Hero: white, centred headline only (“The haystack is their product. The needle is ours.”). No buttons in the hero.
+- One action: **Talk to us** (top bar, after the hero) + the contact form submit. Everything else is a text link.
+- Photos: full colour, Pulse bars/squares scattered in the scene (from the brand guide library, `img/`). Founder photo stays black and white.
+- Don't publish the method (no engine/pipeline diagram), no prices, no client logos or usage counters until real ones exist.
+- Motion is vanilla JS + CSS (no Motion.dev). Pause motion + dark mode toggles live in the footer.
+
+## Research applied (AI product marketing pages, Oct 2026)
+- Interactive proof right under the hero, ungated: OS→GO signal hand-off, four-check claim runner, Mushroom tap-a-person, GO card demo.
+- GO card draft **streams in** (15–45 ms/char, cursor, “DRAFTING FROM VERIFIED FACTS…” → audit) with its space reserved so there's no layout shift.
+- Reading progress bar is CSS scroll-driven (`animation-timeline`), off the main thread; hidden where unsupported.
+- Images lazy + async decoded, sized to avoid layout shift.
+- Not applied on purpose (conflict with site rules or need real data): hero sandbox buttons, reverse-trial pricing, SOC 2 / data-retention badges, logo wall, live telemetry counters.
+
 ## Direction
 Graphite + signal-yellow identity. The site should feel like an intelligent operating system doing real work, not a generic AI/SaaS landing page. Motion explains the product; it is never decoration.
 
@@ -13,8 +31,7 @@ Core motion philosophy: **Data appears → gets checked → becomes useful → p
 
 ## Motion already in place
 - Hero entrance sequencing
-- Animated verification flow inside the hero intelligence card
-- Hero headline emphasis (the yellow underline device on "now.")
+- Hero headline emphasis (yellow highlight sweeps behind "The needle is ours.")
 - Scroll-triggered section reveals
 - Four-check verification progression
 - Haystack → signal/needle treatment
@@ -24,7 +41,6 @@ Core motion philosophy: **Data appears → gets checked → becomes useful → p
 - Subtle button/card interactions
 - Scroll progress bar
 - `prefers-reduced-motion` support (all content stays visible)
-- Motion.dev pinned (`motion@13.2.0`), never `latest`
 
 ## Trigger rule (do not regress)
 Animations originally fired too early. Triggers were moved so a section enters the visitor's visible reading area **before** it animates. The visitor should see the section, understand it, then see it animate. Do not move `inView` margins/amounts back upward unless intentionally testing.
@@ -52,6 +68,6 @@ Selecting a company swaps the white intelligence card: contact, company, signal,
 Do not add "name withheld", competitor language, or "anonymous executive" language. Identified by seniority + company only.
 
 ## Creative guardrails
-Keep: graphite, signal yellow, white/off-white, Archivo / IBM Plex Mono, restrained product-motion aesthetic, evidence/verification language, human-control positioning, premium slightly-industrial feel.
+Keep: Night Black, signal yellow, white, Archivo / Inter / IBM Plex Mono, restrained product-motion aesthetic, evidence/verification language, human-control positioning, premium slightly-industrial feel.
 
 Avoid: floating AI blobs, glowing orbs, parallax everywhere, excessive bounce, neon gradients, generic "AI circuitry", motion on every element, anything that reads as another AI sales-tool template.
