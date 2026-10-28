@@ -117,3 +117,17 @@ html,body{background:#fff}
 @media(max-width:600px){.signal-story{grid-template-columns:1fr}}
 
 .section-heading .sec-rule::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:var(--night);transform-origin:left center}
+
+/* ---------- One system (home): numbered trust header full width, three heading sizes ---------- */
+.trust>div:first-child{display:flex;flex-direction:column}
+.trust .sec-rule{margin-bottom:0}
+.trust h2{font-size:clamp(38px,4.4vw,60px)}
+.section-heading h2{font-size:clamp(38px,4.4vw,60px)}
+.founder-copy h2,.photo-row h2,.contact h2{font-size:clamp(30px,3vw,42px)}
+@media(max-width:600px){.trust h2,.section-heading h2{font-size:clamp(34px,9.5vw,40px)}}
+.trust{row-gap:28px}
+.trust>div:first-child{display:contents}
+.trust .sec-rule{grid-column:1/-1}
+.trust h2{grid-column:1;margin-top:0}
+.trust-details{grid-column:2}
+@media(max-width:600px){.trust h2,.trust-details{grid-column:1}}

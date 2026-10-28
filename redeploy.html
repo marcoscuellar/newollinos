@@ -41,6 +41,58 @@ a{color:#181a1e}a:hover{color:#3f4550}
 .tag{display:flex;gap:8px;align-items:center;margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#ffffff}
 .ln{position:absolute;background:#b8bec7}
 .dl{position:absolute;border-color:#8b929d;border-style:dashed;border-width:0}
+
+/* 01 / Why it's hard: the assignment timeline every staffing desk knows. Yellow = the window that gets missed. */
+.rd{margin:0;border:1px solid #2c3037;border-radius:18px;background:#1d2024;padding:28px clamp(20px,3vw,40px)}
+.rd-wide{position:relative;height:360px;margin:0 8px 0 132px}
+.rd-lane{position:absolute;left:-132px;right:0;height:0;border-top:1px dashed #3a3f47}
+.rd-am{top:34px}.rd-rec{top:322px}
+.rd-lane-lbl{position:absolute;left:0;top:-9px;background:#1d2024;padding-right:10px;font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:#8b929d}
+.rd-window{position:absolute;left:44%;width:31%;top:14px;bottom:14px;background:rgba(255,225,77,.07);border:1px solid rgba(255,225,77,.35);border-radius:12px}
+.rd-window span{position:absolute;left:14px;max-width:130px;top:62px;font:500 11px/1.4 "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:#ffe14d}
+.rd-bar{position:absolute;left:0;right:0;top:174px;height:8px;display:flex}
+.rd-assign{display:block;width:80%;height:100%;background:#b8bec7;border-radius:4px 0 0 4px;transform-origin:left center}
+.rd-bench{display:block;flex:1;height:0;margin-top:3px;border-top:2px dashed #6e7480}
+.rd-tick{position:absolute;left:var(--x);top:206px;transform:translateX(-50%);white-space:nowrap;font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#8b929d}
+.rd-tick[style*="--x:0%"]{transform:none}
+.rd-tick-end{color:#fff}
+.rd-tick-end::before{content:"";position:absolute;left:50%;top:-30px;height:20px;border-left:2px solid #fff}
+.rd-pin{position:absolute;left:var(--x);top:178px;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:#181a1e;border:2px solid #fff;display:grid;place-items:center;z-index:2}
+.rd-pin b{font:600 14px Archivo,sans-serif;color:#fff}
+.rd-pin[style*="--x:0%"]{transform:translate(-2px,-50%)}
+.rd-pin-late{border-color:#ffe14d}.rd-pin-late b{color:#ffe14d}
+.rd-note{position:absolute;max-width:190px;font-size:14px;line-height:1.4;color:#e3e6ea}
+.rd-n1{left:0;top:236px}
+.rd-n3{left:75%;top:96px;transform:translateX(-50%);text-align:center;max-width:160px;background:#1d2024;padding:4px 8px;border-radius:8px}
+.rd-n4{left:90%;top:236px;transform:translateX(-50%);text-align:center;max-width:180px}
+.rd-link{position:absolute;left:var(--x);width:0;border-left:1px dashed #8b929d}
+.rd-link-up{top:52px;height:104px}.rd-link-dn{top:200px;height:104px}
+.rd-quote{position:absolute;left:var(--x);transform:translateX(-50%);white-space:nowrap;font-size:14px;font-style:italic;color:#fff;background:#2c3037;padding:6px 12px;border-radius:999px}
+.rd-q-am{top:20px}.rd-q-rec{top:308px}
+.rd-tall{display:none}
+.rd-legend{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+@media(max-width:1100px){.rd-legend{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.rd-legend{grid-template-columns:1fr}}
+.rd-legend li{display:flex;gap:14px;border-top:1px solid #3a3f47;padding-top:20px}
+.rd-legend li>div{display:flex;flex-direction:column;gap:10px;min-width:0}
+.rd-legend p{margin:0;font-size:15px;line-height:1.6}
+.rd-num{flex:0 0 30px;height:30px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;font:600 13px Archivo,sans-serif}
+.rd-legend li:nth-child(3) .rd-num{border-color:#ffe14d;color:#ffe14d}
+@media(max-width:1100px){
+  .rd-wide{display:none}
+  .rd{padding:22px 20px}
+  .rd-tall{display:flex;flex-direction:column;list-style:none;margin:0;padding:0 0 0 22px;border-left:3px solid #b8bec7;position:relative}
+  .rd-tall li{position:relative;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:center;padding:14px 0 14px 8px}
+  .rd-tall li::before{content:"";position:absolute;left:-29px;top:20px;width:11px;height:11px;border-radius:50%;background:#1d2024;border:2px solid #b8bec7}
+  .rd-t{grid-column:1/-1;font:500 11px/1.4 "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:#8b929d}
+  .rd-pin-s{width:28px;height:28px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;font:600 13px Archivo,sans-serif}
+  .rd-s{font-size:14px;line-height:1.45;color:#e3e6ea}
+  .rd-win-s,.rd-late-s{background:rgba(255,225,77,.07);border-radius:0 10px 10px 0;padding-right:10px}
+  .rd-win-s .rd-t,.rd-late-s .rd-t{color:#ffe14d}
+  .rd-late-s .rd-pin-s{border-color:#ffe14d;color:#ffe14d}
+  .rd-bench-s{border-top:2px dashed #6e7480;margin-left:-25px;padding-left:33px!important}
+  .rd-bench-s::before{left:-4px!important}
+}
 </style>
 <style>html,body{background:#fff}</style>
 </head>
@@ -51,25 +103,63 @@ a{color:#181a1e}a:hover{color:#3f4550}
 <template id="sn-logo-src"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="48 50 520 170"><rect x="56.00" y="96.00" width="36.00" height="76.00" rx="13.00" fill="#FFE14D"></rect><rect x="102.00" y="56.00" width="36.00" height="92.00" rx="13.00" fill="#FFE14D"></rect><rect x="152.00" y="76.00" width="32.00" height="32.00" rx="11.00" fill="#FFE14D"></rect><rect x="148.00" y="118.00" width="36.00" height="98.00" rx="13.00" fill="#FFE14D"></rect><path d="M239.96 139.64Q239.96 127.28 245.78 117.44Q251.6 107.60000000000001 261.5 102.08000000000001Q271.4 96.56 283.28 96.56Q295.15999999999997 96.56 305.05999999999995 102.08000000000001Q314.96 107.60000000000001 320.65999999999997 117.44Q326.36 127.28 326.36 139.64Q326.36 152.0 320.6 161.9Q314.84000000000003 171.8 305.0 177.32Q295.15999999999997 182.84 283.28 182.84Q271.4 182.84 261.5 177.32Q251.6 171.8 245.78 161.9Q239.96 152.0 239.96 139.64ZM305.48 139.64Q305.48 128.48000000000002 299.42 121.82000000000001Q293.36 115.16 283.28 115.16Q273.08 115.16 267.02 121.76Q260.96 128.36 260.96 139.64Q260.96 150.8 267.02 157.46Q273.08 164.12 283.28 164.12Q293.36 164.12 299.42 157.4Q305.48 150.68 305.48 139.64Z M355.87999999999994 166.16H382.75999999999993V182.0H335.35999999999996V97.76H355.87999999999994Z M410.7199999999999 166.16H437.5999999999999V182.0H390.19999999999993V97.76H410.7199999999999Z M465.5599999999999 97.76V182.0H445.0399999999999V97.76Z M553.3999999999999 182.0H532.8799999999999L498.5599999999999 130.04V182.0H478.0399999999999V97.76H498.5599999999999L532.8799999999999 149.96V97.76H553.3999999999999Z" fill="#181A1E"></path><rect x="276.25" y="75.56" width="60.48" height="12.60" rx="4.03" fill="#181A1E"></rect></svg></template><header class="sn"></header>
 
 <section class="wrap">
-<div style="padding: 76px 16px 40px; max-width: 960px; display: flex; flex-direction: column; gap: 20px">
-<div class="lbl muted">Redeploy · for staffing teams</div>
-<h1 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 600; font-size: clamp(40px, 4.6vw, 64px); line-height: 1.04; letter-spacing: -0.045em">Every firm has its own way to redeploy.<br>Few get it right.</h1>
-<p class="muted" style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 600px">ŌLLIN starts from your consultant, not a job board, and lines up the next seat before the last one ends.</p>
+<div style="padding: 76px 0 40px; max-width: 960px; display: flex; flex-direction: column; gap: 20px">
+<div class="lbl muted">ŌLLIN OS + GO · Redeploy</div>
+<h1 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 600; font-size: clamp(40px, 4.6vw, 64px); line-height: 1.04; letter-spacing: -0.045em">Line up the next seat<br>before the last one ends.</h1>
+<p class="muted" style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 600px">ŌLLIN starts from your consultant, not a job board. Every firm redeploys its own way. The cracks are the same.</p>
+<a class="opener-cta" href="/#contact">Let’s talk</a>
 </div>
 </section>
 
 <section class="wrap">
 <div class="panel dark" style="padding: clamp(24px, 5vw, 64px); display: flex; flex-direction: column; gap: 36px">
-<div style="display: flex; flex-direction: column; gap: 18px; max-width: 720px">
-<div class="lbl dmuted">01 / Why it’s hard</div>
+<div class="sec-head">
+<div class="sec-rule"><span>01</span><span>Why it’s hard</span></div>
 <h2 class="h2">Every firm has a process. The cracks are the same.</h2>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px">
-<div style="border-top: 1px solid #3a3f47; padding-top: 20px; display: flex; flex-direction: column; gap: 10px"><h3 class="h3" style="font-size: 22px">It starts too late.</h3><p class="dmuted" style="margin: 0; font-size: 15px; line-height: 1.6">Outreach often begins in the last week, or after the last shift. By then, good contractors are already talking to other firms.</p></div>
-<div style="border-top: 1px solid #3a3f47; padding-top: 20px; display: flex; flex-direction: column; gap: 10px"><h3 class="h3" style="font-size: 22px">Their profile is from day one.</h3><p class="dmuted" style="margin: 0; font-size: 15px; line-height: 1.6">A year on a project brings new skills and systems. The record still shows what they could do when you hired them.</p></div>
-<div style="border-top: 1px solid #3a3f47; padding-top: 20px; display: flex; flex-direction: column; gap: 10px"><h3 class="h3" style="font-size: 22px">Everyone thinks someone else has it.</h3><p class="dmuted" style="margin: 0; font-size: 15px; line-height: 1.6">The account manager assumes the recruiter is on it. The recruiter assumes the account manager is. No one calls.</p></div>
-<div style="border-top: 1px solid #3a3f47; padding-top: 20px; display: flex; flex-direction: column; gap: 10px"><h3 class="h3" style="font-size: 22px">It starts from job boards.</h3><p class="dmuted" style="margin: 0; font-size: 15px; line-height: 1.6">When the next order lands, the search goes outside, not to the people already on your bench.</p></div>
+<figure class="rd" role="img" aria-label="An assignment timeline from day one to the end date and the bench, with the account manager and the recruiter as two lanes. Four cracks: the profile is captured at intake and never updated; mid-assignment each side assumes the other owns redeployment; outreach starts in the last week, after the window to line up the next seat has passed; after roll-off the new order goes to a job board instead of the bench.">
+<div class="rd-wide" aria-hidden="true">
+  <div class="rd-lane rd-am"><span class="rd-lane-lbl">Account manager</span></div>
+  <div class="rd-lane rd-rec"><span class="rd-lane-lbl">Recruiter</span></div>
+  <div class="rd-window"><span>The window to line up the next seat</span></div>
+  <div class="rd-bar"><i class="rd-assign"></i><i class="rd-bench"></i></div>
+  <span class="rd-tick" style="--x:0%">Day 1 · Start</span>
+  <span class="rd-tick" style="--x:32%">Mid-assignment</span>
+  <span class="rd-tick" style="--x:54%">Final weeks</span>
+  <span class="rd-tick rd-tick-end" style="--x:80%">End date</span>
+  <span class="rd-tick" style="--x:90%">On the bench</span>
+
+  <span class="rd-pin" style="--x:0%"><b>1</b></span>
+  <span class="rd-note rd-n1">Skills captured at intake. Never updated.</span>
+
+  <span class="rd-pin rd-pin-q" style="--x:64%"><b>2</b></span>
+  <span class="rd-link rd-link-up" style="--x:64%"></span><span class="rd-link rd-link-dn" style="--x:64%"></span>
+  <span class="rd-quote rd-q-am" style="--x:64%">“The recruiter’s on it.”</span>
+  <span class="rd-quote rd-q-rec" style="--x:64%">“The AM’s on it.”</span>
+
+  <span class="rd-pin rd-pin-late" style="--x:75%"><b>3</b></span>
+  <span class="rd-note rd-n3">Outreach starts here. The last week.</span>
+
+  <span class="rd-pin" style="--x:90%"><b>4</b></span>
+  <span class="rd-note rd-n4">New order → job board. Not the bench.</span>
 </div>
+
+<ol class="rd-tall" aria-hidden="true">
+  <li><span class="rd-t">Day 1 · Start</span><span class="rd-pin-s">1</span><span class="rd-s">Skills captured at intake. Never updated.</span></li>
+  <li><span class="rd-t">Mid-assignment</span></li>
+  <li class="rd-win-s"><span class="rd-t">Final weeks · the window to line up the next seat</span><span class="rd-pin-s">2</span><span class="rd-s">AM: “The recruiter’s on it.” Recruiter: “The AM’s on it.”</span></li>
+  <li class="rd-late-s"><span class="rd-t">Last week</span><span class="rd-pin-s">3</span><span class="rd-s">Outreach starts here.</span></li>
+  <li><span class="rd-t">End date</span></li>
+  <li class="rd-bench-s"><span class="rd-t">On the bench</span><span class="rd-pin-s">4</span><span class="rd-s">New order → job board. Not the bench.</span></li>
+</ol>
+</figure>
+
+<ol class="rd-legend">
+<li><span class="rd-num">1</span><div><h3 class="h3" style="font-size: 22px">Their profile is from day one.</h3><p class="dmuted">A year on a project brings new skills and systems. The record still shows what they could do when you hired them.</p></div></li>
+<li><span class="rd-num">2</span><div><h3 class="h3" style="font-size: 22px">Everyone thinks someone else has it.</h3><p class="dmuted">The account manager assumes the recruiter is on it. The recruiter assumes the account manager is. No one calls.</p></div></li>
+<li><span class="rd-num">3</span><div><h3 class="h3" style="font-size: 22px">It starts too late.</h3><p class="dmuted">Outreach often begins in the last week, or after the last shift. By then, good consultants are already talking to other firms.</p></div></li>
+<li><span class="rd-num">4</span><div><h3 class="h3" style="font-size: 22px">It starts from job boards.</h3><p class="dmuted">When the next order lands, the search goes outside, not to the people already on your bench.</p></div></li>
+</ol>
 </div>
 </section>
 
@@ -93,23 +183,23 @@ a{color:#181a1e}a:hover{color:#3f4550}
 </section>
 
 <section class="wrap" style="padding-top: 76px; display: flex; flex-direction: column; gap: 40px">
-<div style="max-width: 750px; padding: 0 16px; display: flex; flex-direction: column; gap: 20px">
-<div class="lbl muted">02 / How ŌLLIN does it</div>
+<div class="sec-head">
+<div class="sec-rule"><span>02</span><span>How ŌLLIN does it</span></div>
 <h2 class="h2">Start from the person. End with the next seat.</h2>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
 <article class="panel" style="padding: 32px; display: flex; flex-direction: column; gap: 14px">
-<div style="width: 44px; height: 44px; border-radius: 10px; background: #ffe14d; color: #181a1e; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px">01</div>
+<span class="num">1</span>
 <h3 class="h3">Bring the consultant.</h3>
 <p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">Tell ŌLLIN who’s rolling off. Their name stays private.</p>
 </article>
 <article class="panel" style="padding: 32px; display: flex; flex-direction: column; gap: 14px">
-<div style="width: 44px; height: 44px; border-radius: 10px; background: #ffe14d; color: #181a1e; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px">02</div>
+<span class="num">2</span>
 <h3 class="h3">See the next seat.</h3>
 <p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">Real, current roles where their work fits, and the people who own each hire.</p>
 </article>
 <article class="panel" style="padding: 32px; display: flex; flex-direction: column; gap: 14px">
-<div style="width: 44px; height: 44px; border-radius: 10px; background: #ffe14d; color: #181a1e; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px">03</div>
+<span class="num">3</span>
 <h3 class="h3">Make the first move.</h3>
 <p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">A ready draft for each person. Nothing sends without your yes.</p>
 </article>
@@ -119,7 +209,7 @@ a{color:#181a1e}a:hover{color:#3f4550}
 <section class="wrap" style="padding-top: 76px">
 <div class="panel dark" style="padding: clamp(24px, 5vw, 64px); display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
 <div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
-<div class="lbl dmuted">03 / The redeployment packet</div>
+<div class="sec-rule"><span>03</span><span>The redeployment packet</span></div>
 <h2 class="h2">The next seat, lined up before the last one ends.</h2>
 <p class="dmuted" style="margin: 0; font-size: 16px; line-height: 1.6">One packet per consultant: where they fit, which roles are real, who owns each hire, and a ready first message for each person.</p>
 <p style="margin: 0; font-size: 16px; line-height: 1.6"><b>Your consultant stays anonymous</b> <span class="dmuted">until you decide to share them.</span></p>
@@ -147,21 +237,21 @@ a{color:#181a1e}a:hover{color:#3f4550}
 </div>
 <div style="flex: 1 1 420px; min-width: 0; padding: clamp(32px, 4.5vw, 64px) clamp(28px, 3.4vw, 48px); align-self: center; display: flex; flex-direction: column; gap: 22px">
 <div class="lbl muted">Built around your bench</div>
-<h2 class="h2" style="font-size: clamp(32px, 3.2vw, 44px)">Your best placement is someone you already trust.</h2>
+<h2 class="h2 h2-panel">Your best placement is someone you already trust.</h2>
 <p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6; max-width: 360px">They know your clients, your standards and your way of working. Keep them working, and keep them yours.</p>
 </div>
 </div>
 </section>
 
 <section class="wrap" style="padding-top: 76px; display: flex; flex-direction: column; gap: 40px">
-<div style="max-width: 750px; padding: 0 16px; display: flex; flex-direction: column; gap: 20px">
-<div class="lbl muted">04 / The rules</div>
+<div class="sec-head">
+<div class="sec-rule"><span>04</span><span>The rules</span></div>
 <h2 class="h2">Built to protect your people.</h2>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; padding: 0 16px">
-<div style="border-top: 2px solid #181a1e; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><h3 class="h3">Anonymous until you say so.</h3><p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">The consultant’s name never leaves ŌLLIN without you.</p></div>
-<div style="border-top: 2px solid #181a1e; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><h3 class="h3">Only real, current roles.</h3><p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">Every seat is checked against a live source. Stale posts are dropped.</p></div>
-<div style="border-top: 2px solid #181a1e; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><h3 class="h3">Never sends without your yes.</h3><p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">You approve every message, one by one.</p></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
+<div style="border-top: 1px solid #d9dee5; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><h3 class="h3">Anonymous until you say so.</h3><p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">The consultant’s name never leaves ŌLLIN without you.</p></div>
+<div style="border-top: 1px solid #d9dee5; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><h3 class="h3">Only real, current roles.</h3><p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">Every seat is checked against a live source. Stale posts are dropped.</p></div>
+<div style="border-top: 1px solid #d9dee5; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><h3 class="h3">Never sends without your yes.</h3><p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">You approve every message, one by one.</p></div>
 </div>
 </section>
 
@@ -172,7 +262,7 @@ a{color:#181a1e}a:hover{color:#3f4550}
 <h2 class="h2">Bring a consultant. See their next seat<span style="color: #ffe14d">.</span></h2>
 <p class="dmuted" style="margin: 0; font-size: 16px; line-height: 1.6">Name one consultant rolling off soon. We’ll run it live with you, and they stay anonymous the whole time.</p>
 </div>
-<a href="/#contact" style="color: #ffffff; font-size: 16px; font-weight: 600; text-underline-offset: 6px">Let’s talk →</a>
+<a class="cta-btn" href="/#contact">Let’s talk</a>
 </div>
 </section>
 
