@@ -10,10 +10,11 @@
 
 ## Features
 - [Client mapping](https://www.ollinos.com/client-mapping): start with one person and see the people around them. Every line is labelled confirmed or inferred.
-- [Campaigns](https://www.ollinos.com/campaigns): approve tonight and it goes out in the morning. Nothing leaves without your yes.
+- [Campaigns](https://www.ollinos.com/campaigns): every touch built from a verified fact, approved by you, sent in the morning. Nothing sends without your yes.
 - [Redeploy](https://www.ollinos.com/redeploy): for staffing firms. Starts from your consultant, not a job board, and lines up the next seat before the last one ends. Their name stays private.
 
 ## How it works
+Full page: https://www.ollinos.com/how-we-work
 - Show the evidence: the source stays next to the signal.
 - Say what is unknown: "unable to verify" is shown, not hidden.
 - Keep people in charge: nothing sends without your approval.

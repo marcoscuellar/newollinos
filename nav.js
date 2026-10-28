@@ -7,7 +7,7 @@
     map: '/client-mapping',
     camp: '/campaigns',
     redeploy: '/redeploy',
-    trust: home ? '#trust' : '/#trust',
+    trust: '/how-we-work',
     talk: home ? '#contact' : '/#contact'
   };
   var items = [
