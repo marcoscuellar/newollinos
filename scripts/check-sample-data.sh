@@ -34,7 +34,7 @@ REAL_CONTACT="marcos@ollinos.com"
 # Form placeholder text — interface chrome, not sample data about anyone.
 UI_PLACEHOLDERS="you@company.com"
 
-TARGETS=(index.html)
+TARGETS=(index.html client-mapping.html campaigns.html redeploy.html app.js nav.js)
 fail=0
 
 echo "Checking sample data in: ${TARGETS[*]}"

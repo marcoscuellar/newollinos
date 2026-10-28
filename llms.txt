@@ -1,22 +1,22 @@
-# ŌLLIN OS
+# ŌLLIN
 
-> ŌLLIN OS is sales intelligence software. It finds the accounts showing
-> movement, verifies why they matter, and maps the people worth reaching.
-> ŌLLIN OS finds it. ŌLLIN GO runs it. Nothing sends without your approval.
+> ŌLLIN finds the signal and the people behind it, and turns it into outreach
+> you approve. ŌLLIN OS finds it. ŌLLIN GO runs it. Nothing sends without your yes.
+> An ELIPAN Group company.
 
-## What it does
-- Finds account signals. Every signal shows its source.
-- Checks every claim before it is used. "Unable to verify" is shown as-is, never guessed.
-- Maps the whole account: the director, the manager, finance, talent. Every reporting line is labelled verified or inferred, so a deal is never single-threaded.
-- Prepares the evidence, the reason to act, and a ready draft. Your team reviews it, adjusts it, and sends it.
+## Products
+- ŌLLIN OS: finds the business moment, connects it to the person who matters, and shows the evidence. Every fact is sourced. Gaps stay visible as "unable to verify".
+- ŌLLIN GO: turns that intelligence into a campaign. You review the message and decide what happens next.
 
-## Three things it will never do
-- Never invents: verifiable sources only. No made-up companies, people or facts.
-- Never softens: a claim that fails a check is dropped, not hedged.
-- Never sends on its own: ŌLLIN OS prepares. Your team reviews and decides.
+## Features
+- [Client mapping](https://www.ollinos.com/client-mapping): start with one person and see the people around them. Every line is labelled confirmed or inferred.
+- [Campaigns](https://www.ollinos.com/campaigns): approve tonight and it goes out in the morning. Nothing leaves without your yes.
+- [Redeploy](https://www.ollinos.com/redeploy): for staffing firms. Starts from your consultant, not a job board, and lines up the next seat before the last one ends. Their name stays private.
 
-## Who it is for
-Sales teams that want fewer wasted swings: a real reason to reach out, and the right people to reach.
+## How it works
+- Show the evidence: the source stays next to the signal.
+- Say what is unknown: "unable to verify" is shown, not hidden.
+- Keep people in charge: nothing sends without your approval.
 
 ## Contact
 - Website: https://www.ollinos.com/

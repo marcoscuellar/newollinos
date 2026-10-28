@@ -1,0 +1,63 @@
+/* ŌLLIN site nav: three menus that drop down over the page, a Menu button on phones */
+.sn{position:relative;z-index:50;background:#fff;font-family:Inter,Arial,sans-serif;color:#181a1e}
+.sn-bar{max-width:1440px;margin:0 auto;min-height:96px;display:flex;align-items:center;gap:16px 28px;padding:16px max(20px,env(safe-area-inset-right,0px)) 16px max(20px,env(safe-area-inset-left,0px));box-sizing:border-box}
+@media(min-width:900px){.sn-bar{padding-left:40px;padding-right:40px}}
+.sn-logo{display:block;line-height:0}
+.sn-logo svg{width:132px;height:auto}
+.sn-menus{margin-left:auto;position:relative;display:flex;align-items:center}
+.sn-btn{appearance:none;background:transparent;border:0;margin:0;height:44px;padding:0 16px;font:500 14px Inter,Arial,sans-serif;color:#181a1e;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:10px;position:relative;z-index:1}
+.sn-btn svg{transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.sn-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.sn-pill{position:absolute;left:0;top:0;height:44px;width:0;border-radius:10px;background:#eceef1;opacity:0;transition:transform .4s cubic-bezier(.34,1.4,.64,1),width .4s cubic-bezier(.34,1.4,.64,1),opacity .2s ease;pointer-events:none}
+.sn-cta{background:#181a1e;color:#fff;text-decoration:none;font:600 14px Inter,Arial,sans-serif;padding:0 20px;min-height:44px;border-radius:9px;display:inline-flex;align-items:center;white-space:nowrap}
+.sn-cta:hover{background:#2c3037}
+.sn-burger{display:none}
+.sn a:focus-visible,.sn button:focus-visible{outline:3px solid #9d8500;outline-offset:3px}
+/* the dropdown floats over the page */
+.sn-panel{position:absolute;top:calc(100% - 8px);right:40px;width:min(620px,calc(100vw - 40px));background:#fff;border-radius:22px;box-shadow:0 3px 8px rgba(24,26,30,.05),0 24px 56px rgba(24,26,30,.14);padding:18px;box-sizing:border-box;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 8px;animation:snDrop .45s cubic-bezier(.34,1.35,.64,1) both;transform-origin:top right}
+.sn-col{display:flex;flex-direction:column;gap:2px;animation:snCol .5s cubic-bezier(.34,1.4,.64,1) both}
+.sn-col+.sn-col{animation-delay:60ms}
+.sn-lbl{font:500 12px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#5f6672;padding:8px 14px 6px}
+.sn-link{display:flex;flex-direction:column;gap:3px;padding:11px 14px;border-radius:12px;text-decoration:none;color:#181a1e}
+.sn-link:hover{background:#f5f6f7}
+.sn-t{font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px}
+.sn-d{font-size:13px;line-height:1.5;color:#5f6672}
+.sn-here{width:8px;height:8px;border-radius:2px;background:#ffe14d;display:inline-block}
+@keyframes snDrop{from{opacity:0;transform:translateY(-8px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes snCol{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* phones: logo, Let's talk and a Menu button; the menu opens as one list */
+@media(max-width:860px){
+  .sn-btn,.sn-pill{display:none}
+  .sn-menus{margin-left:auto}
+  .sn-burger{display:inline-flex;appearance:none;border:1px solid #c9ced5;background:#fff;border-radius:9px;min-height:44px;padding:0 16px;align-items:center;gap:8px;font:600 14px Inter,Arial,sans-serif;color:#181a1e;cursor:pointer}
+  .sn-cta{padding:0 16px}
+  .sn-logo svg{width:112px}
+  .sn-panel{left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));width:auto;grid-template-columns:1fr;max-height:calc(100vh - 110px);overflow:auto;transform-origin:top center}
+}
+@media(prefers-reduced-motion:reduce){.sn-panel,.sn-col{animation:none}.sn-pill,.sn-btn svg{transition:none}}
+.sn-panel[hidden]{display:none}
+
+/* Nav stays pinned to the top; once you scroll it turns to frosted glass so the page shows through */
+html{scroll-padding-top:96px}
+.sn{position:sticky;top:0;transition:background-color .3s ease,box-shadow .3s ease}
+.sn .sn-bar{transition:min-height .3s ease}
+.sn.is-scrolled{background:rgba(255,255,255,.68);-webkit-backdrop-filter:saturate(180%) blur(16px);backdrop-filter:saturate(180%) blur(16px);box-shadow:0 1px 0 rgba(24,26,30,.06)}
+.sn.is-scrolled .sn-bar{min-height:72px}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.sn.is-scrolled{background:rgba(255,255,255,.94)}}
+@media(prefers-reduced-motion:reduce){.sn,.sn .sn-bar{transition:none}}
+
+/* Dropdown v2: sits under its own button, slides between menus instead of re-dropping */
+@media(min-width:861px){
+  .sn-panel{left:24px;right:auto;width:auto;grid-template-columns:repeat(var(--cols,2),270px);transform-origin:top left;transition:left .32s cubic-bezier(.22,1,.36,1)}
+  .sn-panel.no-slide{transition:none}
+}
+.sn-panel.switching .sn-col{animation:none}
+@media(prefers-reduced-motion:reduce){.sn-panel{transition:none}}
+
+/* Footer page links: plain HTML links so search engines can reach every page without running scripts */
+.foot-links{display:flex;flex-wrap:wrap;gap:6px 20px}
+.foot-links a{color:inherit;text-decoration:none;font-size:13px}
+.foot-links a:hover{text-decoration:underline;text-underline-offset:4px}
+.foot-links a:focus-visible{outline:3px solid #9d8500;outline-offset:3px;border-radius:2px}
+/* Spam trap on the contact form: hidden from people, filled only by bots */
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
