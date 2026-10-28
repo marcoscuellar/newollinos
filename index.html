@@ -406,6 +406,14 @@ button.pn:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
 @media (max-width:1100px){ .go{grid-template-columns:1fr} }
 @media (max-width:640px){ .ccard .hd{flex-direction:column-reverse;align-items:flex-start} .ccard{padding:16px} .panel.stat,.panel.rule,.panel.half{min-height:0} .cap{display:none} .app{grid-template-columns:1fr} .app .ql{flex-direction:row;overflow-x:auto;padding-bottom:4px} .app .ql .label,.rot{display:none} .un{min-width:170px} .fact{grid-template-columns:1fr;gap:2px} }
 
+/* ---------- capabilities bento ---------- */
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--gap)}
+.b2{grid-column:span 2}.b4{grid-column:span 4}.b6{grid-column:1/-1}
+@media (max-width:960px){ .bento>*{grid-column:1/-1} }
+.bento .rd2{grid-template-columns:1fr 1fr}
+@media (max-width:1100px){ .bento .rd2{grid-template-columns:1fr} }
+.hero .label.pill{padding:8px 14px 8px 12px;border-radius:999px;background:var(--raised);color:var(--ink)}
+.cta-photo .revsteps{margin-top:2px}
 /* ---------- you decide ---------- */
 .decide .photo{height:100%;min-height:260px;border-radius:var(--r)}
 .decide-copy{display:flex;flex-direction:column;justify-content:center;gap:20px}
@@ -622,13 +630,11 @@ footer{padding:8px 0 40px}
   <div class="wrap">
     <a class="logo" href="#top" aria-label="ŌLLIN home"><svg role="img" aria-label="ŌLLIN" viewBox="0 0 524 184" width="97" height="34"><use href="#ollin"/></svg></a>
     <nav class="nav" aria-label="Main">
-      <a href="#redeploy">Redeploy</a>
-      <a href="#how">How it works</a>
-      <a href="#mushroom">Mushroom</a>
-      <a href="#go">ŌLLIN GO</a>
-      <a href="#founder">Founder</a>
+      <a href="#one">Demo</a>
+      <a href="#proof">Proof</a>
+      <a href="#features">What it does</a>
+      <a href="#rules">Trust</a>
       <a href="#plans">Plans</a>
-      <a href="#rules">Rules</a>
     </nav>
     <div class="top-cta">
       <a class="signin" href="https://go.ollinos.com">Sign in</a>
@@ -637,14 +643,15 @@ footer{padding:8px 0 40px}
     <details class="menu">
       <summary aria-label="Open menu">Menu</summary>
       <nav class="sheet" aria-label="Main (mobile)">
-        <a href="#one">One product</a>
-        <a href="#redeploy">Redeploy talent</a>
-        <a href="#how">How it works</a>
-        <a href="#mushroom">Mushroom</a>
-        <a href="#go">ŌLLIN GO</a>
+        <a href="#one">Demo</a>
+        <a href="#go">ŌLLIN GO card</a>
+        <a href="#proof">Proof</a>
         <a href="#founder">Founder</a>
-      <a href="#plans">Plans</a>
-        <a href="#rules">Rules</a>
+        <a href="#features">What it does</a>
+        <a href="#mushroom">Mushroom</a>
+        <a href="#redeploy">Redeploy talent</a>
+        <a href="#rules">Trust</a>
+        <a href="#plans">Plans</a>
         <a href="#contact">Talk to us</a>
         <a href="https://go.ollinos.com">Sign in to ŌLLIN GO</a>
       </nav>
@@ -653,11 +660,10 @@ footer{padding:8px 0 40px}
 </header>
 
 <main id="main" class="wrap">
-
-  <!-- HERO: one big statement, the old site's editorial reveal -->
+  <!-- 1 · HERO — "Is this relevant to me?" -->
   <section id="top" class="panel hero" aria-labelledby="h-hero">
     <div class="hero-in">
-      <p class="label hfade"><i class="hdot" aria-hidden="true"></i>Not another AI sales tool</p>
+      <p class="label pill hfade"><i class="hdot" aria-hidden="true"></i>For sales and staffing teams</p>
       <h1 id="h-hero">
         <span class="ln"><span>The haystack</span></span>
         <span class="ln"><span>is their product.</span></span>
@@ -670,7 +676,7 @@ footer{padding:8px 0 40px}
     </div>
   </section>
 
-  <!-- ONE PRODUCT, TWO HALVES -->
+  <!-- 2 · PRODUCT DEMO — "Does it actually do what I need?" Clickable, no sign-up -->
   <section id="one" class="stack" aria-labelledby="h-one" style="gap:var(--gap)">
     <div class="panel slim bridge" data-r>
       <div class="head">
@@ -703,105 +709,6 @@ footer{padding:8px 0 40px}
     </div>
   </section>
 
-  <!-- FOUR CHECKS -->
-  <section id="how" class="panel" aria-labelledby="h-how" data-r>
-    <div class="head">
-      <p class="label">How it works · the four checks</p>
-      <h2 id="h-how">High confidence. Zero guesswork.</h2>
-      <p class="lede">Every claim runs four checks and arrives with its source attached. Nothing to re-read, re-find, or second-guess.</p>
-    </div>
-    <div class="tryrow" role="group" aria-label="Pick an example claim to check">
-      <span class="label">Try a claim</span>
-      <button class="chip" type="button" data-claim="0" aria-pressed="true">Aldervane Freight · $60M Series C</button>
-      <button class="chip" type="button" data-claim="1" aria-pressed="false">Verrida Health · 47 roles in 21 days</button>
-      <button class="chip" type="button" data-claim="2" aria-pressed="false">Kestrelbrook · "new CFO named"</button>
-    </div>
-    <ol class="checks" id="checks" style="list-style:none;padding:0">
-      <li class="rail" aria-hidden="true"></li>
-      <li class="step"><span class="n">01</span><h3>Source found</h3><p>A credible first-party or primary source.</p></li>
-      <li class="step"><span class="n">02</span><h3>Cross-checked</h3><p>Confirmed against an independent signal.</p></li>
-      <li class="step"><span class="n">03</span><h3>Live-confirmed</h3><p>Checked against the current system of record.</p></li>
-      <li class="step"><span class="n">04</span><h3>Engine QA</h3><p>Final audit before the intelligence reaches your team.</p></li>
-    </ol>
-    <p class="verdict" id="verdict" aria-live="polite"><i class="vd"></i><span>Passed all four. Shown to your team as verified, with the source attached.</span></p>
-    <div class="unknown">
-      <span><i class="vd"></i>Passed all four: shown as verified</span>
-      <span><i class="ud"></i>Failed a check: dropped, not hedged</span>
-      <span><i class="ud"></i>Unknown: shown as "unable to verify", never filled in</span>
-    </div>
-  </section>
-
-  <!-- THE DIFFERENCE -->
-  <section id="why" class="stack" aria-labelledby="h-why" style="gap:var(--gap)">
-    <div class="panel slim" data-r>
-      <div class="head">
-        <p class="label">The difference</p>
-        <h2 id="h-why">Most platforms give you more to sort. ŌLLIN does the sorting first.</h2>
-      </div>
-    </div>
-    <div class="row r-2">
-      <div class="panel vs them" data-r>
-        <div class="pile" aria-hidden="true"><div class="pile-rows"><i style="width:92%"></i><i style="width:74%"></i><i style="width:86%"></i><i style="width:63%"></i><i style="width:95%"></i><i style="width:70%"></i><i style="width:81%"></i><i style="width:58%"></i><i style="width:88%"></i><i style="width:77%"></i><i style="width:66%"></i><i style="width:90%"></i><i style="width:72%"></i><i style="width:84%"></i><i style="width:61%"></i><i style="width:93%"></i><i style="width:69%"></i><i style="width:80%"></i><i style="width:92%"></i><i style="width:74%"></i><i style="width:86%"></i><i style="width:63%"></i><i style="width:95%"></i><i style="width:70%"></i><i style="width:81%"></i><i style="width:58%"></i><i style="width:88%"></i><i style="width:77%"></i><i style="width:66%"></i><i style="width:90%"></i><i style="width:72%"></i><i style="width:84%"></i><i style="width:61%"></i><i style="width:93%"></i><i style="width:69%"></i><i style="width:80%"></i></div><span class="pile-cap">YOUR TEAM SORTS THIS</span></div>
-        <p class="label">Traditional sales intelligence</p>
-        <h3>More information to sort.</h3>
-        <ul>
-          <li><span class="ic"><svg><use href="#i-x"/></svg></span>Massive contact lists</li>
-          <li><span class="ic"><svg><use href="#i-x"/></svg></span>Verification stops at contact accuracy</li>
-          <li><span class="ic"><svg><use href="#i-x"/></svg></span>Missing context left for reps to research</li>
-          <li><span class="ic"><svg><use href="#i-x"/></svg></span>Individual contacts without the full buying picture</li>
-          <li><span class="ic"><svg><use href="#i-x"/></svg></span>More information for your team to sort</li>
-        </ul>
-      </div>
-      <div class="panel night vs us" data-r data-d="1">
-        <div class="pick" aria-hidden="true"><div class="pick-row"><span class="vd"></span><b>Aldervane Freight</b><span class="pick-s">$60M Series C · 12 days ago</span><span class="pick-v">VERIFIED</span></div><span class="pile-cap">ŌLLIN HANDS YOU THIS</span></div>
-        <p class="label">ŌLLIN</p>
-        <h3>Ready to use. Not another list.</h3>
-        <ul>
-          <li><span class="ic"><svg><use href="#i-check"/></svg></span>Every signal shows its source</li>
-          <li><span class="ic"><svg><use href="#i-check"/></svg></span>Critical facts are cross-checked before they reach you</li>
-          <li><span class="ic"><svg><use href="#i-check"/></svg></span>Unknowns stay unknown</li>
-          <li><span class="ic"><svg><use href="#i-check"/></svg></span>Accounts, people, and relationships mapped together</li>
-          <li><span class="ic"><svg><use href="#i-check"/></svg></span>Your team decides what happens next</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- MUSHROOM -->
-  <section id="mushroom" class="panel night" aria-labelledby="h-mush" data-r>
-    <div class="mush">
-      <div class="stack">
-        <p class="label">Mushroom · map the whole account</p>
-        <h2 id="h-mush">The VP didn't answer? Don't get single-threaded.</h2>
-        <p class="lede">ŌLLIN starts with the person you found, then maps the buyers, blockers, influencers and operators around them. When one contact goes quiet, your team already knows where to go next.</p>
-        <ol class="numlist">
-          <li><span class="chip">01</span><div><b>Start with the person you found</b><p>One contact is the seed. ŌLLIN builds outward.</p></div></li>
-          <li><span class="chip">02</span><div><b>Mushroom the account</b><p>The people around them, not just more names.</p></div></li>
-          <li><span class="chip">03</span><div><b>Know what's verified</b><p>Confirmed lines stay solid. Inferred ones are clearly marked.</p></div></li>
-          <li><span class="chip">04</span><div><b>Give every person a reason to reply</b><p>Different roles care about different things.</p></div></li>
-        </ol>
-      </div>
-      <div>
-        <div class="tree" id="tree" role="group" aria-label="Example org map for Aldervane Freight. Omar Reyes, VP Operations, was found first. Above him: Nadia Cole, COO, economic buyer, verified. Beside him: Leo Fontaine, Director of Finance and Planning, blocker, verified. Under him: Priya Anand, Director Regional Ops, evaluator, verified, and Marcus Vale, Senior Manager East Coast, influencer, reporting line inferred.">
-          <svg class="links" viewBox="0 0 600 470" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M300 92 C300 132 150 132 150 172"/>
-            <path d="M300 92 C300 132 480 132 480 172"/>
-            <path d="M150 242 C150 292 108 292 108 356"/>
-            <path class="inf" d="M150 242 C150 292 312 292 312 356"/>
-          </svg>
-          <button type="button" class="pn l1" style="left:50%;top:13%" data-why="Owns the budget the East Coast buildout runs on." aria-pressed="false"><b>Nadia Cole</b><small>Chief Operating Officer</small><span class="tg">Econ. buyer · <span class="v">verified</span></span></button>
-          <button type="button" class="pn l2 seed" style="left:25%;top:44%" data-why="Running a region with no regional leader in seat." aria-pressed="false"><span class="ff">FOUND FIRST</span><b>Omar Reyes</b><small>VP, Operations</small><span class="tg">Champion · <span class="v">verified</span></span></button>
-          <button type="button" class="pn l2" style="left:80%;top:44%" data-why="Signs off on new spend before Q4. Worth winning early." aria-pressed="false"><b>Leo Fontaine</b><small>Dir. Finance &amp; Planning</small><span class="tg">Blocker · <span class="v">verified</span></span></button>
-          <button type="button" class="pn l3" style="left:18%;top:84%" data-why="Will judge whether the people placed can actually do the work." aria-pressed="false"><b>Priya Anand</b><small>Director, Regional Ops</small><span class="tg">Evaluator · <span class="v">verified</span></span></button>
-          <button type="button" class="pn l3 inferred" style="left:52%;top:84%" data-why="Feels the gap every day. Reporting line inferred, so it's marked." aria-pressed="false"><b>Marcus Vale</b><small>Sr. Manager, East Coast</small><span class="tg">Influencer · line inferred</span></button>
-        </div>
-        <p class="whyline" id="whyLine" aria-live="polite"><span class="label">Tap a person</span><span id="whyText">to see why they'd care.</span></p>
-        <div class="legend" aria-hidden="true"><span><i></i>Confirmed</span><span><i class="d"></i>Inferred, clearly marked</span><span>Example data</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ŌLLIN GO -->
   <section id="go" class="panel" aria-labelledby="h-go" data-r>
     <div class="go">
       <div class="stack">
@@ -855,55 +762,7 @@ footer{padding:8px 0 40px}
     </div>
   </section>
 
-  <!-- REDEPLOY -->
-  <section id="redeploy" class="panel night" aria-labelledby="h-redeploy" data-r>
-    <div class="rd2">
-      <div class="stack">
-        <p class="label">ELY · talent redeployment</p>
-        <h2 id="h-redeploy">Your consultant is rolling off. ŌLLIN finds the next seat<span class="dotp">.</span></h2>
-        <p class="lede">Same engine, run backwards. Start with the résumé, not the account. ŌLLIN finds live demand that fits, checks it, maps who owns the need, and drafts the pitch before your talent leaves payroll.</p>
-        <ol class="revsteps">
-          <li><span class="chip">01</span><div><b>Start with the résumé</b><span>Skills, seniority, roll-off date.</span></div></li>
-          <li><span class="chip">02</span><div><b>Find live demand</b><span>Your CRM first, then public roles.</span></div></li>
-          <li><span class="chip">03</span><div><b>Check every role</b><span>Live, current, a real match. Not a keyword match.</span></div></li>
-          <li><span class="chip">04</span><div><b>Map the buyer, draft the pitch</b><span>Existing clients first. You approve.</span></div></li>
-        </ol>
-        <p class="label" style="margin-top:4px">The candidate stays anonymous. The résumé is never forwarded.</p>
-      </div>
-      <div class="runway" id="runway" data-r aria-label="Example redeployment runway">
-        <div class="who">
-          <div><b>Senior data engineer</b><small>Coming available · rolls off Dec 12</small></div>
-          <span class="anon">CANDIDATE ANONYMOUS</span>
-        </div>
-        <div class="track" aria-hidden="true"><i></i></div>
-        <div class="track-key"><span>TODAY</span><b>19 DAYS LEFT</b><span>ROLL-OFF</span></div>
-        <p class="label">Next seats found</p>
-        <ul class="seats">
-          <li class="seat"><b>Marrowfield Platforms</b><small>Data platform lead · existing client · CRM need</small><span class="st">VERIFIED</span></li>
-          <li class="seat"><b>Verrida Health</b><small>Senior data engineer · live posting, 6 days old</small><span class="st">VERIFIED</span></li>
-          <li class="seat held"><b>Kestrelbrook Devices</b><small>Posting found, but closed last week</small><span class="st">DROPPED</span></li>
-        </ul>
-        <p class="label" style="margin:0">Example data · not real candidates or roles</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- YOU DECIDE -->
-  <section class="row r-12 decide" aria-labelledby="h-decide">
-    <div class="photo" data-r>
-      <img src="img/portrait.webp" alt="A man walks out of a glass office lobby at dusk, looking off to the side. Small yellow signals float in the window reflections." width="1100" height="614" loading="lazy" decoding="async">
-    </div>
-    <div class="panel decide-copy" data-r data-d="1">
-      <p class="label">Human on the trigger</p>
-      <h2 id="h-decide">It prepares. <span>You decide.</span></h2>
-      <p class="lede">ŌLLIN does the research, the checking and the draft. Your team makes the call. The relationship was always yours.</p>
-      <div class="flow" aria-label="Data appears, gets checked, becomes useful, you decide">
-        <span>DATA APPEARS</span><em aria-hidden="true">→</em><span>GETS CHECKED</span><em aria-hidden="true">→</em><span>BECOMES USEFUL</span><em aria-hidden="true">→</em><span class="you">YOU DECIDE</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROOF -->
+  <!-- 3 · SOCIAL PROOF — "Has it worked for people like me?" -->
   <section id="proof" class="stack" aria-labelledby="h-proof" style="gap:var(--gap)">
     <div class="banner" data-r>
       <h2 id="h-proof" class="sr">Proof</h2>
@@ -941,7 +800,6 @@ footer{padding:8px 0 40px}
     </figure>
   </section>
 
-  <!-- FOUNDER -->
   <section id="founder" class="row r-12" aria-labelledby="h-founder">
     <div class="panel night stack" data-r>
       <figure class="fphoto"><img src="img/marcos.webp" alt="Marcos Cuellar, founder of ŌLLIN, smiling, seated with his hands folded." width="900" height="934" loading="lazy" decoding="async"><figcaption><b>Marcos Cuellar</b><span>Founder, ŌLLIN</span></figcaption></figure>
@@ -955,7 +813,176 @@ footer{padding:8px 0 40px}
     </div>
   </section>
 
-  <!-- PLANS -->
+  <!-- 4 · CAPABILITIES — "Can it handle my workflow?" Bento: core card big, the rest around it -->
+  <section id="features" class="bento" aria-labelledby="h-why">
+    <div class="panel slim b6" data-r><div class="head"><p class="label">What it does</p><h2 id="h-why">Most platforms give you more to sort. ŌLLIN does the sorting first.</h2></div></div>
+  <section id="how" class="panel b4" aria-labelledby="h-how" data-r>
+    <div class="head">
+      <p class="label">How it works · the four checks</p>
+      <h2 id="h-how">High confidence. Zero guesswork.</h2>
+      <p class="lede">Every claim runs four checks and arrives with its source attached. Nothing to re-read, re-find, or second-guess.</p>
+    </div>
+    <div class="tryrow" role="group" aria-label="Pick an example claim to check">
+      <span class="label">Try a claim</span>
+      <button class="chip" type="button" data-claim="0" aria-pressed="true">Aldervane Freight · $60M Series C</button>
+      <button class="chip" type="button" data-claim="1" aria-pressed="false">Verrida Health · 47 roles in 21 days</button>
+      <button class="chip" type="button" data-claim="2" aria-pressed="false">Kestrelbrook · "new CFO named"</button>
+    </div>
+    <ol class="checks" id="checks" style="list-style:none;padding:0">
+      <li class="rail" aria-hidden="true"></li>
+      <li class="step"><span class="n">01</span><h3>Source found</h3><p>A credible first-party or primary source.</p></li>
+      <li class="step"><span class="n">02</span><h3>Cross-checked</h3><p>Confirmed against an independent signal.</p></li>
+      <li class="step"><span class="n">03</span><h3>Live-confirmed</h3><p>Checked against the current system of record.</p></li>
+      <li class="step"><span class="n">04</span><h3>Engine QA</h3><p>Final audit before the intelligence reaches your team.</p></li>
+    </ol>
+    <p class="verdict" id="verdict" aria-live="polite"><i class="vd"></i><span>Passed all four. Shown to your team as verified, with the source attached.</span></p>
+    <div class="unknown">
+      <span><i class="vd"></i>Passed all four: shown as verified</span>
+      <span><i class="ud"></i>Failed a check: dropped, not hedged</span>
+      <span><i class="ud"></i>Unknown: shown as "unable to verify", never filled in</span>
+    </div>
+  </section>
+
+      <div class="panel night vs us b2" data-r data-d="1">
+        <div class="pick" aria-hidden="true"><div class="pick-row"><span class="vd"></span><b>Aldervane Freight</b><span class="pick-s">$60M Series C · 12 days ago</span><span class="pick-v">VERIFIED</span></div><span class="pile-cap">ŌLLIN HANDS YOU THIS</span></div>
+        <p class="label">ŌLLIN</p>
+        <h3>Ready to use. Not another list.</h3>
+        <ul>
+          <li><span class="ic"><svg><use href="#i-check"/></svg></span>Every signal shows its source</li>
+          <li><span class="ic"><svg><use href="#i-check"/></svg></span>Critical facts are cross-checked before they reach you</li>
+          <li><span class="ic"><svg><use href="#i-check"/></svg></span>Unknowns stay unknown</li>
+          <li><span class="ic"><svg><use href="#i-check"/></svg></span>Accounts, people, and relationships mapped together</li>
+          <li><span class="ic"><svg><use href="#i-check"/></svg></span>Your team decides what happens next</li>
+        </ul>
+      </div>
+  <section id="mushroom" class="panel night b6" aria-labelledby="h-mush" data-r>
+    <div class="mush">
+      <div class="stack">
+        <p class="label">Mushroom · map the whole account</p>
+        <h2 id="h-mush">The VP didn't answer? Don't get single-threaded.</h2>
+        <p class="lede">ŌLLIN starts with the person you found, then maps the buyers, blockers, influencers and operators around them. When one contact goes quiet, your team already knows where to go next.</p>
+        <ol class="numlist">
+          <li><span class="chip">01</span><div><b>Start with the person you found</b><p>One contact is the seed. ŌLLIN builds outward.</p></div></li>
+          <li><span class="chip">02</span><div><b>Mushroom the account</b><p>The people around them, not just more names.</p></div></li>
+          <li><span class="chip">03</span><div><b>Know what's verified</b><p>Confirmed lines stay solid. Inferred ones are clearly marked.</p></div></li>
+          <li><span class="chip">04</span><div><b>Give every person a reason to reply</b><p>Different roles care about different things.</p></div></li>
+        </ol>
+      </div>
+      <div>
+        <div class="tree" id="tree" role="group" aria-label="Example org map for Aldervane Freight. Omar Reyes, VP Operations, was found first. Above him: Nadia Cole, COO, economic buyer, verified. Beside him: Leo Fontaine, Director of Finance and Planning, blocker, verified. Under him: Priya Anand, Director Regional Ops, evaluator, verified, and Marcus Vale, Senior Manager East Coast, influencer, reporting line inferred.">
+          <svg class="links" viewBox="0 0 600 470" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M300 92 C300 132 150 132 150 172"/>
+            <path d="M300 92 C300 132 480 132 480 172"/>
+            <path d="M150 242 C150 292 108 292 108 356"/>
+            <path class="inf" d="M150 242 C150 292 312 292 312 356"/>
+          </svg>
+          <button type="button" class="pn l1" style="left:50%;top:13%" data-why="Owns the budget the East Coast buildout runs on." aria-pressed="false"><b>Nadia Cole</b><small>Chief Operating Officer</small><span class="tg">Econ. buyer · <span class="v">verified</span></span></button>
+          <button type="button" class="pn l2 seed" style="left:25%;top:44%" data-why="Running a region with no regional leader in seat." aria-pressed="false"><span class="ff">FOUND FIRST</span><b>Omar Reyes</b><small>VP, Operations</small><span class="tg">Champion · <span class="v">verified</span></span></button>
+          <button type="button" class="pn l2" style="left:80%;top:44%" data-why="Signs off on new spend before Q4. Worth winning early." aria-pressed="false"><b>Leo Fontaine</b><small>Dir. Finance &amp; Planning</small><span class="tg">Blocker · <span class="v">verified</span></span></button>
+          <button type="button" class="pn l3" style="left:18%;top:84%" data-why="Will judge whether the people placed can actually do the work." aria-pressed="false"><b>Priya Anand</b><small>Director, Regional Ops</small><span class="tg">Evaluator · <span class="v">verified</span></span></button>
+          <button type="button" class="pn l3 inferred" style="left:52%;top:84%" data-why="Feels the gap every day. Reporting line inferred, so it's marked." aria-pressed="false"><b>Marcus Vale</b><small>Sr. Manager, East Coast</small><span class="tg">Influencer · line inferred</span></button>
+        </div>
+        <p class="whyline" id="whyLine" aria-live="polite"><span class="label">Tap a person</span><span id="whyText">to see why they'd care.</span></p>
+        <div class="legend" aria-hidden="true"><span><i></i>Confirmed</span><span><i class="d"></i>Inferred, clearly marked</span><span>Example data</span></div>
+      </div>
+    </div>
+  </section>
+
+      <div class="panel vs them b2" data-r>
+        <div class="pile" aria-hidden="true"><div class="pile-rows"><i style="width:92%"></i><i style="width:74%"></i><i style="width:86%"></i><i style="width:63%"></i><i style="width:95%"></i><i style="width:70%"></i><i style="width:81%"></i><i style="width:58%"></i><i style="width:88%"></i><i style="width:77%"></i><i style="width:66%"></i><i style="width:90%"></i><i style="width:72%"></i><i style="width:84%"></i><i style="width:61%"></i><i style="width:93%"></i><i style="width:69%"></i><i style="width:80%"></i><i style="width:92%"></i><i style="width:74%"></i><i style="width:86%"></i><i style="width:63%"></i><i style="width:95%"></i><i style="width:70%"></i><i style="width:81%"></i><i style="width:58%"></i><i style="width:88%"></i><i style="width:77%"></i><i style="width:66%"></i><i style="width:90%"></i><i style="width:72%"></i><i style="width:84%"></i><i style="width:61%"></i><i style="width:93%"></i><i style="width:69%"></i><i style="width:80%"></i></div><span class="pile-cap">YOUR TEAM SORTS THIS</span></div>
+        <p class="label">Traditional sales intelligence</p>
+        <h3>More information to sort.</h3>
+        <ul>
+          <li><span class="ic"><svg><use href="#i-x"/></svg></span>Massive contact lists</li>
+          <li><span class="ic"><svg><use href="#i-x"/></svg></span>Verification stops at contact accuracy</li>
+          <li><span class="ic"><svg><use href="#i-x"/></svg></span>Missing context left for reps to research</li>
+          <li><span class="ic"><svg><use href="#i-x"/></svg></span>Individual contacts without the full buying picture</li>
+          <li><span class="ic"><svg><use href="#i-x"/></svg></span>More information for your team to sort</li>
+        </ul>
+      </div>
+  <section id="redeploy" class="panel night b4" aria-labelledby="h-redeploy" data-r>
+    <div class="rd2">
+      <div class="stack">
+        <p class="label">ELY · talent redeployment</p>
+        <h2 id="h-redeploy">Your consultant is rolling off. ŌLLIN finds the next seat<span class="dotp">.</span></h2>
+        <p class="lede">Same engine, run backwards. Start with the résumé, not the account. ŌLLIN finds live demand that fits, checks it, maps who owns the need, and drafts the pitch before your talent leaves payroll.</p>
+        <ol class="revsteps">
+          <li><span class="chip">01</span><div><b>Start with the résumé</b><span>Skills, seniority, roll-off date.</span></div></li>
+          <li><span class="chip">02</span><div><b>Find live demand</b><span>Your CRM first, then public roles.</span></div></li>
+          <li><span class="chip">03</span><div><b>Check every role</b><span>Live, current, a real match. Not a keyword match.</span></div></li>
+          <li><span class="chip">04</span><div><b>Map the buyer, draft the pitch</b><span>Existing clients first. You approve.</span></div></li>
+        </ol>
+        <p class="label" style="margin-top:4px">The candidate stays anonymous. The résumé is never forwarded.</p>
+      </div>
+      <div class="runway" id="runway" data-r aria-label="Example redeployment runway">
+        <div class="who">
+          <div><b>Senior data engineer</b><small>Coming available · rolls off Dec 12</small></div>
+          <span class="anon">CANDIDATE ANONYMOUS</span>
+        </div>
+        <div class="track" aria-hidden="true"><i></i></div>
+        <div class="track-key"><span>TODAY</span><b>19 DAYS LEFT</b><span>ROLL-OFF</span></div>
+        <p class="label">Next seats found</p>
+        <ul class="seats">
+          <li class="seat"><b>Marrowfield Platforms</b><small>Data platform lead · existing client · CRM need</small><span class="st">VERIFIED</span></li>
+          <li class="seat"><b>Verrida Health</b><small>Senior data engineer · live posting, 6 days old</small><span class="st">VERIFIED</span></li>
+          <li class="seat held"><b>Kestrelbrook Devices</b><small>Posting found, but closed last week</small><span class="st">DROPPED</span></li>
+        </ul>
+        <p class="label" style="margin:0">Example data · not real candidates or roles</p>
+      </div>
+    </div>
+  </section>
+
+  </section>
+
+  <!-- 5 · TRUST — "Can I safely rely on it?" -->
+  <section id="rules" class="stack" aria-labelledby="h-rules" style="gap:var(--gap)">
+    <div class="panel slim" data-r>
+      <div class="head">
+        <p class="label">Trust · the rules</p>
+        <h2 id="h-rules">Three things it will never do.</h2>
+        <p class="lede">Not guardrails we added. The way it was built.</p>
+      </div>
+    </div>
+    <div class="row r-3">
+      <article class="panel night rule" data-r>
+        <span class="ri" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h3>Never invents.</h3>
+        <p>Verifiable sources only. No made-up companies, people, or facts. Empty beats plausible.</p>
+      </article>
+      <article class="panel rule" data-r data-d="1">
+        <span class="ri" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
+        <h3>Never softens.</h3>
+        <p>A claim that fails a check is dropped, not hedged, not "likely." You see the real signal, unknowns included.</p>
+      </article>
+      <article class="panel night rule" data-r data-d="2">
+        <span class="ri" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+        <h3>Never sends on its own.</h3>
+        <p>ŌLLIN prepares. Your team reviews and decides. Always. Approval is not send.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="row r-12 decide" aria-labelledby="h-decide">
+    <div class="photo" data-r>
+      <img src="img/portrait.webp" alt="A man walks out of a glass office lobby at dusk, looking off to the side. Small yellow signals float in the window reflections." width="1100" height="614" loading="lazy" decoding="async">
+    </div>
+    <div class="panel decide-copy" data-r data-d="1">
+      <p class="label">Human on the trigger</p>
+      <h2 id="h-decide">It prepares. <span>You decide.</span></h2>
+      <p class="lede">ŌLLIN does the research, the checking and the draft. Your team makes the call. The relationship was always yours.</p>
+      <div class="flow" aria-label="Data appears, gets checked, becomes useful, you decide">
+        <span>DATA APPEARS</span><em aria-hidden="true">→</em><span>GETS CHECKED</span><em aria-hidden="true">→</em><span>BECOMES USEFUL</span><em aria-hidden="true">→</em><span class="you">YOU DECIDE</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="stack" style="gap:var(--gap)">
+    <div class="panel statement" data-r>
+      <p>Verification is the mechanism. <span>Better decisions are the product.</span></p>
+    </div>
+  </div>
+
+  <!-- 6 · PLANS + CTA — "Is it worth trying, and what happens next?" -->
   <section id="plans" class="stack" aria-labelledby="h-plans" style="gap:var(--gap)">
     <div class="panel slim" data-r>
       <div class="head">
@@ -997,44 +1024,18 @@ footer{padding:8px 0 40px}
     </div>
   </section>
 
-  <!-- RULES -->
-  <section id="rules" class="stack" aria-labelledby="h-rules" style="gap:var(--gap)">
-    <div class="panel slim" data-r>
-      <div class="head">
-        <p class="label">The rules</p>
-        <h2 id="h-rules">Three things it will never do.</h2>
-        <p class="lede">Not guardrails we added. The way it was built.</p>
-      </div>
-    </div>
-    <div class="row r-3">
-      <article class="panel night rule" data-r>
-        <span class="ri" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-        <h3>Never invents.</h3>
-        <p>Verifiable sources only. No made-up companies, people, or facts. Empty beats plausible.</p>
-      </article>
-      <article class="panel rule" data-r data-d="1">
-        <span class="ri" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
-        <h3>Never softens.</h3>
-        <p>A claim that fails a check is dropped, not hedged, not "likely." You see the real signal, unknowns included.</p>
-      </article>
-      <article class="panel night rule" data-r data-d="2">
-        <span class="ri" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
-        <h3>Never sends on its own.</h3>
-        <p>ŌLLIN prepares. Your team reviews and decides. Always. Approval is not send.</p>
-      </article>
-    </div>
-    <div class="panel statement" data-r>
-      <p>Verification is the mechanism. <span>Better decisions are the product.</span></p>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
   <section id="contact" class="row r-12" aria-labelledby="h-contact">
     <div class="panel night cta-photo" data-r>
       <div class="photo"><img src="img/people.webp" alt="Three people talking at a rooftop table at dusk, city lights behind them. Small yellow signals float in the evening sky." width="1100" height="614" loading="lazy" decoding="async"></div>
       <p class="label">30 minutes · your account · the engines running live</p>
       <h2 id="h-contact">Bring an account<span class="dotp">.</span></h2>
-      <p class="lede">Name one you're working right now. You'll watch the four checks, see every source, and get the card. Then you go sell.</p>
+      <p class="lede">Name one account you're working right now. Here's what happens next.</p>
+      <ol class="revsteps" aria-label="What happens next">
+        <li><span class="chip">01</span><div><b>Send your work email</b><span>No list, no newsletter, no tracker.</span></div></li>
+        <li><span class="chip">02</span><div><b>A person replies</b><span>Within one business day.</span></div></li>
+        <li><span class="chip">03</span><div><b>30 minutes, your account</b><span>Watch the four checks run live, every source shown.</span></div></li>
+        <li><span class="chip">04</span><div><b>You get the card</b><span>Then you go sell.</span></div></li>
+      </ol>
     </div>
     <div class="panel" data-r data-d="1">
       <form class="form" id="csForm" novalidate>

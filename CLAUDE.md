@@ -17,6 +17,15 @@ Single-page site. Working file: `index.html` — the fixed ŌLLIN OS page, kept 
 - Don't publish the method (no engine/pipeline diagram), no prices, no client logos or usage counters until real ones exist.
 - Motion is vanilla JS + CSS (no Motion.dev). Pause motion + dark mode toggles live in the footer.
 
+## Page order = the buyer's next question (do not reshuffle)
+1. **Hero** — Is this relevant to me? (pill: "For sales and staffing teams" + headline + one line)
+2. **Product demo** — Does it actually do what I need? (OS→GO hand-off, then the clickable GO card; no sign-up)
+3. **Social proof** — Has it worked for people like me? (yellow banner, 3 sourced stats, Bullhorn quote, founder)
+4. **Capabilities** — Can it handle my workflow? (bento: four checks big, "ready to use" beside it, Mushroom wide, then traditional vs Redeploy)
+5. **Trust** — Can I safely rely on it? (three rules, It prepares. You decide., the statement)
+6. **Plans + CTA** — Is it worth trying, and what happens next? (plans, then "Bring an account" with the 4 next steps and the one email field)
+Each section earns the next step; don't add feature claims that don't answer that section's question.
+
 ## Research applied (AI product marketing pages, Oct 2026)
 - Interactive proof right under the hero, ungated: OS→GO signal hand-off, four-check claim runner, Mushroom tap-a-person, GO card demo.
 - GO card draft **streams in** (15–45 ms/char, cursor, “DRAFTING FROM VERIFIED FACTS…” → audit) with its space reserved so there's no layout shift.
