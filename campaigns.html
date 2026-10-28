@@ -53,6 +53,16 @@ a{color:#181a1e}a:hover{color:#3f4550}
 .camp-held .num{color:#8b929d}
 .camp-held .camp-draft p{background:transparent;border:1px dashed #3a3f47;color:#b8bec7}
 @media(max-width:860px){.camp-row{grid-template-columns:1fr;gap:12px}}
+.practice{display:flex;flex-direction:column;gap:24px;margin-top:12px}
+.practice-head{display:flex;flex-direction:column;gap:10px;max-width:720px}
+.practice-head p{margin:0;font-size:16px;line-height:1.6}
+.practice-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.practice-list li{display:flex;gap:12px;align-items:flex-start;border-top:1px solid #d9dee5;padding-top:18px}
+.practice-list b{display:block;font-size:16px;margin-bottom:4px}
+.practice-list span:not(.num){display:block;font-size:14px;line-height:1.5;color:#62666d}
+.practice-list .num{width:30px;height:30px;flex-basis:30px;font-size:13px}
+@media(max-width:1000px){.practice-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.practice-list{grid-template-columns:1fr}}
 </style>
 <style>html,body{background:#fff}</style>
 </head>
@@ -113,6 +123,18 @@ a{color:#181a1e}a:hover{color:#3f4550}
 <div class="camp-draft"><span class="lbl camp-k">Draft</span><p>Omar, with four operations managers starting across both hubs, how are you keeping the work in step between sites?</p></div></li><li class="camp-row camp-held"><div class="camp-touch"><span class="num">4</span><div><b>Not written</b><span>Held back</span></div></div>
 <div class="camp-fact"><span class="lbl camp-k">Built from</span><div class="camp-f"><span class="odot"></span><span>Routing technology budget</span></div><span class="lbl camp-src">Unable to verify</span></div>
 <div class="camp-draft"><span class="lbl camp-k">Why</span><p>ŌLLIN won’t build a touch around a fact it couldn’t check. A gap stays a gap.</p></div></li></ol>
+</div>
+<div class="practice">
+<div class="practice-head">
+<h3 class="h3">Built on how staffing outreach works now.</h3>
+<p class="muted">ŌLLIN GO is built on current B2B staffing outreach research: what gets read, what gets a reply, and what gets sent to spam. Every campaign follows it, so you don’t have to.</p>
+</div>
+<ul class="practice-list">
+<li><span class="num">1</span><div><b>A real reason, every time.</b><span>Each touch starts from a hiring signal you can check.</span></div></li>
+<li><span class="num">2</span><div><b>Short and plain.</b><span>Written the way people talk, easy to read on a phone.</span></div></li>
+<li><span class="num">3</span><div><b>One clear ask.</b><span>An easy yes, not a calendar request from a stranger.</span></div></li>
+<li><span class="num">4</span><div><b>Built to reach the inbox.</b><span>Sends spread out, bounces stop a contact, and every email has an opt-out.</span></div></li>
+</ul>
 </div>
 </section>
 <section class="wrap" style="padding-top: 76px">
