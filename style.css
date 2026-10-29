@@ -142,3 +142,9 @@ html,body{background:#fff}
 .panel.story-block>p,.panel.proof .stat-takeaway{font:700 26px/1.1 Archivo,Arial,sans-serif;letter-spacing:-.03em;color:#fff;max-width:420px;margin:8px 0 0}
 .panel.story-block .stat-source,.panel.proof .stat-source{font-size:12px;margin-top:10px;padding:0}
 .panel.story-block .stat-method,.panel.proof .stat-method{font:12px/1.6 'IBM Plex Mono',monospace;margin:0}
+
+/* Demo tabs: the selected step is Night Black (icon turns white, its yellow dot stays the signal). */
+.steps button{transition:background-color .25s ease,color .25s ease}
+.steps button[aria-selected=true]{background:#181a1e;color:#fff}
+.steps button[aria-selected=true] span{color:#fff}
+.steps button[aria-selected=false]:hover{background:#f0f1f3;color:#181a1e}
