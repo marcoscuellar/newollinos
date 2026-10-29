@@ -105,3 +105,11 @@ html{scroll-padding-top:96px}
 .foot-links a:focus-visible{outline:3px solid #9d8500;outline-offset:3px;border-radius:2px}
 /* Spam trap on the contact form: hidden from people, filled only by bots */
 .hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+
+/* Hover motion (motion-intro.js) */
+.node{transition:background-color .25s ease,box-shadow .3s ease}
+.node.is-lifted{background:#2a2e35;box-shadow:0 14px 28px -14px rgba(0,0,0,.55)}
+.workflow-icon{transition:background-color .25s ease,color .25s ease}
+.workflow-icon svg [fill="#FFE14D"]{transition:fill .25s ease}
+.checks li.is-lit .workflow-icon{background:#ffe14d;color:#181a1e}
+.checks li.is-lit .workflow-icon svg [fill="#FFE14D"]{fill:#181a1e}
