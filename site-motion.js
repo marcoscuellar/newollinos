@@ -14,22 +14,14 @@
   }
   var pseudoOK = typeof KeyframeEffect !== 'undefined' && 'pseudoElement' in KeyframeEffect.prototype;
 
-  // ---------- Hero (home): photo settles in, headline rises ----------
-  var hero = document.querySelector('.hero');
-  if (hero) {
-    var hImg = hero.querySelector('.hero-media img');
-    if (hImg) play(hImg, [{ transform: 'scale(1.08)' }, { transform: 'scale(1)' }], 1800, 0);
-    [].slice.call(hero.querySelectorAll('h1, .hero-sub, .hero-bottom')).forEach(function (el, i) {
-      play(el, [{ opacity: 0, transform: 'translateY(26px)' }, { opacity: 1, transform: 'none' }], 900, 150 + i * 130);
-    });
-  }
+  // The top bar, home hero and feature-page openers are animated by motion-intro.js (Motion.dev).
 
   // ---------- Pick what reveals on scroll ----------
   // Big blocks (cards, photos) move as one piece; loose text outside cards moves line by line.
   var BLOCK = '.panel, .section-heading > *, h1, h2, h3, p, .lbl, .eyebrow, img, li, footer > *';
   var kept = [];
   [].slice.call(document.querySelectorAll(BLOCK)).forEach(function (el) {
-    if (el.closest('header.sn, .hero, template, [role="img"]')) return;
+    if (el.closest('header.sn, .hero, .fp-hero, template, [role="img"]')) return;
     for (var i = 0; i < kept.length; i++) if (kept[i].contains(el)) return;
     kept.push(el);
   });

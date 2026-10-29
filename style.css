@@ -131,3 +131,6 @@ html,body{background:#fff}
 .trust h2{grid-column:1;margin-top:0}
 .trust-details{grid-column:2}
 @media(max-width:600px){.trust h2,.trust-details{grid-column:1}}
+
+/* 73% card: number first, then the sentence; keep air above the source line. */
+.story-block .stat-source{padding-top:26px}
