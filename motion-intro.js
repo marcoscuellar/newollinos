@@ -2,11 +2,12 @@
 // - Top bar: logo, then links, then "Let's talk" settle in.
 // - Home hero: headline rises word by word, then the yellow period lands (the signal).
 // - Feature pages: label → title → copy → button, while the photo settles.
-// - Cards lift slightly under the cursor (mouse/trackpad only).
+// - Hover (mouse/trackpad only): cards lift, photos zoom slightly, buttons rise and press,
+//   text links nudge forward, client-map people lift.
 // Rules kept: plays once, settles under ~2s, no loops, no bounce, reduced-motion gets the still page.
 // Content is only pre-hidden by the html.mi class, which the <head> snippet removes after 2.5s
 // no matter what, so if this file never loads the page still shows everything.
-import { animate, stagger, hover } from "https://cdn.jsdelivr.net/npm/motion@13.2.0/+esm";
+import { animate, stagger, hover, press } from "https://cdn.jsdelivr.net/npm/motion@13.2.0/+esm";
 
 const root = document.documentElement;
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -107,6 +108,50 @@ function lift() {
       el.classList.add("is-lifted");
       animate(el, { y: -6 }, spring);
       return () => { el.classList.remove("is-lifted"); animate(el, { y: 0 }, spring); };
+    });
+
+    // Photos: a slow, slight zoom inside their frame (the frame itself stays put).
+    const zoom = { duration: 0.9, ease: EASE };
+    hover(".panel:not(.hero):not(.fp-hero), .fp-hero-img", el => {
+      const imgs = $$("img", el).filter(i => i.getBoundingClientRect().width >= 200);
+      if (!imgs.length) return;
+      animate(imgs, { scale: 1.04 }, zoom);
+      return () => animate(imgs, { scale: 1 }, zoom);
+    });
+
+    // Buttons and demo tabs: rise a touch on hover, press down on click.
+    const BTN = ".opener-cta, .cta-btn, .sn-cta, .steps button";
+    hover(BTN, el => {
+      animate(el, { y: -2 }, spring);
+      return () => animate(el, { y: 0 }, spring);
+    });
+    press(BTN, el => {
+      animate(el, { scale: 0.97 }, { duration: 0.12, ease: "easeOut" });
+      return () => animate(el, { scale: 1 }, spring);
+    });
+
+    // Text links: nudge forward.
+    $$(".panel-link, .stat-source, .foot-links a").forEach(a => {
+      if (getComputedStyle(a).display === "inline") a.style.display = "inline-block";
+    });
+    hover(".panel-link, .stat-source, .foot-links a", el => {
+      animate(el, { x: 3 }, spring);
+      return () => animate(el, { x: 0 }, spring);
+    });
+
+    // Client maps: each person card lifts and brightens a shade.
+    hover(".node", el => {
+      el.classList.add("is-lifted");
+      animate(el, { y: -4 }, spring);
+      return () => { el.classList.remove("is-lifted"); animate(el, { y: 0 }, spring); };
+    });
+
+    // Four questions: the row you're on lights up. Its icon tile turns Signal Yellow.
+    hover(".checks li", el => {
+      const icon = el.querySelector(".workflow-icon");
+      el.classList.add("is-lit");
+      if (icon) animate(icon, { scale: 1.08 }, spring);
+      return () => { el.classList.remove("is-lit"); if (icon) animate(icon, { scale: 1 }, spring); };
     });
   }
 }

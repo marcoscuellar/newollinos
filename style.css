@@ -132,5 +132,13 @@ html,body{background:#fff}
 .trust-details{grid-column:2}
 @media(max-width:600px){.trust h2,.trust-details{grid-column:1}}
 
-/* 73% card: number first, then the sentence; keep air above the source line. */
-.story-block .stat-source{padding-top:26px}
+/* Home stat cards (58% and 73%): same sizes and spacing as the feature-page stat cards.
+   Number → sentence → takeaway → source, 14px apart, top-aligned. */
+.panel.story-block,.panel.proof{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(28px,4vw,48px);min-height:0}
+.panel.story-block>*,.panel.proof>*{margin:0;padding:0}
+.panel.story-block>.eyebrow,.panel.proof>.eyebrow{margin-bottom:6px}
+.panel.story-block .work-stat,.panel.proof .evidence-stat{font-size:clamp(84px,9vw,132px);line-height:.95;margin:0;padding:0}
+.panel.story-block h2.work-stat-title,.panel.proof .stat-description{font:400 19px/1.5 Inter,Arial,sans-serif;letter-spacing:normal;color:#fff;max-width:420px;margin:0}
+.panel.story-block>p,.panel.proof .stat-takeaway{font:700 26px/1.1 Archivo,Arial,sans-serif;letter-spacing:-.03em;color:#fff;max-width:420px;margin:8px 0 0}
+.panel.story-block .stat-source,.panel.proof .stat-source{font-size:12px;margin-top:10px;padding:0}
+.panel.story-block .stat-method,.panel.proof .stat-method{font:12px/1.6 'IBM Plex Mono',monospace;margin:0}
