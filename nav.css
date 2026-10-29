@@ -97,3 +97,11 @@ html{scroll-padding-top:96px}
 .fp-hero-img{position:relative;min-height:320px;overflow:hidden}
 .fp-hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 @media(max-width:860px){.fp-hero{grid-template-columns:1fr;min-height:0}.fp-hero-img{order:-1;min-height:260px}.fp-hero-text{padding:28px 24px 32px}}
+
+/* Footer page links: plain HTML links so search engines can reach every page without running scripts */
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 22px}
+.foot-links a{color:inherit;text-decoration:none;font-size:13px;white-space:nowrap}
+.foot-links a:hover{text-decoration:underline;text-underline-offset:4px}
+.foot-links a:focus-visible{outline:3px solid #9d8500;outline-offset:3px;border-radius:2px}
+/* Spam trap on the contact form: hidden from people, filled only by bots */
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
