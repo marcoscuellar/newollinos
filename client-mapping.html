@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Client mapping: see the whole account | ŌLLIN</title>
+<meta name="description" content="Heard every objection in the book? ŌLLIN maps the people around your hiring manager and finds the next person to call, each line labelled.">
+<link rel="canonical" href="https://www.ollinos.com/client-mapping">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ŌLLIN">
+<meta property="og:url" content="https://www.ollinos.com/client-mapping">
+<meta property="og:title" content="Client mapping: see the whole account | ŌLLIN">
+<meta property="og:description" content="Heard every objection in the book? ŌLLIN maps the people around your hiring manager and finds the next person to call, each line labelled.">
+<meta property="og:image" content="https://www.ollinos.com/assets/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Client mapping: see the whole account | ŌLLIN">
+<meta name="twitter:description" content="Heard every objection in the book? ŌLLIN maps the people around your hiring manager and finds the next person to call, each line labelled.">
+<meta name="twitter:image" content="https://www.ollinos.com/assets/og-cover.png">
+<link rel="icon" type="image/svg+xml" href="/assets/pulse.svg">
+<link rel="stylesheet" href="/nav.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#ffffff}
+a{color:#181a1e}a:hover{color:#3f4550}
+.lbl{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.wrap{max-width:1440px;margin:0 auto;padding:0 clamp(20px, 3vw, 40px);box-sizing:border-box}
+.panel{border-radius:26px;background:#ffffff;box-shadow:0 3px 8px rgba(24,26,30,.03),0 16px 40px rgba(24,26,30,.07);overflow:hidden}
+.dark{background:#181a1e;color:#ffffff}
+.h2{margin:0;font-family:Archivo,sans-serif;font-weight:600;font-size:clamp(36px,4vw,56px);line-height:1.04;letter-spacing:-.045em}
+.h3{margin:0;font-family:Archivo,sans-serif;font-weight:700;font-size:26px;letter-spacing:-.025em;line-height:1.1}
+.muted{color:#62666d}
+.dmuted{color:#b8bec7}
+.vdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#ffe14d;flex:0 0 8px}
+.odot{display:inline-block;width:8px;height:8px;border-radius:50%;border:1px solid #b8bec7;box-sizing:border-box;flex:0 0 8px}
+.node{position:absolute;width:240px;box-sizing:border-box;background:#22252b;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:4px}
+.nm{font-weight:600;font-size:16px}
+.tt{font-size:13px;color:#b8bec7}
+.tag{display:flex;gap:8px;align-items:center;margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#ffffff}
+.ln{position:absolute;background:#b8bec7}
+.dl{position:absolute;border-color:#8b929d;border-style:dashed;border-width:0}
+.objections{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.objections li{font-size:15px;font-style:italic;color:#181a1e;background:#f2f3f5;border-radius:999px;padding:8px 14px}
+</style>
+<style>html,body{background:#fff}</style>
+</head>
+<body data-page="mushroom">
+
+<div style="font-family: Inter, system-ui, sans-serif; color: #181a1e; background: #ffffff; padding-bottom: 48px">
+
+<template id="sn-logo-src"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="48 50 520 170"><rect x="56.00" y="96.00" width="36.00" height="76.00" rx="13.00" fill="#FFE14D"></rect><rect x="102.00" y="56.00" width="36.00" height="92.00" rx="13.00" fill="#FFE14D"></rect><rect x="152.00" y="76.00" width="32.00" height="32.00" rx="11.00" fill="#FFE14D"></rect><rect x="148.00" y="118.00" width="36.00" height="98.00" rx="13.00" fill="#FFE14D"></rect><path d="M239.96 139.64Q239.96 127.28 245.78 117.44Q251.6 107.60000000000001 261.5 102.08000000000001Q271.4 96.56 283.28 96.56Q295.15999999999997 96.56 305.05999999999995 102.08000000000001Q314.96 107.60000000000001 320.65999999999997 117.44Q326.36 127.28 326.36 139.64Q326.36 152.0 320.6 161.9Q314.84000000000003 171.8 305.0 177.32Q295.15999999999997 182.84 283.28 182.84Q271.4 182.84 261.5 177.32Q251.6 171.8 245.78 161.9Q239.96 152.0 239.96 139.64ZM305.48 139.64Q305.48 128.48000000000002 299.42 121.82000000000001Q293.36 115.16 283.28 115.16Q273.08 115.16 267.02 121.76Q260.96 128.36 260.96 139.64Q260.96 150.8 267.02 157.46Q273.08 164.12 283.28 164.12Q293.36 164.12 299.42 157.4Q305.48 150.68 305.48 139.64Z M355.87999999999994 166.16H382.75999999999993V182.0H335.35999999999996V97.76H355.87999999999994Z M410.7199999999999 166.16H437.5999999999999V182.0H390.19999999999993V97.76H410.7199999999999Z M465.5599999999999 97.76V182.0H445.0399999999999V97.76Z M553.3999999999999 182.0H532.8799999999999L498.5599999999999 130.04V182.0H478.0399999999999V97.76H498.5599999999999L532.8799999999999 149.96V97.76H553.3999999999999Z" fill="#181A1E"></path><rect x="276.25" y="75.56" width="60.48" height="12.60" rx="4.03" fill="#181A1E"></rect></svg></template><header class="sn"></header>
+
+<section class="wrap fp-hero-wrap">
+<div class="panel fp-hero">
+<div class="fp-hero-text">
+<div class="lbl muted">ŌLLIN OS · Client mapping</div>
+<h1 style="margin: 0; font-family: Archivo, sans-serif; font-weight: 600; font-size: clamp(40px, 4.6vw, 64px); line-height: 1.04; letter-spacing: -0.045em">We’ve all heard every objection in the book.</h1>
+<ul class="objections" aria-label="Objections staffing reps hear"><li>“We’re not hiring right now.”</li><li>“You need to talk to HR.”</li><li>“Stop calling me.”</li></ul>
+<p class="muted" style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 580px">The best staffing reps don’t stop there. Neither does ŌLLIN. It maps the people around your hiring manager and finds the next person to call, with every line labelled confirmed or inferred.</p>
+<a class="opener-cta" href="/#contact">Let’s talk</a>
+</div>
+<div class="fp-hero-img"><img src="/assets/team.jpg" alt="Three colleagues work through an account together at a café table" style="object-position: center 30%"></div>
+</div>
+</section>
+
+<section class="wrap">
+<div class="panel dark" style="display: flex; flex-wrap: wrap; align-items: stretch">
+<div style="flex: 1 1 100%; min-width: 0; padding: clamp(20px, 4vw, 44px); display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap">
+<div class="lbl dmuted">Aldervane Freight · account map</div>
+<div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center; font-size: 13px; color: #b8bec7">
+<span style="display: flex; gap: 10px; align-items: center"><span style="width: 28px; height: 3px; border-radius: 2px; background: #ffe14d"></span>Confirmed</span>
+<span style="display: flex; gap: 10px; align-items: center"><span style="width: 28px; border-top: 2px dashed #8b929d"></span>Inferred, and labelled so</span>
+</div>
+</div>
+<div style="overflow-x: auto">
+<div role="img" aria-label="Account map. Omar Reyes, VP Operations, found first. Reports to Nadia Cole, COO, economic buyer, verified. Leo Fontaine, Director of Finance, blocker, verified, never sequenced. Priya Anand, Director of Regional Ops, evaluator, verified, reports to Omar. Marcus Vale, Senior Manager East Coast, influencer, line inferred." style="position: relative; width: 640px; height: 540px; margin: 0 auto">
+<div style="position: absolute; left: 318px; top: 104px; width: 3px; height: 96px; background: #ffe14d"></div>
+<div style="position: absolute; left: 100px; top: 150px; width: 221px; height: 3px; background: #ffe14d"></div>
+<div style="position: absolute; left: 99px; top: 150px; width: 3px; height: 50px; background: #ffe14d"></div>
+<div style="position: absolute; left: 318px; top: 330px; width: 3px; height: 42px; background: #ffe14d"></div>
+<div style="position: absolute; left: 209px; top: 370px; width: 112px; height: 3px; background: #ffe14d"></div>
+<div style="position: absolute; left: 209px; top: 370px; width: 3px; height: 50px; background: #ffe14d"></div>
+<div class="dl" style="left: 321px; top: 370px; width: 220px; height: 0; border-top-width: 2px"></div>
+<div class="dl" style="left: 539px; top: 370px; width: 0; height: 50px; border-left-width: 2px"></div>
+
+<div class="node" style="left: 220px; top: 0; width: 200px"><span class="nm">Nadia Cole</span><span class="tt">Chief Operating Officer</span><span class="tag"><span class="vdot"></span>Econ. buyer · verified</span></div>
+<div class="node" style="left: 0; top: 200px; width: 200px"><span class="nm">Leo Fontaine</span><span class="tt">Dir. Finance &amp; Planning</span><span class="tag" style="color: #b8bec7"><span class="vdot"></span>Blocker · no emails</span></div>
+<div class="node" style="left: 220px; top: 200px; width: 200px; background: #ffe14d; color: #181a1e"><span class="lbl" style="color: #181a1e">Found first</span><span class="nm">Omar Reyes</span><span class="tt" style="color: #181a1e">VP, Operations</span><span class="tag" style="color: #181a1e">Champion · verified</span></div>
+<div class="node" style="left: 110px; top: 420px; width: 200px"><span class="nm">Priya Anand</span><span class="tt">Director, Regional Ops</span><span class="tag"><span class="vdot"></span>Evaluator · verified</span></div>
+<div class="node" style="left: 440px; top: 420px; width: 200px"><span class="nm">Marcus Vale</span><span class="tt">Sr. Manager, East Coast</span><span class="tag" style="color: #b8bec7"><span class="odot"></span>Influencer · inferred</span></div>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: baseline">
+<p class="dmuted" style="margin: 0; font-size: 14px; line-height: 1.5; max-width: 420px"><b style="color: #ffffff">Tap anyone</b> to see their line, their email, why they’d care, and jump straight to their card.</p>
+<div class="lbl" style="color: #8b929d">Example data · not real contacts</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="wrap" style="padding-top: 76px; display: flex; flex-direction: column; gap: 40px">
+<div class="sec-head">
+<div class="sec-rule"><span>01</span><span>Built for staffing</span></div>
+<h2 class="h2">One contact is a lead. The whole account is a business.</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px">
+<article class="panel" style="padding: 32px; display: flex; flex-direction: column; gap: 14px">
+<span class="num">1</span>
+<h3 class="h3">Your contact stopped replying.</h3>
+<p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">See their boss, their peers and the talent team, each with their own reason to reply. Never single-threaded again.</p>
+</article>
+<article class="panel" style="padding: 32px; display: flex; flex-direction: column; gap: 14px">
+<span class="num">2</span>
+<h3 class="h3">Your champion needs backup.</h3>
+<p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">Find the boss who signs and the peers who feel the problem, so one quiet inbox doesn’t stall the account.</p>
+</article>
+<article class="panel" style="padding: 32px; display: flex; flex-direction: column; gap: 14px">
+<span class="num">3</span>
+<h3 class="h3">One placement. The whole department.</h3>
+<p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">Every team around your placement, mapped. The next req isn’t a cold call.</p>
+</article>
+</div>
+</section>
+
+
+<section class="wrap" style="padding-top: 76px; display: flex; flex-direction: column; gap: 40px">
+<div class="sec-head">
+<div class="sec-rule"><span>02</span><span>Honest by design</span></div>
+<h2 class="h2">A guess never gets a solid line.</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
+<div style="border-top: 1px solid #d9dee5; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><h3 class="h3">Inferred lines say so.</h3><p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">Anyone placed by role is drawn dashed and labelled inferred.</p></div>
+<div style="border-top: 1px solid #d9dee5; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><h3 class="h3">Your lines stay yours.</h3><p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">A line you draw is labelled with its source. It’s never called verified.</p></div>
+<div style="border-top: 1px solid #d9dee5; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><h3 class="h3">Blockers never get a sequence.</h3><p class="muted" style="margin: 0; font-size: 15px; line-height: 1.6">They stay on the map so you know they’re there. They never get an email.</p></div>
+</div>
+</section>
+
+<section class="wrap" style="padding-top: 76px">
+<div class="panel" style="padding: clamp(24px, 5vw, 56px); display: flex; flex-wrap: wrap; gap: 32px; align-items: center">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div class="sec-rule"><span>03</span><span>Into ŌLLIN GO</span></div>
+<h2 class="h2 h2-panel">Every person gets their own angle.</h2>
+<p class="muted" style="margin: 0; font-size: 16px; line-height: 1.6">The buyer hears about cost. The champion hears about the work. Each person on the map gets their own card, their own draft and their own sequence. Coordinated, not copy-pasted.</p>
+</div>
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 14px 18px; border-radius: 12px; background: #f5f6f7; font-size: 15px"><b>Nadia Cole</b><span class="muted">Cares about cost</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 14px 18px; border-radius: 12px; background: #f5f6f7; font-size: 15px"><b>Omar Reyes</b><span class="muted">Cares about the work</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 14px 18px; border-radius: 12px; background: #f5f6f7; font-size: 15px"><b>Priya Anand</b><span class="muted">Cares about her team</span></div>
+</div>
+</div>
+</section>
+
+<section id="talk" class="wrap" style="padding-top: 76px">
+<div class="panel dark" style="padding: clamp(28px, 5vw, 64px); display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 18px; max-width: 620px">
+<div class="lbl dmuted">Your next move</div>
+<h2 class="h2">Bring an account. See the whole map<span style="color: #ffe14d">.</span></h2>
+<p class="dmuted" style="margin: 0; font-size: 16px; line-height: 1.6">Name one client, or one consultant about to roll off. We’ll map it live with you.</p>
+</div>
+<a class="cta-btn" href="/#contact">Let’s talk</a>
+</div>
+</section>
+
+<footer style="max-width: 1440px; margin: 0 auto; padding: 44px clamp(20px, 3vw, 40px); box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 16px 36px; align-items: center; font-size: 12px; color: #62666d">
+<svg style="display:block;width:115px;height:auto" role="img" aria-label="ŌLLIN" xmlns="http://www.w3.org/2000/svg" viewBox="48 50 520 170"><rect x="56.00" y="96.00" width="36.00" height="76.00" rx="13.00" fill="#FFE14D"></rect><rect x="102.00" y="56.00" width="36.00" height="92.00" rx="13.00" fill="#FFE14D"></rect><rect x="152.00" y="76.00" width="32.00" height="32.00" rx="11.00" fill="#FFE14D"></rect><rect x="148.00" y="118.00" width="36.00" height="98.00" rx="13.00" fill="#FFE14D"></rect><path d="M239.96 139.64Q239.96 127.28 245.78 117.44Q251.6 107.60000000000001 261.5 102.08000000000001Q271.4 96.56 283.28 96.56Q295.15999999999997 96.56 305.05999999999995 102.08000000000001Q314.96 107.60000000000001 320.65999999999997 117.44Q326.36 127.28 326.36 139.64Q326.36 152.0 320.6 161.9Q314.84000000000003 171.8 305.0 177.32Q295.15999999999997 182.84 283.28 182.84Q271.4 182.84 261.5 177.32Q251.6 171.8 245.78 161.9Q239.96 152.0 239.96 139.64ZM305.48 139.64Q305.48 128.48000000000002 299.42 121.82000000000001Q293.36 115.16 283.28 115.16Q273.08 115.16 267.02 121.76Q260.96 128.36 260.96 139.64Q260.96 150.8 267.02 157.46Q273.08 164.12 283.28 164.12Q293.36 164.12 299.42 157.4Q305.48 150.68 305.48 139.64Z M355.87999999999994 166.16H382.75999999999993V182.0H335.35999999999996V97.76H355.87999999999994Z M410.7199999999999 166.16H437.5999999999999V182.0H390.19999999999993V97.76H410.7199999999999Z M465.5599999999999 97.76V182.0H445.0399999999999V97.76Z M553.3999999999999 182.0H532.8799999999999L498.5599999999999 130.04V182.0H478.0399999999999V97.76H498.5599999999999L532.8799999999999 149.96V97.76H553.3999999999999Z" fill="#181A1E"></path><rect x="276.25" y="75.56" width="60.48" height="12.60" rx="4.03" fill="#181A1E"></rect></svg>
+<span>Intelligence for real work.</span>
+<nav class="foot-links" aria-label="Site pages"><a href="/">Home</a><a href="/client-mapping">Client mapping</a><a href="/campaigns">Campaigns</a><a href="/redeploy">Redeploy</a><a href="/how-we-work">How we work</a><a href="/#contact">Let’s talk</a></nav><span style="margin-left: auto">© 2026 ŌLLIN · an ELIPAN Group company.</span>
+</footer>
+
+</div>
+
+<script src="/nav.js"></script>
+<script src="/site-motion.js"></script>
+</body>
+</html>

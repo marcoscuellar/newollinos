@@ -59,15 +59,21 @@ module.exports = async (req, res) => {
   }
 
   const source = String(body.source || 'unknown').replace(/[^\w.-]/g, '').slice(0, 40);
+  /* optional fields from the contact form; plain text only, trimmed and capped */
+  const clean = (v, max) => String(v || '').replace(/[\u0000-\u001f\u007f]+/g, ' ').trim().slice(0, max);
+  const name = clean(body.name, 120);
+  const interest = clean(body.interest, 80);
+  const account = clean(body.account, 1000);
   const text = [
-    email + ' asked to bring an account and see the four checks run live.',
+    (name ? name + ' (' + email + ')' : email) + ' asked to bring an account and see what ŌLLIN finds.',
     '',
-    'They said they would bring an account they are already working.',
+    interest ? 'Interested in: ' + interest : '',
+    account ? 'Account they are working: ' + account : 'They did not name an account yet.',
     '',
     'Reply straight to this email — it goes back to them.',
     '',
     'source: ' + source,
-  ].join('\n');
+  ].filter((line, i, all) => line !== '' || all[i - 1] !== '').join('\n');
 
   /* What the visitor gets back, straight away. Plain text on purpose: it
      reads as a note from a person, and nothing in it is a claim we can't keep.
