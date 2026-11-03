@@ -148,3 +148,27 @@ html,body{background:#fff}
 .steps button[aria-selected=true]{background:#181a1e;color:#fff}
 .steps button[aria-selected=true] span{color:#fff}
 .steps button[aria-selected=false]:hover{background:#f0f1f3;color:#181a1e}
+
+/* Hero scan: ŌLLIN reading the skyline for signals (hero-scan.js) */
+.scan-stage{position:absolute;z-index:1;pointer-events:none;opacity:0;transition:opacity .6s ease}
+.hero-media.scan-on .scan-stage{opacity:1}
+.scan-read{position:absolute;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;overflow:hidden}
+.scan-read>i{position:absolute;left:0;right:0;top:0;height:45%;transform:translateY(-120%);background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.85) 55%,rgba(255,255,255,0))}
+.scan-lock{position:absolute;margin:-9px;padding:9px;box-sizing:content-box;opacity:0;--c:rgba(255,255,255,.95);--l:12px;background:
+ linear-gradient(var(--c),var(--c)) 0 0/var(--l) 2px,linear-gradient(var(--c),var(--c)) 0 0/2px var(--l),
+ linear-gradient(var(--c),var(--c)) 100% 0/var(--l) 2px,linear-gradient(var(--c),var(--c)) 100% 0/2px var(--l),
+ linear-gradient(var(--c),var(--c)) 0 100%/var(--l) 2px,linear-gradient(var(--c),var(--c)) 0 100%/2px var(--l),
+ linear-gradient(var(--c),var(--c)) 100% 100%/var(--l) 2px,linear-gradient(var(--c),var(--c)) 100% 100%/2px var(--l);background-repeat:no-repeat;filter:drop-shadow(0 1px 3px rgba(0,0,0,.35))}
+.scan-beam{position:absolute;top:0;left:0;width:140px;z-index:1;pointer-events:none;opacity:0;
+ background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.16) 85%,rgba(255,255,255,.9) 98.5%,rgba(255,255,255,0));
+ -webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.scan-ctl{display:flex;align-items:center;gap:18px}
+.scan-status{display:flex;align-items:center;gap:9px}
+.scan-status b{width:7px;height:7px;border-radius:2px;background:var(--yellow)}
+.scan-ctl.is-scanning .scan-status b{animation:scanBlink .8s steps(2,end) infinite}
+@keyframes scanBlink{50%{opacity:.25}}
+.scan-toggle{font:inherit;letter-spacing:inherit;text-transform:uppercase;color:#fff;background:transparent;border:1px solid #ffffff40;border-radius:6px;padding:5px 10px;cursor:pointer}
+.scan-toggle:hover{border-color:#fff}
+@media(max-width:600px){.scan-ctl{gap:10px}.scan-lock{--l:8px;margin:-6px;padding:6px}}
+@media(prefers-reduced-motion:reduce){.scan-stage,.scan-beam,.scan-ctl{display:none}}
+@media(max-width:600px){.scan-status span{display:none}.scan-toggle{padding:4px 8px}}
