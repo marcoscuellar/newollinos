@@ -23,9 +23,13 @@
     { d: "M944 184 V262" },                                  // rail post
     { d: "M600 236 V40 H686" },                              // glass tower, left skyline
     { d: "M160 352 V134 H246" },                             // tall tower, far left
-    { d: "M1222 250 V4" },                                   // glass tower edge, above the table
-    { d: "M1540 262 V126" },                                 // dark tower edge
+    { d: "M1222 250 V4", prun: true },                       // glass tower edge, above the table
+    { d: "M1540 262 V126", prun: true },                     // dark tower edge
     { d: "M1792 282 V157 L2000 78", run: true },             // terrace building pillar + slab edge
+    // Phones crop the photo to roughly x 826–1645, so they get their own traces in that window
+    { d: "M1026 270 V96", ph: true, prun: true },            // old tower, right edge
+    { d: "M1346 268 V0", ph: true, prun: true },             // glass tower, right edge
+    { d: "M1360 270 V64 L1384 26", ph: true },               // tan tower, left edge to the crown
   ];
   // Corner brackets: [x, y, w, h]
   const LOCKS = [
@@ -33,6 +37,8 @@
     [1252, 148, 88, 84],    // glass tower windows, above the table
     [1840, 118, 140, 70],   // terrace building windows
     [168, 142, 76, 104],    // far-left tower
+    [1128, 118, 52, 64, 1], // mid glass tower (phone)
+    [936, 64, 84, 76, 1],   // old tower crown (phone)
   ];
   // Lit window panes: the highlights ŌLLIN has picked out. [x, y, w, h]
   const PANES = [
@@ -40,6 +46,7 @@
     [1262, 166, 34, 9], [1318, 206, 24, 9],                                             // glass tower
     [1903, 228, 34, 52],                                                                // terrace window
     [612, 70, 28, 10], [646, 110, 28, 10],                                              // glass tower, left skyline
+    [1136, 140, 14, 8, 1], [950, 122, 16, 10, 1], [982, 176, 16, 10, 1],                 // phone window
   ];
   // Small signal pieces in the brand's forms: [x, y, w, h, opacity]
   const PIECES = [
@@ -61,23 +68,28 @@
     return n;
   };
 
+  const ph = (n, on) => { if (on) n.classList.add("sig-ph"); return n; };
   const traces = TRACES.map(t => {
-    const p = el("path", { d: t.d, pathLength: 1, class: "sig-trace" });
+    const p = ph(el("path", { d: t.d, pathLength: 1, class: "sig-trace" }), t.ph);
     svg.append(p);
     let comet = null;
-    if (t.run) { comet = el("path", { d: t.d, pathLength: 1, class: "sig-comet" }); svg.append(comet); }
-    return { p, comet };
+    if (t.run || t.prun) { comet = ph(el("path", { d: t.d, pathLength: 1, class: "sig-comet" }), t.ph); svg.append(comet); }
+    return { p, comet, run: !!t.run, prun: !!t.prun };
   });
-  const locks = LOCKS.map(([x, y, w, h]) => {
+  const isPhone = () => !!(window.matchMedia && matchMedia("(max-width: 600px)").matches);
+  const inPhoneView = x => x > 826 && x < 1645;
+  const locks = LOCKS.map(([x, y, w, h, only]) => {
     const a = Math.min(18, w / 3, h / 3);
     const d = `M${x} ${y + a}V${y}H${x + a}M${x + w - a} ${y}H${x + w}V${y + a}` +
       `M${x + w} ${y + h - a}V${y + h}H${x + w - a}M${x + a} ${y + h}H${x}V${y + h - a}`;
-    const p = el("path", { d, class: "sig-lock" });
+    const p = ph(el("path", { d, class: "sig-lock" }), only);
+    p._ph = inPhoneView(x + w / 2); p._desk = !only;
     svg.append(p);
     return p;
   });
-  const panes = PANES.map(([x, y, w, h]) => {
-    const r = el("rect", { x, y, width: w, height: h, rx: 2, class: "sig-pane" });
+  const panes = PANES.map(([x, y, w, h, only]) => {
+    const r = ph(el("rect", { x, y, width: w, height: h, rx: 2, class: "sig-pane" }), only);
+    r._ph = inPhoneView(x + w / 2); r._desk = !only;
     svg.append(r);
     return r;
   });
@@ -124,20 +136,22 @@
 
   let timer = 0, running = [], paused = false, onScreen = true, ready = false, n = 0;
   function beat() {
-    // A light runs along the rail and the terrace edge; one bracket re-locks.
+    // Lights run along the architecture; one bracket re-locks; a few windows brighten.
+    // Phones see a narrower slice of the photo, so they get the lights that fall inside it.
     running = [];
-    traces.forEach(({ comet }, i) => {
-      if (!comet) return;
+    const phone = isPhone();
+    const vis = a => a.filter(e => phone ? e._ph : e._desk);
+    traces.filter(t => t.comet && (phone ? t.prun : t.run)).forEach(({ comet }, j) => {
       running.push(comet.animate(
         [{ strokeDashoffset: .14, opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .85 }, { strokeDashoffset: -1, opacity: 0 }],
-        { duration: 2600, delay: i * 500, easing: "cubic-bezier(.45,0,.55,1)" }));
+        { duration: phone ? 1900 : 2600, delay: j * (phone ? 650 : 500), easing: "cubic-bezier(.45,0,.55,1)" }));
     });
-    const lock = locks[n++ % locks.length];
+    const vl = vis(locks), lock = vl[n++ % vl.length];
     running.push(lock.animate(
       [{ transform: "scale(1)", opacity: 1 }, { transform: "scale(1.25)", opacity: .2, offset: .3 }, { transform: "scale(1)", opacity: 1 }],
       { duration: 900, delay: 400, easing: EASE }));
     [0, 3, 6].forEach((k, j) => {
-      const pane = panes[(n * 2 + k) % panes.length];
+      const vp = vis(panes), pane = vp[(n * 2 + k) % vp.length];
       running.push(pane.animate([{ opacity: .55 }, { opacity: 1, offset: .25 }, { opacity: .55 }],
         { duration: 1400, delay: 600 + j * 700, easing: "ease-in-out" }));
     });

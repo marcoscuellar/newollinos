@@ -160,6 +160,8 @@ html,body{background:#fff}
 .sig-lock{stroke:#ffe14d;stroke-width:2.6px;transform-box:fill-box;transform-origin:center;filter:drop-shadow(0 0 2px rgba(255,225,77,.9)) drop-shadow(0 1px 3px rgba(0,0,0,.35))}
 .sig-pane{fill:#ffe14d;opacity:.55;filter:drop-shadow(0 0 4px rgba(255,225,77,.85))}
 .sig-piece{fill:#ffe14d;opacity:var(--o)}
+.sig-ph{display:none}
+@media(max-width:600px){.sig-ph{display:inline}}
 .sig-toggle{font:inherit;letter-spacing:inherit;text-transform:uppercase;color:#fff;background:transparent;border:1px solid #ffffff40;border-radius:6px;padding:5px 10px;cursor:pointer}
 .sig-toggle:hover{border-color:#fff}
 @media(max-width:600px){.sig-toggle{padding:4px 8px}}
