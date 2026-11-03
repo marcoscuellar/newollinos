@@ -1,129 +1,174 @@
-// Home hero: ŌLLIN scanning the city for signals.
-// A light beam sweeps the skyline; each yellow signal in the photo gets read
-// (a light pass runs down it) and locked (corner brackets snap on), then the
-// readout says how many were found. Repeats while the hero is on screen.
-// The signals are part of the photo, so each effect is clipped to the signal's
-// own pixels with a mask cut from the photo. Pause button for WCAG 2.2.2.
-// Reduced motion: nothing runs; the photo stays as it is.
+// Home hero: signals working around the people, never on them.
+// Thin yellow traces draw along the architecture (the glass rail, the rooftop terrace,
+// building edges), corner brackets lock onto windows and towers, and a light
+// runs along the rail and the terrace edge now and then. Nothing touches a face.
+// Drawn in photo coordinates and matched to the photo's object-fit: cover crop.
+// Pause button for WCAG 2.2.2. Reduced motion: drawn once, still.
 (function () {
   const hero = document.querySelector(".hero");
   const media = hero && hero.querySelector(".hero-media");
   const img = media && media.querySelector("img");
-  if (!img || !media.animate) return;
-  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!img) return;
+  const reduce = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const canAnimate = !reduce && !!document.body.animate;
 
   const IW = 2000, IH = 767; // hero.jpg natural size
-  // Signal boxes in photo pixels: [mask x, y, w, h] (mask = signal + 4px)
-  const SIGNALS = [
-    [1026, 6, 54, 158],
-    [1178, 22, 44, 44],
-    [1412, 0, 97, 236],
-    [1673, 0, 112, 108],
+  const NS = "http://www.w3.org/2000/svg";
+
+  // Traces along the architecture (photo pixels). Faces sit roughly in
+  // x 1120–2000, y 290–470, and the headline covers x 420–1020, y 300–680, so everything stays in the sky and the architecture.
+  const TRACES = [
+    { d: "M430 0 L783 125 L793 128 L1000 207", run: true },  // glass rail top edge, traced on the photo
+    { d: "M787 128 V262" },                                  // rail post
+    { d: "M944 184 V262" },                                  // rail post
+    { d: "M600 236 V40 H686" },                              // glass tower, left skyline
+    { d: "M160 352 V134 H246" },                             // tall tower, far left
+    { d: "M1222 250 V4" },                                   // glass tower edge, above the table
+    { d: "M1540 262 V126" },                                 // dark tower edge
+    { d: "M1792 282 V157 L2000 78", run: true },             // terrace building pillar + slab edge
   ];
-  const SWEEP = 2600, REST = 3400;
+  // Corner brackets: [x, y, w, h]
+  const LOCKS = [
+    [1548, 128, 116, 92],   // dark tower windows
+    [1252, 148, 88, 84],    // glass tower windows, above the table
+    [1840, 118, 140, 70],   // terrace building windows
+    [168, 142, 76, 104],    // far-left tower
+  ];
+  // Lit window panes: the highlights ŌLLIN has picked out. [x, y, w, h]
+  const PANES = [
+    [1562, 142, 20, 11], [1602, 182, 20, 11], [1582, 222, 20, 11], [1642, 162, 18, 11],  // dark tower
+    [1262, 166, 34, 9], [1318, 206, 24, 9],                                             // glass tower
+    [1903, 228, 34, 52],                                                                // terrace window
+    [612, 70, 28, 10], [646, 110, 28, 10],                                              // glass tower, left skyline
+  ];
+  // Small signal pieces in the brand's forms: [x, y, w, h, opacity]
+  const PIECES = [
+    [826, 236, 22, 62, .38],  // reflection in the glass panel
+    [1872, 206, 14, 40, .42], // reflection in the terrace windows
+    [586, 230, 9, 9, 1],      // trace node
+    [1216, 244, 12, 12, 1],   // trace node
+    [1534, 256, 12, 12, 1],   // trace node
+  ];
 
-  const pct = (v, of) => (v / of * 100) + "%";
-  const stage = document.createElement("div");
-  stage.className = "scan-stage";
-  const beam = document.createElement("div");
-  beam.className = "scan-beam";
-  media.append(stage, beam);
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", `0 0 ${IW} ${IH}`);
+  svg.setAttribute("preserveAspectRatio", "none");
+  svg.setAttribute("aria-hidden", "true");
+  svg.classList.add("sig-layer");
+  const el = (tag, attrs) => {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  };
 
-  const sigs = SIGNALS.map(([x, y, w, h], i) => {
-    const read = document.createElement("div");
-    read.className = "scan-read";
-    read.style.cssText = `left:${pct(x, IW)};top:${pct(y, IH)};width:${pct(w, IW)};height:${pct(h, IH)};` +
-      `-webkit-mask-image:url(/assets/hero-signal-${i + 1}.png);mask-image:url(/assets/hero-signal-${i + 1}.png)`;
-    const band = document.createElement("i");
-    read.append(band);
-    const lock = document.createElement("div");
-    lock.className = "scan-lock";
-    lock.style.cssText = `left:${pct(x + 4, IW)};top:${pct(y + (y ? 4 : 0), IH)};width:${pct(w - 8, IW)};height:${pct(h - (y ? 8 : 4), IH)}`;
-    stage.append(read, lock);
-    return { x: x + w / 2, y: y + h / 2, band, lock };
+  const traces = TRACES.map(t => {
+    const p = el("path", { d: t.d, pathLength: 1, class: "sig-trace" });
+    svg.append(p);
+    let comet = null;
+    if (t.run) { comet = el("path", { d: t.d, pathLength: 1, class: "sig-comet" }); svg.append(comet); }
+    return { p, comet };
+  });
+  const locks = LOCKS.map(([x, y, w, h]) => {
+    const a = Math.min(18, w / 3, h / 3);
+    const d = `M${x} ${y + a}V${y}H${x + a}M${x + w - a} ${y}H${x + w}V${y + a}` +
+      `M${x + w} ${y + h - a}V${y + h}H${x + w - a}M${x + a} ${y + h}H${x}V${y + h - a}`;
+    const p = el("path", { d, class: "sig-lock" });
+    svg.append(p);
+    return p;
+  });
+  const panes = PANES.map(([x, y, w, h]) => {
+    const r = el("rect", { x, y, width: w, height: h, rx: 2, class: "sig-pane" });
+    svg.append(r);
+    return r;
+  });
+  const pieces = PIECES.map(([x, y, w, h, o]) => {
+    const r = el("rect", { x, y, width: w, height: h, rx: Math.min(w, h) * .36, class: "sig-piece" });
+    r.style.setProperty("--o", o);
+    svg.append(r);
+    return r;
   });
 
-  // Readout + pause button in the hero's bottom line
-  const bottom = hero.querySelector(".hero-bottom");
-  const ctl = document.createElement("div");
-  ctl.className = "scan-ctl";
-  ctl.innerHTML = '<span class="scan-status" aria-hidden="true"><b></b><span>SCANNING</span></span>' +
-    '<button type="button" class="scan-toggle" aria-pressed="false">Pause</button>';
-  if (bottom) bottom.append(ctl);
-  const statusText = ctl.querySelector(".scan-status span");
-  const toggle = ctl.querySelector(".scan-toggle");
+  const stage = document.createElement("div");
+  stage.className = "sig-stage";
+  stage.append(svg);
+  media.append(stage);
 
   // Match the stage to the photo as object-fit: cover draws it
-  let W = 0, H = 0, ox = 0, oy = 0, s = 1;
   function layout() {
-    W = media.clientWidth; H = media.clientHeight;
-    s = Math.max(W / IW, H / IH);
+    const W = media.clientWidth, H = media.clientHeight;
+    const s = Math.max(W / IW, H / IH);
     const pos = getComputedStyle(img).objectPosition.split(" ").map(v => parseFloat(v) / 100);
-    ox = (W - IW * s) * (isNaN(pos[0]) ? .5 : pos[0]);
-    oy = (H - IH * s) * (isNaN(pos[1]) ? .5 : pos[1]);
+    const ox = (W - IW * s) * (isNaN(pos[0]) ? .5 : pos[0]);
+    const oy = (H - IH * s) * (isNaN(pos[1]) ? .5 : pos[1]);
     stage.style.cssText = `left:${ox}px;top:${oy}px;width:${IW * s}px;height:${IH * s}px`;
-    beam.style.height = Math.min(H, oy + IH * s * 0.46) + "px";
   }
   layout();
   if (window.ResizeObserver) new ResizeObserver(layout).observe(media);
   else addEventListener("resize", layout);
 
-  const EASE = "cubic-bezier(.22,1,.36,1)";
-  let timer = 0, running = [], paused = false, onScreen = true, ready = false;
+  if (!canAnimate) { media.classList.add("sig-on", "sig-still"); return; }
 
-  function cycle() {
-    layout();
-    const visible = sigs.filter(g => {
-      const cx = ox + g.x * s, cy = oy + g.y * s;
-      return cx > 0 && cx < W && cy < H;
-    });
-    statusText.textContent = "SCANNING";
-    ctl.classList.add("is-scanning");
-    running = [beam.animate(
-      [{ transform: "translateX(-140px)", opacity: 0 }, { opacity: 1, offset: .06 }, { opacity: 1, offset: .94 }, { transform: `translateX(${W + 20}px)`, opacity: 0 }],
-      { duration: SWEEP, easing: "linear" })];
-    visible.forEach(g => {
-      const delay = Math.max(0, (ox + g.x * s) / W) * SWEEP;
-      running.push(
-        g.band.animate([{ transform: "translateY(-120%)" }, { transform: "translateY(130%)" }],
-          { duration: 750, delay, easing: "cubic-bezier(.4,0,.2,1)" }),
-        g.lock.animate([
-          { opacity: 0, transform: "scale(1.45)" },
-          { opacity: 1, transform: "scale(1)", offset: .16, easing: EASE },
-          { opacity: 1, transform: "scale(1)", offset: .72 },
-          { opacity: 0, transform: "scale(1)" }],
-          { duration: 2400, delay, easing: "ease-out" })
-      );
-    });
-    timer = setTimeout(() => {
-      const n = visible.length;
-      statusText.textContent = n + (n === 1 ? " SIGNAL FOUND" : " SIGNALS FOUND");
-      ctl.classList.remove("is-scanning");
-      timer = setTimeout(cycle, REST);
-    }, SWEEP);
+  // ---- Motion ----
+  const EASE = "cubic-bezier(.22,1,.36,1)";
+  function drawIn() {
+    media.classList.add("sig-on");
+    traces.forEach(({ p }, i) => p.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }],
+      { duration: 1100, delay: i * 110, easing: EASE, fill: "both" }));
+    locks.forEach((p, i) => p.animate([{ opacity: 0, transform: "scale(1.3)" }, { opacity: 1, transform: "scale(1)" }],
+      { duration: 600, delay: 500 + i * 140, easing: EASE, fill: "both" }));
+    panes.forEach((r, i) => r.animate([{ opacity: 0 }, { opacity: .95 }, { opacity: .55 }],
+      { duration: 700, delay: 900 + i * 120, easing: "ease-out", fill: "both" }));
+    pieces.forEach((r, i) => r.animate([{ opacity: 0 }, { opacity: getComputedStyle(r).getPropertyValue("--o") }],
+      { duration: 500, delay: 700 + i * 90, fill: "both" }));
   }
-  function stop() {
-    clearTimeout(timer); timer = 0;
-    running.forEach(a => a.cancel()); running = [];
-    ctl.classList.remove("is-scanning");
+
+  let timer = 0, running = [], paused = false, onScreen = true, ready = false, n = 0;
+  function beat() {
+    // A light runs along the rail and the terrace edge; one bracket re-locks.
+    running = [];
+    traces.forEach(({ comet }, i) => {
+      if (!comet) return;
+      running.push(comet.animate(
+        [{ strokeDashoffset: .14, opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .85 }, { strokeDashoffset: -1, opacity: 0 }],
+        { duration: 2600, delay: i * 500, easing: "cubic-bezier(.45,0,.55,1)" }));
+    });
+    const lock = locks[n++ % locks.length];
+    running.push(lock.animate(
+      [{ transform: "scale(1)", opacity: 1 }, { transform: "scale(1.25)", opacity: .2, offset: .3 }, { transform: "scale(1)", opacity: 1 }],
+      { duration: 900, delay: 400, easing: EASE }));
+    [0, 3, 6].forEach((k, j) => {
+      const pane = panes[(n * 2 + k) % panes.length];
+      running.push(pane.animate([{ opacity: .55 }, { opacity: 1, offset: .25 }, { opacity: .55 }],
+        { duration: 1400, delay: 600 + j * 700, easing: "ease-in-out" }));
+    });
+    timer = setTimeout(beat, 5200);
   }
+  function stop() { clearTimeout(timer); timer = 0; running.forEach(a => a.cancel()); running = []; }
   function sync() {
     const go = ready && !paused && onScreen && !document.hidden;
-    if (go && !timer) cycle();
+    if (go && !timer) beat();
     if (!go && timer) stop();
   }
 
-  toggle.addEventListener("click", () => {
-    paused = !paused;
-    toggle.textContent = paused ? "Play" : "Pause";
-    toggle.setAttribute("aria-pressed", String(paused));
-    if (paused) statusText.textContent = "PAUSED";
-    sync();
-  });
-  document.addEventListener("visibilitychange", sync);
-  if (window.IntersectionObserver) {
-    new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; sync(); }).observe(hero);
+  // Pause button in the hero's bottom line
+  const bottom = hero.querySelector(".hero-bottom");
+  if (bottom) {
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.className = "sig-toggle"; btn.textContent = "Pause";
+    btn.setAttribute("aria-pressed", "false");
+    btn.setAttribute("aria-label", "Pause background motion");
+    btn.addEventListener("click", () => {
+      paused = !paused;
+      btn.textContent = paused ? "Play" : "Pause";
+      btn.setAttribute("aria-pressed", String(paused));
+      btn.setAttribute("aria-label", paused ? "Play background motion" : "Pause background motion");
+      sync();
+    });
+    bottom.append(btn);
   }
+  document.addEventListener("visibilitychange", sync);
+  if (window.IntersectionObserver) new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; sync(); }).observe(hero);
+
   // Start once the headline has landed and the photo has settled
-  setTimeout(() => { ready = true; media.classList.add("scan-on"); sync(); }, 1900);
+  setTimeout(() => { drawIn(); setTimeout(() => { ready = true; sync(); }, 1600); }, 1700);
 })();
