@@ -176,6 +176,8 @@
       btn.textContent = paused ? "Play" : "Pause";
       btn.setAttribute("aria-pressed", String(paused));
       btn.setAttribute("aria-label", paused ? "Play background motion" : "Pause background motion");
+      document.documentElement.classList.toggle("sig-paused", paused);
+      document.dispatchEvent(new Event("sigpause"));
       sync();
     });
     bottom.append(btn);
