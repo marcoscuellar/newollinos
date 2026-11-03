@@ -29,7 +29,6 @@
     // Phones crop the photo to roughly x 826–1645, so they get their own traces in that window
     { d: "M1026 270 V96", ph: true, prun: true },            // old tower, right edge
     { d: "M1346 268 V0", ph: true, prun: true },             // glass tower, right edge
-    { d: "M1360 270 V64 L1384 26", ph: true },               // tan tower, left edge to the crown
   ];
   // Corner brackets: [x, y, w, h]
   const LOCKS = [
