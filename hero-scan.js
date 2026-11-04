@@ -26,39 +26,8 @@ function main() {
 
   // Faces sit roughly in x 880-1500, y 90-300, and the headline covers the left
   // third, so every line below runs through sky, glass and architecture.
-  const TRACES = [
-    { d: "M300 86 L1196 232", run: true },         // the long run, into the gap between them
-    { d: "M1218 228 L1612 150", run: true },       // on to the glass
-    { d: "M700 318 V74 H884" },                    // ceiling line into the back wall
-    { d: "M452 268 V40" },                         // column edge, left
-    { d: "M1664 196 H1740 V116 H1828" },           // stepped run over the glass
-    { d: "M1862 298 V228 H1952 V160", run: true }, // stepped run, street side
-    // Phones crop to roughly x 760-1540, so they get their own run
-    { d: "M860 300 L1192 236", ph: true, prun: true },
-    { d: "M1398 330 V120", ph: true },
-  ];
-  const RINGS = [            // where a signal lands: [cx, cy, r]
-    [1204, 234, 14],
-    [1620, 148, 8],
-    [1196, 238, 11, 1],
-  ];
-  const LOCKS = [            // corner brackets: [x, y, w, h]
-    [1534, 152, 104, 84],
-    [762, 96, 88, 74],
-    [1872, 236, 76, 92],
-    [1140, 126, 58, 70, 1],
-  ];
-  const RAILS = [            // dashed read-outs down the facades
-    { d: "M1700 70 V292" }, { d: "M1740 96 V292" }, { d: "M1780 120 V284" },
-    { d: "M1906 150 V300" }, { d: "M1944 182 V300" },
-    { d: "M1268 60 V228", ph: true }, { d: "M1300 92 V228", ph: true },
-  ];
-  const PANES = [            // lit panes ŌLLIN has picked out: [x, y, w, h]
-    [1550, 170, 22, 10], [1592, 202, 22, 10], [1566, 212, 16, 9],
-    [778, 114, 26, 9], [812, 146, 20, 9],
-    [1888, 262, 24, 36],
-    [1150, 142, 14, 8, 1], [1172, 176, 16, 8, 1],
-  ];
+  // Lines, brackets and reticles are gone. Only the brand's own signal forms stay.
+  const TRACES = [], RINGS = [], LOCKS = [], RAILS = [], PANES = [];
   const PIECES = [           // brand forms: [x, y, w, h, opacity]
     [1782, 244, 24, 80, .26], [1838, 300, 16, 52, .22],
     [1962, 60, 9, 9, .9], [1962, 86, 9, 9, .7], [1962, 112, 9, 9, .5],
@@ -157,18 +126,18 @@ function main() {
 
   function drawIn() {
     media.classList.add("sig-on");
-    animate(traces.map(t => t.p), { strokeDashoffset: [1, 0] },
+    if (traces.length) animate(traces.map(t => t.p), { strokeDashoffset: [1, 0] },
       { duration: 1.1, delay: stagger(.11), ease: EASE });
-    animate(rails, { strokeDashoffset: [1, 0] },
+    if (rails.length) animate(rails, { strokeDashoffset: [1, 0] },
       { duration: .9, delay: stagger(.09, { startDelay: .6 }), ease: EASE });
-    animate(locks, { opacity: [0, .82], scale: [1.2, 1] },
+    if (locks.length) animate(locks, { opacity: [0, .82], scale: [1.2, 1] },
       { duration: .6, delay: stagger(.14, { startDelay: .5 }), ease: EASE });
-    animate(panes, { opacity: [0, .9, .68] },
+    if (panes.length) animate(panes, { opacity: [0, .9, .68] },
       { duration: .9, delay: stagger(.12, { startDelay: .9 }), ease: "easeOut" });
     pieces.forEach((r, i) => animate(r,
       { opacity: [0, parseFloat(getComputedStyle(r).getPropertyValue("--o")) || 1] },
       { duration: .5, delay: .7 + i * .09 }));
-    animate(rings, { opacity: [0, 1], scale: [.4, 1] },
+    if (rings.length) animate(rings, { opacity: [0, 1], scale: [.4, 1] },
       { duration: .62, delay: stagger(.15, { startDelay: 1.15 }), ease: EASE });
 
     // The dashboard rises out of the bottom edge once the evidence is on screen
