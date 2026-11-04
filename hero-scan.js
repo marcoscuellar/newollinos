@@ -12,41 +12,68 @@
   const reduce = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
   const canAnimate = !reduce && !!document.body.animate;
 
-  const IW = 2000, IH = 1116; // handshake.jpg natural size
+  const IW = 2000, IH = 767; // hero.jpg natural size
   const NS = "http://www.w3.org/2000/svg";
 
   // Traces along the architecture (photo pixels). Faces sit roughly in
   // x 1120–2000, y 290–470, and the headline covers x 420–1020, y 300–680, so everything stays in the sky and the architecture.
   const TRACES = [
-    { d: "M700 322 V72 H884" },                 // ceiling line into the back wall
-    { d: "M1214 262 V44", prun: true },         // glass mullion between the two of them
-    { d: "M1662 596 V132" },                    // right facade mullion
-    { d: "M1844 520 V196 L1958 150", run: true },// facade edge out to the street
-    // Phones crop to roughly x 760-1540, so these live inside that window
-    { d: "M880 300 V96", ph: true },
-    { d: "M1402 330 V150", ph: true, prun: true },
+    // The long run: it crosses the skyline and lands in the gap between two people.
+    { d: "M286 54 L1342 292", run: true },
+    { d: "M1358 288 L1642 212", run: true },      // on to the next gap
+    // The architecture it travels along
+    { d: "M430 0 L783 125 L793 128 L1000 207" },  // glass rail top edge
+    { d: "M787 128 V262" },                       // rail post
+    { d: "M944 184 V262" },                       // rail post
+    { d: "M600 236 V40 H686" },                   // glass tower, left skyline
+    { d: "M160 352 V134 H246" },                  // tall tower, far left
+    // Stepped runs over the towers on the right
+    { d: "M1664 196 H1736 V120 H1812" },
+    { d: "M1858 258 V190 H1948 V128", run: true },
+    // Phones crop to roughly x 826-1645, so they get their own run
+    { d: "M900 300 L1340 292", ph: true, prun: true },
+    { d: "M1222 250 V4", ph: true },
+    { d: "M1540 262 V126", ph: true, prun: true },
+  ];
+  // Where a signal lands: [cx, cy, r]
+  const RINGS = [
+    [1350, 290, 14],
+    [1648, 210, 8],
+    [1286, 288, 11, 1],
   ];
   // Corner brackets: [x, y, w, h]
   const LOCKS = [
-    [1534, 152, 104, 84],   // glass pane, right of her shoulder
-    [762, 96, 88, 74],      // back wall window
-    [1872, 236, 76, 92],    // street-side glass
-    [1140, 126, 58, 70, 1], // mullion pane (phone)
+    [1548, 128, 116, 92],   // dark tower windows
+    [1252, 148, 88, 84],    // glass tower windows, above the table
+    [1840, 118, 140, 70],   // terrace building windows
+    [168, 142, 76, 104],    // far-left tower
+    [1128, 118, 52, 64, 1], // mid glass tower (phone)
+    [936, 64, 84, 76, 1],   // old tower crown (phone)
+  ];
+  // Dashed read-outs down the facades
+  const RAILS = [
+    { d: "M1578 70 V244" },
+    { d: "M1612 98 V244" },
+    { d: "M1646 122 V236" },
+    { d: "M1958 108 V252" },
+    { d: "M1986 142 V252" },
+    { d: "M1268 60 V232", ph: true },
+    { d: "M1300 92 V232", ph: true },
   ];
   // Lit window panes: the highlights ŌLLIN has picked out. [x, y, w, h]
   const PANES = [
-    [1550, 170, 22, 10], [1592, 202, 22, 10], [1566, 212, 16, 9],
-    [778, 114, 26, 9], [812, 146, 20, 9],
-    [1888, 262, 26, 44],
-    [1150, 142, 14, 8, 1], [1172, 176, 16, 8, 1],
+    [1562, 142, 20, 11], [1602, 182, 20, 11], [1582, 222, 20, 11],
+    [1262, 166, 34, 9], [1318, 206, 24, 9],
+    [1903, 228, 26, 38],
+    [612, 70, 28, 10], [646, 110, 28, 10],
+    [1136, 140, 14, 8, 1], [950, 122, 16, 10, 1],
   ];
   // Small signal pieces in the brand's forms: [x, y, w, h, opacity]
   const PIECES = [
-    [1782, 244, 26, 88, .26],  // soft bar sitting behind the glass
-    [1838, 300, 17, 58, .22],  // its smaller partner
-    [1716, 286, 12, 34, .20],
-    [1214, 288, 10, 10, .55],  // trace node
-    [1662, 614, 11, 11, .5],   // trace node
+    [826, 236, 20, 56, .30],  // reflection in the glass panel
+    [1930, 286, 9, 9, .9], [1930, 312, 9, 9, .7], [1930, 338, 9, 9, .5],
+    [586, 230, 9, 9, .9],
+    [1216, 244, 10, 10, .9],
   ];
 
   const svg = document.createElementNS(NS, "svg");
@@ -92,6 +119,19 @@
     return r;
   });
 
+  const rails = RAILS.map(t => {
+    const p = ph(el("path", { d: t.d, pathLength: 1, class: "sig-rail" }), t.ph);
+    p._ph = true; p._desk = !t.ph;
+    svg.append(p);
+    return p;
+  });
+  const rings = RINGS.map(([cx, cy, r, only]) => {
+    const c = ph(el("circle", { cx, cy, r, class: "sig-ring" }), only);
+    c._ph = inPhoneView(cx); c._desk = !only;
+    svg.append(c);
+    return c;
+  });
+
   const stage = document.createElement("div");
   stage.className = "sig-stage";
   stage.append(svg);
@@ -118,12 +158,16 @@
     media.classList.add("sig-on");
     traces.forEach(({ p }, i) => p.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }],
       { duration: 1100, delay: i * 110, easing: EASE, fill: "both" }));
-    locks.forEach((p, i) => p.animate([{ opacity: 0, transform: "scale(1.18)" }, { opacity: .42, transform: "scale(1)" }],
+    locks.forEach((p, i) => p.animate([{ opacity: 0, transform: "scale(1.2)" }, { opacity: .82, transform: "scale(1)" }],
       { duration: 600, delay: 500 + i * 140, easing: EASE, fill: "both" }));
-    panes.forEach((r, i) => r.animate([{ opacity: 0 }, { opacity: .40 }, { opacity: .26 }],
+    panes.forEach((r, i) => r.animate([{ opacity: 0 }, { opacity: .9 }, { opacity: .68 }],
       { duration: 900, delay: 900 + i * 120, easing: "ease-out", fill: "both" }));
     pieces.forEach((r, i) => r.animate([{ opacity: 0 }, { opacity: getComputedStyle(r).getPropertyValue("--o") }],
       { duration: 500, delay: 700 + i * 90, fill: "both" }));
+    rails.forEach((p, i) => p.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }],
+      { duration: 900, delay: 600 + i * 90, easing: EASE, fill: "both" }));
+    rings.forEach((c, i) => c.animate([{ opacity: 0, transform: "scale(.4)" }, { opacity: 1, transform: "scale(1)" }],
+      { duration: 620, delay: 1150 + i * 150, easing: EASE, fill: "both" }));
   }
 
   let timer = 0, running = [], paused = false, onScreen = true, ready = false, n = 0;
@@ -135,16 +179,20 @@
     const vis = a => a.filter(e => phone ? e._ph : e._desk);
     traces.filter(t => t.comet && (phone ? t.prun : t.run)).forEach(({ comet }, j) => {
       running.push(comet.animate(
-        [{ strokeDashoffset: .14, opacity: 0 }, { opacity: .45, offset: .1 }, { opacity: .45, offset: .85 }, { strokeDashoffset: -1, opacity: 0 }],
+        [{ strokeDashoffset: .14, opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .85 }, { strokeDashoffset: -1, opacity: 0 }],
         { duration: phone ? 1900 : 2600, delay: j * (phone ? 650 : 500), easing: "cubic-bezier(.45,0,.55,1)" }));
     });
+    const vr = vis(rings);
+    if (vr.length) running.push(vr[n % vr.length].animate(
+      [{ transform: "scale(1)", opacity: 1 }, { transform: "scale(1.6)", opacity: 0, offset: .7 }, { transform: "scale(1.6)", opacity: 0 }],
+      { duration: 2200, delay: 300, easing: "cubic-bezier(.3,0,.5,1)" }));
     const vl = vis(locks), lock = vl[n++ % vl.length];
     running.push(lock.animate(
-      [{ transform: "scale(1)", opacity: .42 }, { transform: "scale(1.12)", opacity: .16, offset: .3 }, { transform: "scale(1)", opacity: .42 }],
+      [{ transform: "scale(1)", opacity: .82 }, { transform: "scale(1.16)", opacity: .25, offset: .3 }, { transform: "scale(1)", opacity: .82 }],
       { duration: 900, delay: 400, easing: EASE }));
     [0, 3, 6].forEach((k, j) => {
       const vp = vis(panes), pane = vp[(n * 2 + k) % vp.length];
-      running.push(pane.animate([{ opacity: .26 }, { opacity: .40, offset: .25 }, { opacity: .26 }],
+      running.push(pane.animate([{ opacity: .68 }, { opacity: 1, offset: .25 }, { opacity: .68 }],
         { duration: 1400, delay: 600 + j * 700, easing: "ease-in-out" }));
     });
     timer = setTimeout(beat, 5200);
