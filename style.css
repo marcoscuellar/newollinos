@@ -188,3 +188,27 @@ html,body{background:#fff}
 .sig-piece{filter:drop-shadow(0 0 3px rgba(255,225,77,.4))}
 .sig-still .sig-trace{stroke-opacity:.8}
 .sig-still .sig-rail{stroke-opacity:.66}
+
+
+/* The dashboard rises out of the bottom edge of the hero and is cropped by it:
+   enough to read the evidence, not so much that it covers the people. */
+.hero-proof{position:absolute;right:64px;bottom:-188px;z-index:3;width:356px;padding:26px 28px 24px;border-radius:18px 18px 0 0;background:rgba(24,26,30,.88);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.14);border-bottom:0;box-shadow:0 -10px 60px rgba(0,0,0,.45);color:#fff;will-change:transform}
+.hero-proof .hp-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hero-proof .hp-top .eyebrow{color:#b8bec7;font-size:9px}
+.hero-proof .hp-mark{width:17px;height:21px}
+.hero-proof .hp-name{font:600 25px/1.05 Archivo,Arial,sans-serif;letter-spacing:-.03em;margin:20px 0 5px}
+.hero-proof .hp-sub{font-size:11px;color:#b8bec7;margin:0}
+.hero-proof .hp-verified{display:inline-flex;align-items:center;gap:7px;background:rgba(255,225,77,.11);color:var(--yellow);font:10px 'IBM Plex Mono',monospace;letter-spacing:.06em;border-radius:5px;padding:5px 9px;margin:15px 0 2px}
+.hero-proof .hp-verified i{width:5px;height:5px;border-radius:50%;background:var(--yellow)}
+.hero-proof .hp-fact{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;line-height:1.5;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.11)}
+.hero-proof .hp-fact i{flex-shrink:0;margin-top:6px}
+.hero-proof .hp-fact small{margin-left:auto;flex-shrink:0;color:#8b929d;font:9px 'IBM Plex Mono',monospace;letter-spacing:.06em;padding-top:2px}
+.hero-proof .hp-open{display:flex;gap:10px;align-items:flex-start;font-size:11.5px;color:#9ba1ab;margin:13px 0 0}
+.hero-proof .hp-open i{flex-shrink:0;width:7px;height:7px;margin-top:5px;border-radius:50%;border:1px solid #6d737c}
+.hero-proof .hp-next{margin:16px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.11);font:9px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--yellow)}
+/* The pause control moves next to the wordmark so the card never sits on it. */
+.hero .hero-bottom{justify-content:flex-start;gap:22px;z-index:5}
+@media(max-width:1180px){.hero-proof{width:316px;right:36px;padding:22px 22px 20px;bottom:-196px}.hero-proof .hp-name{font-size:22px;margin-top:17px}.hero-message{max-width:470px}}
+@media(max-width:980px){.hero-proof{display:none}}
+.sig-echo{fill:none;vector-effect:non-scaling-stroke;stroke:#ffe14d;stroke-width:1.5px;stroke-opacity:.8;transform-box:fill-box;transform-origin:center;opacity:0}
+.sig-lock{transform-box:fill-box;transform-origin:center}
