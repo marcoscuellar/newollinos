@@ -194,7 +194,7 @@ html,body{background:#fff}
 
 /* ŌLLIN GO's own card, rising out of the bottom edge of the hero and cropped by
    it: the prepared first touch, in the product's real surface. */
-.hero-proof{position:absolute;right:52px;bottom:-26px;z-index:3;width:428px;padding:20px 24px 0;border-radius:16px 16px 0 0;background:#fff;color:var(--night);border:1px solid rgba(24,26,30,.1);border-bottom:0;box-shadow:0 -16px 70px rgba(0,0,0,.42);overflow:hidden;will-change:transform}
+.hero-proof{position:absolute;right:48px;bottom:-185px;z-index:3;width:356px;padding:18px 22px 0;border-radius:16px 16px 0 0;background:#fff;color:var(--night);border:1px solid rgba(24,26,30,.1);border-bottom:0;box-shadow:0 -16px 70px rgba(0,0,0,.42);overflow:hidden;will-change:transform}
 .hero-proof .hp-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding-bottom:14px}
 .hero-proof .hp-top .eyebrow{color:#5f6672;font-size:9px}
 .hero-proof .hp-stamp{display:grid;justify-items:center;gap:3px}
@@ -202,7 +202,7 @@ html,body{background:#fff}
 .hero-proof .hp-stamp em{font:8px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8b929d;font-style:normal}
 .hero-proof .hp-bar{position:absolute;left:0;right:0;top:58px;height:2px;background:rgba(24,26,30,.08)}
 .hero-proof .hp-bar i{display:block;height:100%;width:0;background:var(--yellow)}
-.hero-proof .hp-name{font:700 34px/1 Archivo,Arial,sans-serif;letter-spacing:-.04em;text-transform:uppercase;margin:16px 0 8px}
+.hero-proof .hp-name{font:700 29px/1 Archivo,Arial,sans-serif;letter-spacing:-.04em;text-transform:uppercase;margin:16px 0 8px}
 .hero-proof .hp-sub{margin:0;font-size:13px;color:var(--night)}
 .hero-proof .hp-sub b{font-weight:600;color:#8a7400}
 .hero-proof .hp-meta{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:10px 0 0;font:10px 'IBM Plex Mono',monospace;color:#5f6672}
