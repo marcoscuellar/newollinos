@@ -1,60 +1,37 @@
 // Home hero: signals working around the people, never on them.
-// Thin yellow traces draw along the architecture (the glass rail, the rooftop terrace,
-// building edges), corner brackets lock onto windows and towers, and a light
-// runs along the rail and the terrace edge now and then. Nothing touches a face.
+// Motion.dev (pinned) owns the sequencing: it draws the traces in with a stagger,
+// then keeps the loop going itself with repeat + repeatDelay. No hand-rolled timers.
+//
+// One long trace crosses the frame and lands in a reticle in the gap between the
+// two of them, then runs on. Stepped runs cross the glass, dashed read-outs fall
+// down the facades, brackets lock onto windows. The dashboard rises out of the
+// bottom edge of the hero, cropped by it.
+//
 // Drawn in photo coordinates and matched to the photo's object-fit: cover crop.
 // Pause button for WCAG 2.2.2. Reduced motion: drawn once, still.
-(function () {
-  const hero = document.querySelector(".hero");
-  const media = hero && hero.querySelector(".hero-media");
-  const img = media && media.querySelector("img");
-  if (!img) return;
+import { animate, stagger, inView } from "https://cdn.jsdelivr.net/npm/motion@13.2.0/+esm";
+
+const hero = document.querySelector(".hero");
+const media = hero && hero.querySelector(".hero-media");
+const img = media && media.querySelector("img");
+const card = hero && hero.querySelector(".hero-proof");
+
+if (img) main();
+
+function main() {
   const reduce = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
-  const canAnimate = !reduce && !!document.body.animate;
-
-  const IW = 2000, IH = 767; // hero.jpg natural size
+  const IW = 2000, IH = 1116; // handshake.jpg natural size
   const NS = "http://www.w3.org/2000/svg";
+  const EASE = [.22, 1, .36, 1];
 
-  // Traces along the architecture (photo pixels). Faces sit roughly in
-  // x 1120–2000, y 290–470, and the headline covers x 420–1020, y 300–680, so everything stays in the sky and the architecture.
-  const TRACES = [
-    { d: "M430 0 L783 125 L793 128 L1000 207", run: true },  // glass rail top edge, traced on the photo
-    { d: "M787 128 V262" },                                  // rail post
-    { d: "M944 184 V262" },                                  // rail post
-    { d: "M600 236 V40 H686" },                              // glass tower, left skyline
-    { d: "M160 352 V134 H246" },                             // tall tower, far left
-    { d: "M1222 250 V4", prun: true },                       // glass tower edge, above the table
-    { d: "M1540 262 V126", prun: true },                     // dark tower edge
-    { d: "M1792 282 V157 L2000 78", run: true },             // terrace building pillar + slab edge
-    // Phones crop the photo to roughly x 826–1645, so they get their own traces in that window
-    { d: "M1026 270 V96", ph: true, prun: true },            // old tower, right edge
-    { d: "M1346 268 V0", ph: true, prun: true },             // glass tower, right edge
-    { d: "M1360 270 V64 L1384 26", ph: true },               // tan tower, left edge to the crown
-  ];
-  // Corner brackets: [x, y, w, h]
-  const LOCKS = [
-    [1548, 128, 116, 92],   // dark tower windows
-    [1252, 148, 88, 84],    // glass tower windows, above the table
-    [1840, 118, 140, 70],   // terrace building windows
-    [168, 142, 76, 104],    // far-left tower
-    [1128, 118, 52, 64, 1], // mid glass tower (phone)
-    [936, 64, 84, 76, 1],   // old tower crown (phone)
-  ];
-  // Lit window panes: the highlights ŌLLIN has picked out. [x, y, w, h]
-  const PANES = [
-    [1562, 142, 20, 11], [1602, 182, 20, 11], [1582, 222, 20, 11], [1642, 162, 18, 11],  // dark tower
-    [1262, 166, 34, 9], [1318, 206, 24, 9],                                             // glass tower
-    [1903, 228, 34, 52],                                                                // terrace window
-    [612, 70, 28, 10], [646, 110, 28, 10],                                              // glass tower, left skyline
-    [1136, 140, 14, 8, 1], [950, 122, 16, 10, 1], [982, 176, 16, 10, 1],                 // phone window
-  ];
-  // Small signal pieces in the brand's forms: [x, y, w, h, opacity]
-  const PIECES = [
-    [826, 236, 22, 62, .38],  // reflection in the glass panel
-    [1872, 206, 14, 40, .42], // reflection in the terrace windows
-    [586, 230, 9, 9, 1],      // trace node
-    [1216, 244, 12, 12, 1],   // trace node
-    [1534, 256, 12, 12, 1],   // trace node
+  // Faces sit roughly in x 880-1500, y 90-300, and the headline covers the left
+  // third, so every line below runs through sky, glass and architecture.
+  // Lines, brackets and reticles are gone. Only the brand's own signal forms stay.
+  const TRACES = [], RINGS = [], LOCKS = [], RAILS = [], PANES = [];
+  const PIECES = [           // brand forms: [x, y, w, h, opacity]
+    [1782, 244, 24, 80, .26], [1838, 300, 16, 52, .22],
+    [1962, 60, 9, 9, .9], [1962, 86, 9, 9, .7], [1962, 112, 9, 9, .5],
+    [640, 300, 9, 9, .9],
   ];
 
   const svg = document.createElementNS(NS, "svg");
@@ -67,22 +44,30 @@
     for (const k in attrs) n.setAttribute(k, attrs[k]);
     return n;
   };
-
   const ph = (n, on) => { if (on) n.classList.add("sig-ph"); return n; };
+  // Phones see a narrower slice of the photo, so each piece knows where it shows.
+  const PH0 = 760, PH1 = 1540;
+  const inPhoneView = x => x >= PH0 && x <= PH1;
+
   const traces = TRACES.map(t => {
     const p = ph(el("path", { d: t.d, pathLength: 1, class: "sig-trace" }), t.ph);
     svg.append(p);
     let comet = null;
     if (t.run || t.prun) { comet = ph(el("path", { d: t.d, pathLength: 1, class: "sig-comet" }), t.ph); svg.append(comet); }
-    return { p, comet, run: !!t.run, prun: !!t.prun };
+    return { p, comet, run: !!t.run, prun: !!t.prun, ph: !!t.ph };
   });
-  const isPhone = () => !!(window.matchMedia && matchMedia("(max-width: 600px)").matches);
-  const inPhoneView = x => x > 826 && x < 1645;
+  const rails = RAILS.map(t => {
+    const p = ph(el("path", { d: t.d, pathLength: 1, class: "sig-rail" }), t.ph);
+    p._ph = true; p._desk = !t.ph;
+    svg.append(p);
+    return p;
+  });
   const locks = LOCKS.map(([x, y, w, h, only]) => {
-    const a = Math.min(18, w / 3, h / 3);
-    const d = `M${x} ${y + a}V${y}H${x + a}M${x + w - a} ${y}H${x + w}V${y + a}` +
-      `M${x + w} ${y + h - a}V${y + h}H${x + w - a}M${x + a} ${y + h}H${x}V${y + h - a}`;
-    const p = ph(el("path", { d, class: "sig-lock" }), only);
+    const i = 22, p = ph(el("path", {
+      d: `M${x} ${y + i} V${y} H${x + i} M${x + w - i} ${y} H${x + w} V${y + i}
+          M${x + w} ${y + h - i} V${y + h} H${x + w - i} M${x + i} ${y + h} H${x} V${y + h - i}`,
+      class: "sig-lock"
+    }), only);
     p._ph = inPhoneView(x + w / 2); p._desk = !only;
     svg.append(p);
     return p;
@@ -98,6 +83,14 @@
     r.style.setProperty("--o", o);
     svg.append(r);
     return r;
+  });
+  const rings = [], echoes = [];
+  RINGS.forEach(([cx, cy, r, only]) => {
+    const c = ph(el("circle", { cx, cy, r, class: "sig-ring" }), only);
+    const e = ph(el("circle", { cx, cy, r, class: "sig-echo" }), only);
+    c._ph = e._ph = inPhoneView(cx); c._desk = e._desk = !only;
+    svg.append(e, c);
+    rings.push(c); echoes.push(e);
   });
 
   const stage = document.createElement("div");
@@ -118,50 +111,145 @@
   if (window.ResizeObserver) new ResizeObserver(layout).observe(media);
   else addEventListener("resize", layout);
 
-  if (!canAnimate) { media.classList.add("sig-on", "sig-still"); return; }
+  const isPhone = () => !!(window.matchMedia && matchMedia("(max-width: 600px)").matches);
+  const vis = a => { const p = isPhone(); return a.filter(e => p ? e._ph : e._desk); };
 
-  // ---- Motion ----
-  const EASE = "cubic-bezier(.22,1,.36,1)";
+
+  // Placeholder data only — Acme/Globex/Initech and Doe/Roe/Poe are the
+  // universal "obviously not real" conventions, and every address uses the
+  // reserved .example TLD. Nothing here is a real company or person.
+  const DECK = [
+    { who: "Jane Doe", role: "VP, Talent Acquisition", co: "Acme Health",
+      mail: "j.doe@acme.example", loc: "CHICAGO, IL · 350 EMPLOYEES", others: "2 others at Acme Health",
+      rows: [["SIGNAL", "Owns internal recruitment capacity — 4 reqs open 60+ days", "ENGINE 02 · SIGNALS"],
+             ["MONEY", "$15,000/wk in delays", "ENGINE 01 · TIMING"],
+             ["BUYER", "New Chief AI Officer hired to lead the platform migration", "ENGINE 06 · BUYER MAP"]] },
+    { who: "John Roe", role: "VP, Operations", co: "Globex Freight",
+      mail: "j.roe@globex.example", loc: "DALLAS, TX · 620 EMPLOYEES", others: "3 others at Globex Freight",
+      rows: [["SIGNAL", "Opened a second regional hub in Q3", "ENGINE 02 · SIGNALS"],
+             ["MONEY", "4 operations manager reqs open this month", "ENGINE 01 · TIMING"],
+             ["BUYER", "The COO owns the buildout and the hiring plan", "ENGINE 06 · BUYER MAP"]] },
+    { who: "Alex Poe", role: "Director, Supply Chain", co: "Initech Devices",
+      mail: "a.poe@initech.example", loc: "COLUMBUS, OH · 410 EMPLOYEES", others: "2 others at Initech Devices",
+      rows: [["SIGNAL", "Added a second supplier for its control boards", "ENGINE 02 · SIGNALS"],
+             ["MONEY", "Three supply chain reqs open this quarter", "ENGINE 01 · TIMING"],
+             ["BUYER", "VP Manufacturing signs off on the vendor list", "ENGINE 06 · BUYER MAP"]] },
+  ];
+
+  function paint(d) {
+    const q = c => card.querySelector(c);
+    q(".hp-name").textContent = d.who;
+    q(".hp-role").textContent = d.role;
+    q(".hp-co").textContent = d.co + " \u2197";
+    q(".hp-mail").textContent = d.mail;
+    q(".hp-loc").textContent = d.loc;
+    q(".hp-mush span").textContent = "MUSHROOM  " + d.others + "  \u2192";
+    const box = q(".hp-rows");
+    box.textContent = "";
+    d.rows.forEach(([k, t, src]) => {
+      const row = document.createElement("div");
+      row.className = "hp-row";
+      row.innerHTML = "<span></span><div><p></p><small></small></div>";
+      row.querySelector("span").textContent = k;
+      row.querySelector("p").textContent = t;
+      row.querySelector("small").textContent = src;
+      box.append(row);
+    });
+    return [q(".hp-name"), q(".hp-sub"), q(".hp-meta"), q(".hp-mush"), ...box.children];
+  }
+
+  if (reduce) {
+    media.classList.add("sig-on", "sig-still");
+    if (card) { card.style.transform = "none"; paint(DECK[0]); }
+    return;
+  }
+
+  // ---- Motion does the work from here ----
+  const loops = [];
+  let paused = false;
+
+  const DWELL = 5200;
+  let deckAt = 0, deckTimer = 0, barRun = null;
+
+  function showCard(first) {
+    const rows = paint(DECK[deckAt]);
+    card.querySelectorAll(".hp-dots i").forEach((d, i) => d.classList.toggle("on", i === deckAt));
+    // Each line stamps in: the account, then the evidence, then the person to call.
+    animate(rows, { opacity: [0, 1], y: [10, 0] },
+      { duration: .42, delay: stagger(.07, { startDelay: first ? 1.5 : .12 }), ease: EASE });
+    animate(card.querySelector(".hp-stamp"), { scale: [.7, 1] },
+      { duration: .45, delay: (first ? 1.5 : .12) + .14, ease: [.2, 1.4, .4, 1] });
+    const bar = card.querySelector(".hp-bar i");
+    if (barRun) try { barRun.stop(); } catch (e) {}
+    barRun = animate(bar, { width: ["0%", "100%"] },
+      { duration: DWELL / 1000, delay: first ? 1.5 : .12, ease: "linear" });
+    if (barRun) loops.push(barRun);
+  }
+
+  function cycle() {
+    deckTimer = setTimeout(() => {
+      const rows = [...card.querySelectorAll(".hp-name,.hp-sub,.hp-meta,.hp-mush,.hp-row")];
+      animate(rows, { opacity: [1, 0], y: [0, -8] }, { duration: .26, delay: stagger(.03), ease: "easeIn" })
+        .finished.then(() => {
+          deckAt = (deckAt + 1) % DECK.length;
+          showCard(false);
+          cycle();
+        }).catch(() => {});
+    }, DWELL + 700);
+  }
+
   function drawIn() {
     media.classList.add("sig-on");
-    traces.forEach(({ p }, i) => p.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }],
-      { duration: 1100, delay: i * 110, easing: EASE, fill: "both" }));
-    locks.forEach((p, i) => p.animate([{ opacity: 0, transform: "scale(1.3)" }, { opacity: 1, transform: "scale(1)" }],
-      { duration: 600, delay: 500 + i * 140, easing: EASE, fill: "both" }));
-    panes.forEach((r, i) => r.animate([{ opacity: 0 }, { opacity: .95 }, { opacity: .55 }],
-      { duration: 700, delay: 900 + i * 120, easing: "ease-out", fill: "both" }));
-    pieces.forEach((r, i) => r.animate([{ opacity: 0 }, { opacity: getComputedStyle(r).getPropertyValue("--o") }],
-      { duration: 500, delay: 700 + i * 90, fill: "both" }));
+    if (traces.length) animate(traces.map(t => t.p), { strokeDashoffset: [1, 0] },
+      { duration: 1.1, delay: stagger(.11), ease: EASE });
+    if (rails.length) animate(rails, { strokeDashoffset: [1, 0] },
+      { duration: .9, delay: stagger(.09, { startDelay: .6 }), ease: EASE });
+    if (locks.length) animate(locks, { opacity: [0, .82], scale: [1.2, 1] },
+      { duration: .6, delay: stagger(.14, { startDelay: .5 }), ease: EASE });
+    if (panes.length) animate(panes, { opacity: [0, .9, .68] },
+      { duration: .9, delay: stagger(.12, { startDelay: .9 }), ease: "easeOut" });
+    pieces.forEach((r, i) => animate(r,
+      { opacity: [0, parseFloat(getComputedStyle(r).getPropertyValue("--o")) || 1] },
+      { duration: .5, delay: .7 + i * .09 }));
+    if (rings.length) animate(rings, { opacity: [0, 1], scale: [.4, 1] },
+      { duration: .62, delay: stagger(.15, { startDelay: 1.15 }), ease: EASE });
+
+    // The dashboard rises out of the bottom edge, then fills itself in
+    if (card) {
+      animate(card, { y: [150, 0], opacity: [0, 1] }, { duration: 1, delay: .9, ease: EASE });
+      showCard(true);
+      cycle();
+    }
   }
 
-  let timer = 0, running = [], paused = false, onScreen = true, ready = false, n = 0;
-  function beat() {
-    // Lights run along the architecture; one bracket re-locks; a few windows brighten.
-    // Phones see a narrower slice of the photo, so they get the lights that fall inside it.
-    running = [];
+  function startLoops() {
     const phone = isPhone();
-    const vis = a => a.filter(e => phone ? e._ph : e._desk);
     traces.filter(t => t.comet && (phone ? t.prun : t.run)).forEach(({ comet }, j) => {
-      running.push(comet.animate(
-        [{ strokeDashoffset: .14, opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .85 }, { strokeDashoffset: -1, opacity: 0 }],
-        { duration: phone ? 1900 : 2600, delay: j * (phone ? 650 : 500), easing: "cubic-bezier(.45,0,.55,1)" }));
+      loops.push(animate(comet,
+        { strokeDashoffset: [.14, -1], opacity: [0, 1, 1, 0] },
+        {
+          duration: phone ? 1.9 : 2.6, delay: j * (phone ? .65 : .5),
+          ease: [.45, 0, .55, 1], opacity: { times: [0, .1, .85, 1] },
+          repeat: Infinity, repeatDelay: 2.6
+        }));
     });
-    const vl = vis(locks), lock = vl[n++ % vl.length];
-    running.push(lock.animate(
-      [{ transform: "scale(1)", opacity: 1 }, { transform: "scale(1.25)", opacity: .2, offset: .3 }, { transform: "scale(1)", opacity: 1 }],
-      { duration: 900, delay: 400, easing: EASE }));
-    [0, 3, 6].forEach((k, j) => {
-      const vp = vis(panes), pane = vp[(n * 2 + k) % vp.length];
-      running.push(pane.animate([{ opacity: .55 }, { opacity: 1, offset: .25 }, { opacity: .55 }],
-        { duration: 1400, delay: 600 + j * 700, easing: "ease-in-out" }));
+    vis(echoes).forEach((e, j) => {
+      loops.push(animate(e, { scale: [1, 2.1], opacity: [.9, 0] },
+        { duration: 2.2, delay: j * .9, ease: [.3, 0, .5, 1], repeat: Infinity, repeatDelay: 2.8 }));
     });
-    timer = setTimeout(beat, 5200);
+    const vl = vis(locks);
+    if (vl.length) loops.push(animate(vl, { scale: [1, 1.16, 1], opacity: [.82, .25, .82] },
+      { duration: .9, delay: stagger(.7), ease: EASE, repeat: Infinity, repeatDelay: 3.6 }));
+    const vp = vis(panes);
+    if (vp.length) loops.push(animate(vp, { opacity: [.68, 1, .68] },
+      { duration: 1.4, delay: stagger(.45), ease: "easeInOut", repeat: Infinity, repeatDelay: 2.2 }));
   }
-  function stop() { clearTimeout(timer); timer = 0; running.forEach(a => a.cancel()); running = []; }
+
   function sync() {
-    const go = ready && !paused && onScreen && !document.hidden;
-    if (go && !timer) beat();
-    if (!go && timer) stop();
+    const go = !paused && !document.hidden;
+    loops.forEach(a => { try { go ? a.play() : a.pause(); } catch (e) {} });
+    if (!go && deckTimer) { clearTimeout(deckTimer); deckTimer = 0; }
+    else if (go && card && !deckTimer) cycle();
   }
 
   // Pause button in the hero's bottom line
@@ -181,8 +269,12 @@
     bottom.append(btn);
   }
   document.addEventListener("visibilitychange", sync);
-  if (window.IntersectionObserver) new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; sync(); }).observe(hero);
 
-  // Start once the headline has landed and the photo has settled
-  setTimeout(() => { drawIn(); setTimeout(() => { ready = true; sync(); }, 1600); }, 1700);
-})();
+  // The hero has to be read before it animates (trigger rule in CLAUDE.md)
+  let started = false;
+  inView(hero, () => {
+    if (started) return;
+    started = true;
+    setTimeout(() => { drawIn(); setTimeout(() => { startLoops(); sync(); }, 1700); }, 400);
+  }, { amount: .35 });
+}
