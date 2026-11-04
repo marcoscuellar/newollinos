@@ -115,46 +115,48 @@ function main() {
   const vis = a => { const p = isPhone(); return a.filter(e => p ? e._ph : e._desk); };
 
 
-  // Illustrative accounts — the approved sample roster, same as the GO section.
+  // Placeholder data only — Acme/Globex/Initech and Doe/Roe/Poe are the
+  // universal "obviously not real" conventions, and every address uses the
+  // reserved .example TLD. Nothing here is a real company or person.
   const DECK = [
-    { co: "Aldervane Freight", kind: "Expansion signal",
-      facts: [["Opened a second regional hub in Q3", "PRESS RELEASE"],
-              ["Hiring 4 operations managers this month", "JOB POSTS"]],
-      open: "Routing technology budget: unable to verify",
-      who: "Omar Reyes", role: "VP, Operations" },
-    { co: "Verrida Health", kind: "Hiring signal",
-      facts: [["Posted 11 clinical roles across two sites", "JOB POSTS"],
-              ["Named a new VP of Talent Acquisition in October", "PRESS RELEASE"]],
-      open: "Contract staffing spend: unable to verify",
-      who: "Sofia Marin", role: "VP, Talent Acquisition" },
-    { co: "Kestrelbrook Devices", kind: "Supply signal",
-      facts: [["Added a second supplier for its control boards", "FILING"],
-              ["Three supply chain roles opened this quarter", "JOB POSTS"]],
-      open: "Plant expansion timing: unable to verify",
-      who: "Dana Rivera", role: "Director, Supply Chain" },
+    { who: "Jane Doe", role: "VP, Talent Acquisition", co: "Acme Health",
+      mail: "j.doe@acme.example", loc: "CHICAGO, IL · 350 EMPLOYEES", others: "2 others at Acme Health",
+      rows: [["SIGNAL", "Owns internal recruitment capacity — 4 reqs open 60+ days", "ENGINE 02 · SIGNALS"],
+             ["MONEY", "$15,000/wk in delays", "ENGINE 01 · TIMING"],
+             ["BUYER", "New Chief AI Officer hired to lead the platform migration", "ENGINE 06 · BUYER MAP"]] },
+    { who: "John Roe", role: "VP, Operations", co: "Globex Freight",
+      mail: "j.roe@globex.example", loc: "DALLAS, TX · 620 EMPLOYEES", others: "3 others at Globex Freight",
+      rows: [["SIGNAL", "Opened a second regional hub in Q3", "ENGINE 02 · SIGNALS"],
+             ["MONEY", "4 operations manager reqs open this month", "ENGINE 01 · TIMING"],
+             ["BUYER", "The COO owns the buildout and the hiring plan", "ENGINE 06 · BUYER MAP"]] },
+    { who: "Alex Poe", role: "Director, Supply Chain", co: "Initech Devices",
+      mail: "a.poe@initech.example", loc: "COLUMBUS, OH · 410 EMPLOYEES", others: "2 others at Initech Devices",
+      rows: [["SIGNAL", "Added a second supplier for its control boards", "ENGINE 02 · SIGNALS"],
+             ["MONEY", "Three supply chain reqs open this quarter", "ENGINE 01 · TIMING"],
+             ["BUYER", "VP Manufacturing signs off on the vendor list", "ENGINE 06 · BUYER MAP"]] },
   ];
 
   function paint(d) {
-    card.querySelector(".hp-name").textContent = d.co;
-    card.querySelector(".hp-sub").textContent = d.kind + " · illustrative account";
-    card.querySelector(".hp-open span").textContent = d.open;
-    card.querySelector(".hp-who").textContent = d.who;
-    card.querySelector(".hp-role").textContent = d.role;
-    const box = card.querySelector(".hp-facts");
+    const q = c => card.querySelector(c);
+    q(".hp-name").textContent = d.who;
+    q(".hp-role").textContent = d.role;
+    q(".hp-co").textContent = d.co + " \u2197";
+    q(".hp-mail").textContent = d.mail;
+    q(".hp-loc").textContent = d.loc;
+    q(".hp-mush span").textContent = "MUSHROOM  " + d.others + "  \u2192";
+    const box = q(".hp-rows");
     box.textContent = "";
-    d.facts.forEach(([t, src]) => {
+    d.rows.forEach(([k, t, src]) => {
       const row = document.createElement("div");
-      row.className = "hp-fact";
-      row.innerHTML = '<i aria-hidden="true"></i><span></span><small></small>';
-      row.querySelector("span").textContent = t;
+      row.className = "hp-row";
+      row.innerHTML = "<span></span><div><p></p><small></small></div>";
+      row.querySelector("span").textContent = k;
+      row.querySelector("p").textContent = t;
       row.querySelector("small").textContent = src;
       box.append(row);
     });
-    return [card.querySelector(".hp-name"), card.querySelector(".hp-sub"),
-            card.querySelector(".hp-verified"), ...box.children,
-            card.querySelector(".hp-open"), card.querySelector(".hp-person")];
+    return [q(".hp-name"), q(".hp-sub"), q(".hp-meta"), q(".hp-mush"), ...box.children];
   }
-
 
   if (reduce) {
     media.classList.add("sig-on", "sig-still");
@@ -166,7 +168,6 @@ function main() {
   const loops = [];
   let paused = false;
 
-
   const DWELL = 5200;
   let deckAt = 0, deckTimer = 0, barRun = null;
 
@@ -176,7 +177,7 @@ function main() {
     // Each line stamps in: the account, then the evidence, then the person to call.
     animate(rows, { opacity: [0, 1], y: [10, 0] },
       { duration: .42, delay: stagger(.07, { startDelay: first ? 1.5 : .12 }), ease: EASE });
-    animate(card.querySelector(".hp-verified"), { scale: [.7, 1] },
+    animate(card.querySelector(".hp-stamp"), { scale: [.7, 1] },
       { duration: .45, delay: (first ? 1.5 : .12) + .14, ease: [.2, 1.4, .4, 1] });
     const bar = card.querySelector(".hp-bar i");
     if (barRun) try { barRun.stop(); } catch (e) {}
@@ -187,7 +188,7 @@ function main() {
 
   function cycle() {
     deckTimer = setTimeout(() => {
-      const rows = [...card.querySelectorAll(".hp-name,.hp-sub,.hp-verified,.hp-fact,.hp-open,.hp-person")];
+      const rows = [...card.querySelectorAll(".hp-name,.hp-sub,.hp-meta,.hp-mush,.hp-row")];
       animate(rows, { opacity: [1, 0], y: [0, -8] }, { duration: .26, delay: stagger(.03), ease: "easeIn" })
         .finished.then(() => {
           deckAt = (deckAt + 1) % DECK.length;
