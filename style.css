@@ -191,3 +191,17 @@ html,body{background:#fff}
 .hero-proof .hp-next{margin:18px 0 0;padding-top:15px;border-top:1px solid rgba(255,255,255,.11);font:9px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--yellow)}
 @media(max-width:1180px){.hero-proof{width:310px;right:36px;padding:22px 22px 20px}.hero-proof .hp-name{font-size:22px;margin-top:18px}.hero-message{max-width:470px}}
 @media(max-width:980px){.hero-proof{display:none}}
+
+/* Hero signals, quieted: thin, low-contrast, no neon glow — they sit in the
+   architecture and behind the glass instead of lying on top of the photo. */
+.sig-trace{stroke-width:1.05px;stroke-opacity:.34;filter:none}
+.sig-comet{stroke-width:1.3px;stroke-opacity:.45;filter:none}
+.sig-lock{stroke-width:1.2px;stroke-opacity:.42;filter:none}
+.sig-pane{opacity:.26;filter:none}
+.sig-piece{mix-blend-mode:screen}
+.sig-still .sig-trace{stroke-opacity:.3}
+.sig-still .sig-lock{stroke-opacity:.38}
+
+/* The yellow bars are baked into the photo at full strength. A soft scrim over
+   the top right lets them sit behind the glass instead of floating on it. */
+.hero-media.scene:before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(205deg,rgba(24,26,30,.46) 0%,rgba(24,26,30,.26) 26%,rgba(24,26,30,0) 52%)}
