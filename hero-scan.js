@@ -114,15 +114,88 @@ function main() {
   const isPhone = () => !!(window.matchMedia && matchMedia("(max-width: 600px)").matches);
   const vis = a => { const p = isPhone(); return a.filter(e => p ? e._ph : e._desk); };
 
+
+  // Illustrative accounts — the approved sample roster, same as the GO section.
+  const DECK = [
+    { co: "Aldervane Freight", kind: "Expansion signal",
+      facts: [["Opened a second regional hub in Q3", "PRESS RELEASE"],
+              ["Hiring 4 operations managers this month", "JOB POSTS"]],
+      open: "Routing technology budget: unable to verify",
+      who: "Omar Reyes", role: "VP, Operations" },
+    { co: "Verrida Health", kind: "Hiring signal",
+      facts: [["Posted 11 clinical roles across two sites", "JOB POSTS"],
+              ["Named a new VP of Talent Acquisition in October", "PRESS RELEASE"]],
+      open: "Contract staffing spend: unable to verify",
+      who: "Sofia Marin", role: "VP, Talent Acquisition" },
+    { co: "Kestrelbrook Devices", kind: "Supply signal",
+      facts: [["Added a second supplier for its control boards", "FILING"],
+              ["Three supply chain roles opened this quarter", "JOB POSTS"]],
+      open: "Plant expansion timing: unable to verify",
+      who: "Dana Rivera", role: "Director, Supply Chain" },
+  ];
+
+  function paint(d) {
+    card.querySelector(".hp-name").textContent = d.co;
+    card.querySelector(".hp-sub").textContent = d.kind + " · illustrative account";
+    card.querySelector(".hp-open span").textContent = d.open;
+    card.querySelector(".hp-who").textContent = d.who;
+    card.querySelector(".hp-role").textContent = d.role;
+    const box = card.querySelector(".hp-facts");
+    box.textContent = "";
+    d.facts.forEach(([t, src]) => {
+      const row = document.createElement("div");
+      row.className = "hp-fact";
+      row.innerHTML = '<i aria-hidden="true"></i><span></span><small></small>';
+      row.querySelector("span").textContent = t;
+      row.querySelector("small").textContent = src;
+      box.append(row);
+    });
+    return [card.querySelector(".hp-name"), card.querySelector(".hp-sub"),
+            card.querySelector(".hp-verified"), ...box.children,
+            card.querySelector(".hp-open"), card.querySelector(".hp-person")];
+  }
+
+
   if (reduce) {
     media.classList.add("sig-on", "sig-still");
-    if (card) card.style.transform = "none";
+    if (card) { card.style.transform = "none"; paint(DECK[0]); }
     return;
   }
 
   // ---- Motion does the work from here ----
   const loops = [];
   let paused = false;
+
+
+  const DWELL = 5200;
+  let deckAt = 0, deckTimer = 0, barRun = null;
+
+  function showCard(first) {
+    const rows = paint(DECK[deckAt]);
+    card.querySelectorAll(".hp-dots i").forEach((d, i) => d.classList.toggle("on", i === deckAt));
+    // Each line stamps in: the account, then the evidence, then the person to call.
+    animate(rows, { opacity: [0, 1], y: [10, 0] },
+      { duration: .42, delay: stagger(.07, { startDelay: first ? 1.5 : .12 }), ease: EASE });
+    animate(card.querySelector(".hp-verified"), { scale: [.7, 1] },
+      { duration: .45, delay: (first ? 1.5 : .12) + .14, ease: [.2, 1.4, .4, 1] });
+    const bar = card.querySelector(".hp-bar i");
+    if (barRun) try { barRun.stop(); } catch (e) {}
+    barRun = animate(bar, { width: ["0%", "100%"] },
+      { duration: DWELL / 1000, delay: first ? 1.5 : .12, ease: "linear" });
+    if (barRun) loops.push(barRun);
+  }
+
+  function cycle() {
+    deckTimer = setTimeout(() => {
+      const rows = [...card.querySelectorAll(".hp-name,.hp-sub,.hp-verified,.hp-fact,.hp-open,.hp-person")];
+      animate(rows, { opacity: [1, 0], y: [0, -8] }, { duration: .26, delay: stagger(.03), ease: "easeIn" })
+        .finished.then(() => {
+          deckAt = (deckAt + 1) % DECK.length;
+          showCard(false);
+          cycle();
+        }).catch(() => {});
+    }, DWELL + 700);
+  }
 
   function drawIn() {
     media.classList.add("sig-on");
@@ -140,9 +213,12 @@ function main() {
     if (rings.length) animate(rings, { opacity: [0, 1], scale: [.4, 1] },
       { duration: .62, delay: stagger(.15, { startDelay: 1.15 }), ease: EASE });
 
-    // The dashboard rises out of the bottom edge once the evidence is on screen
-    if (card) animate(card, { y: [78, 0], opacity: [0, 1] },
-      { duration: .95, delay: 1.35, ease: EASE });
+    // The dashboard rises out of the bottom edge, then fills itself in
+    if (card) {
+      animate(card, { y: [150, 0], opacity: [0, 1] }, { duration: 1, delay: .9, ease: EASE });
+      showCard(true);
+      cycle();
+    }
   }
 
   function startLoops() {
@@ -171,6 +247,8 @@ function main() {
   function sync() {
     const go = !paused && !document.hidden;
     loops.forEach(a => { try { go ? a.play() : a.pause(); } catch (e) {} });
+    if (!go && deckTimer) { clearTimeout(deckTimer); deckTimer = 0; }
+    else if (go && card && !deckTimer) cycle();
   }
 
   // Pause button in the hero's bottom line
