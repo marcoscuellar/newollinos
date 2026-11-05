@@ -411,3 +411,10 @@ html,body{background:#fff}
   .hero-proof .hp-phone{width:238px}
   .hero-proof .hp-screen{width:222px;height:482px}
 }
+/* Phone faces straight forward and rises out of the hero's bottom edge: three quarters showing, the bottom quarter cropped by the panel. */
+.hero-proof .hp-phone{transform:none;-webkit-box-reflect:none;box-shadow:0 30px 70px rgba(0,0,0,.55),0 8px 22px rgba(0,0,0,.4),0 0 0 1.5px rgba(255,255,255,.16) inset}
+.hero-proof .hp-edge{display:none}
+.hero-proof .hp-glare{transform:none}
+.hero-proof .hp-island{transform:translateX(-50%)}
+@media(min-width:1061px){.hero-proof{right:60px;bottom:-139px}}
+@media(min-width:1061px) and (max-width:1240px){.hero-proof{right:30px;bottom:-123px}}
