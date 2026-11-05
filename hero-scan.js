@@ -115,88 +115,16 @@ function main() {
   const vis = a => { const p = isPhone(); return a.filter(e => p ? e._ph : e._desk); };
 
 
-  // Placeholder data only — Acme/Globex/Initech and Doe/Roe/Poe are the
-  // universal "obviously not real" conventions, and every address uses the
-  // reserved .example TLD. Nothing here is a real company or person.
-  const DECK = [
-    { who: "Jane Doe", role: "VP, Talent Acquisition", co: "Acme Health",
-      mail: "j.doe@acme.example", loc: "CHICAGO, IL · 350 EMPLOYEES", others: "2 others at Acme Health",
-      rows: [["SIGNAL", "Owns internal recruitment capacity — 4 reqs open 60+ days", "ENGINE 02 · SIGNALS"],
-             ["MONEY", "$15,000/wk in delays", "ENGINE 01 · TIMING"],
-             ["BUYER", "New Chief AI Officer hired to lead the platform migration", "ENGINE 06 · BUYER MAP"]] },
-    { who: "John Roe", role: "VP, Operations", co: "Globex Freight",
-      mail: "j.roe@globex.example", loc: "DALLAS, TX · 620 EMPLOYEES", others: "3 others at Globex Freight",
-      rows: [["SIGNAL", "Opened a second regional hub in Q3", "ENGINE 02 · SIGNALS"],
-             ["MONEY", "4 operations manager reqs open this month", "ENGINE 01 · TIMING"],
-             ["BUYER", "The COO owns the buildout and the hiring plan", "ENGINE 06 · BUYER MAP"]] },
-    { who: "Alex Poe", role: "Director, Supply Chain", co: "Initech Devices",
-      mail: "a.poe@initech.example", loc: "COLUMBUS, OH · 410 EMPLOYEES", others: "2 others at Initech Devices",
-      rows: [["SIGNAL", "Added a second supplier for its control boards", "ENGINE 02 · SIGNALS"],
-             ["MONEY", "Three supply chain reqs open this quarter", "ENGINE 01 · TIMING"],
-             ["BUYER", "VP Manufacturing signs off on the vendor list", "ENGINE 06 · BUYER MAP"]] },
-  ];
-
-  function paint(d) {
-    const q = c => card.querySelector(c);
-    q(".hp-name").textContent = d.who;
-    q(".hp-role").textContent = d.role;
-    q(".hp-co").textContent = d.co + " \u2197";
-    q(".hp-mail").textContent = d.mail;
-    q(".hp-loc").textContent = d.loc;
-    q(".hp-mush span").textContent = "MUSHROOM  " + d.others + "  \u2192";
-    const box = q(".hp-rows");
-    box.textContent = "";
-    d.rows.forEach(([k, t, src]) => {
-      const row = document.createElement("div");
-      row.className = "hp-row";
-      row.innerHTML = "<span></span><div><p></p><small></small></div>";
-      row.querySelector("span").textContent = k;
-      row.querySelector("p").textContent = t;
-      row.querySelector("small").textContent = src;
-      box.append(row);
-    });
-    return [q(".hp-name"), q(".hp-sub"), q(".hp-meta"), q(".hp-mush"), ...box.children];
-  }
 
   if (reduce) {
     media.classList.add("sig-on", "sig-still");
-    if (card) { card.style.transform = "none"; paint(DECK[0]); }
+    if (card) card.style.transform = "none";
     return;
   }
 
   // ---- Motion does the work from here ----
   const loops = [];
   let paused = false;
-
-  const DWELL = 5200;
-  let deckAt = 0, deckTimer = 0, barRun = null;
-
-  function showCard(first) {
-    const rows = paint(DECK[deckAt]);
-    card.querySelectorAll(".hp-dots i").forEach((d, i) => d.classList.toggle("on", i === deckAt));
-    // Each line stamps in: the account, then the evidence, then the person to call.
-    animate(rows, { opacity: [0, 1], y: [10, 0] },
-      { duration: .42, delay: stagger(.07, { startDelay: first ? 1.5 : .12 }), ease: EASE });
-    animate(card.querySelector(".hp-stamp"), { scale: [.7, 1] },
-      { duration: .45, delay: (first ? 1.5 : .12) + .14, ease: [.2, 1.4, .4, 1] });
-    const bar = card.querySelector(".hp-bar i");
-    if (barRun) try { barRun.stop(); } catch (e) {}
-    barRun = animate(bar, { width: ["0%", "100%"] },
-      { duration: DWELL / 1000, delay: first ? 1.5 : .12, ease: "linear" });
-    if (barRun) loops.push(barRun);
-  }
-
-  function cycle() {
-    deckTimer = setTimeout(() => {
-      const rows = [...card.querySelectorAll(".hp-name,.hp-sub,.hp-meta,.hp-mush,.hp-row")];
-      animate(rows, { opacity: [1, 0], y: [0, -8] }, { duration: .26, delay: stagger(.03), ease: "easeIn" })
-        .finished.then(() => {
-          deckAt = (deckAt + 1) % DECK.length;
-          showCard(false);
-          cycle();
-        }).catch(() => {});
-    }, DWELL + 700);
-  }
 
   function drawIn() {
     media.classList.add("sig-on");
@@ -216,9 +144,8 @@ function main() {
 
     // The dashboard rises out of the bottom edge, then fills itself in
     if (card) {
-      animate(card, { y: [150, 0], opacity: [0, 1] }, { duration: 1, delay: .9, ease: EASE });
-      showCard(true);
-      cycle();
+      animate(card, { y: [170, 0], opacity: [0, 1] }, { duration: 1, delay: .9, ease: EASE });
+      
     }
   }
 
@@ -248,8 +175,7 @@ function main() {
   function sync() {
     const go = !paused && !document.hidden;
     loops.forEach(a => { try { go ? a.play() : a.pause(); } catch (e) {} });
-    if (!go && deckTimer) { clearTimeout(deckTimer); deckTimer = 0; }
-    else if (go && card && !deckTimer) cycle();
+    
   }
 
   // Pause button in the hero's bottom line
