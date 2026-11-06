@@ -427,3 +427,16 @@ html,body{background:#fff}
 .hero-proof .hp-chain small{display:block;margin-top:2px;font:6.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#767b83}
 .hero-proof .hp-unv{display:flex;align-items:center;gap:6px;margin:8px 0 0;font-size:9px;color:#767b83}
 .hero-proof .hp-unv i{width:6px;height:6px;border-radius:50%;border:1.2px solid #9ba1ab;flex-shrink:0}
+/* Hero without the phone (Nov 6): on small screens the photo sits on top and the copy below it, so text never covers faces. */
+@media(max-width:900px){
+  .hero-media.scene{bottom:auto;height:340px}
+  .hero-media.scene>img{object-position:56% 40%}
+  .hero-media.scene:after{background:linear-gradient(180deg,rgba(24,26,30,0) 0%,rgba(24,26,30,0) 55%,rgba(24,26,30,.7) 82%,#181a1e 100%)}
+  .hero .hero-message,.hero-message{bottom:auto;margin-top:290px}
+}
+@media(max-width:600px){
+  .hero{min-height:0}
+  .hero-media.scene{height:320px}
+  .hero .hero-message,.hero-message{margin-top:262px}
+  .hero .hero-bottom{margin-top:30px}
+}
