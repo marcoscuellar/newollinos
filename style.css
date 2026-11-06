@@ -427,3 +427,19 @@ html,body{background:#fff}
 .hero-proof .hp-chain small{display:block;margin-top:2px;font:6.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#767b83}
 .hero-proof .hp-unv{display:flex;align-items:center;gap:6px;margin:8px 0 0;font-size:9px;color:#767b83}
 .hero-proof .hp-unv i{width:6px;height:6px;border-radius:50%;border:1.2px solid #9ba1ab;flex-shrink:0}
+/* Hero v2: no phone yet, people on the right, bigger copy */
+.hero-media.scene>img{transform:scaleX(-1);transform-origin:left center;position:absolute;top:0;left:135%;width:135%;max-width:none;height:100%;object-position:center 40%}
+.hero-media.scene:after{background:linear-gradient(90deg,rgba(24,26,30,.88) 0%,rgba(24,26,30,.7) 34%,rgba(24,26,30,.12) 62%,transparent 78%),linear-gradient(180deg,transparent 55%,rgba(24,26,30,.85) 100%)}
+.hero-message{max-width:760px}
+.hero .hero-message h1,.hero-message h1{font-size:clamp(56px,6.2vw,96px);max-width:760px}
+.hero-sub{font-size:21px;max-width:560px}
+@media(max-width:850px){.hero .hero-message h1{font-size:60px}.hero-sub{font-size:18px}}
+@media(max-width:600px){
+ .hero{min-height:700px}
+ .hero-media.scene{height:40%;bottom:auto}
+ .hero .hero-message,.hero-message{position:relative;top:auto;bottom:auto;margin-top:auto;margin-bottom:92px}
+ .hero-media.scene>img{position:static;left:auto;width:100%;transform-origin:center;object-position:30% 40%}
+ .hero-media.scene:after{background:linear-gradient(180deg,rgba(24,26,30,0) 72%,#181a1e 100%)}
+ .hero .hero-message h1{font-size:clamp(40px,11.5vw,52px)}
+ .hero-sub{font-size:16px}
+}
