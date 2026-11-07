@@ -110,7 +110,7 @@ module.exports = async (req, res) => {
       from: FROM,
       to: [TO],
       reply_to: email,          /* so hitting reply reaches them, not Resend */
-      subject: 'Bring an account — ' + email,
+      subject: 'Let’s talk — ' + email,
       text: text,
     });
 

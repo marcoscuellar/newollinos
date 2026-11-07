@@ -7,7 +7,7 @@ Single-page site. Working file: `index.html` — the fixed ŌLLIN OS page, kept 
 - ŌLLIN always carries the macron. No hype language. No letter-scramble animation. The stamp reads VERIFIED.
 
 ## Direction
-Graphite + signal-yellow identity. The site should feel like an intelligent operating system doing real work, not a generic AI/SaaS landing page. Motion explains the product; it is never decoration.
+White-led, true black (#000000) + Signal Yellow (#FFE14D) identity (decided Nov 7, 2026; no graphite #181A1E). The brand source of truth is the Signal Pulse brand book in the ŌLLIN OS / GO project. The site should feel like an intelligent operating system doing real work, not a generic AI/SaaS landing page. Motion explains the product; it is never decoration.
 
 Core motion philosophy: **Data appears → gets checked → becomes useful → person decides.** Every animation should reinforce that progression.
 
@@ -52,6 +52,6 @@ Selecting a company swaps the white intelligence card: contact, company, signal,
 Do not add "name withheld", competitor language, or "anonymous executive" language. Identified by seniority + company only.
 
 ## Creative guardrails
-Keep: graphite, signal yellow, white/off-white, Archivo / IBM Plex Mono, restrained product-motion aesthetic, evidence/verification language, human-control positioning, premium slightly-industrial feel.
+Keep: white leads, true black #000000, Signal Yellow, Archivo / Inter / IBM Plex Mono, restrained product-motion aesthetic, evidence/verification language, human-control positioning, premium slightly-industrial feel.
 
 Avoid: floating AI blobs, glowing orbs, parallax everywhere, excessive bounce, neon gradients, generic "AI circuitry", motion on every element, anything that reads as another AI sales-tool template.
