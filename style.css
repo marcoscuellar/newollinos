@@ -501,3 +501,12 @@ html,body{background:#fff}
   .hero{--hpad:clamp(64px,6vw,120px);--hfs:clamp(64px,4.2vw,96px)}
   .hero-proof{left:calc(var(--hpad) + var(--hfs) * 8.5 + 48px);right:auto}
 }
+/* City hero, no people (Nov 13): Chicago L street scene, bigger bolder headline, phone beside the copy. */
+@media(min-width:1061px){
+  .hero{--hfs:clamp(72px,5.4vw,124px)}
+  .hero-media.scene>img{object-position:center 55%}
+  .hero .hero-message{max-width:calc(var(--hfs) * 9.2)}
+  .hero .hero-message h1{font-size:var(--hfs);line-height:.98;letter-spacing:-.045em}
+  .hero-proof{left:calc(var(--hpad) + var(--hfs) * 8.5 + 56px)}
+}
+@media(min-width:1061px) and (max-width:1240px){.hero{--hfs:60px}}
