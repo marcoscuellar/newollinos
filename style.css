@@ -743,3 +743,8 @@ html,body{background:#fff}
   .hero-tablet .go-first{font:700 1.45em/1.2 Inter,Arial,sans-serif!important;letter-spacing:.02em!important;color:#fff!important;margin-bottom:.2em}
   .hero-tablet .go-draft>.go-eb:not(.go-first){font-size:.95em;color:#c3c8d0}
 }
+/* Email / LinkedIn toggle sits on the same line as the heading, right side (Nov 13). */
+@media(min-width:1061px){
+  .hero-tablet .go-draft{position:relative}
+  .hero-tablet .go-draft .go-tog{position:absolute;top:1em;right:1.2em}
+}
