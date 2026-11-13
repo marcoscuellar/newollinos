@@ -663,7 +663,7 @@ html,body{background:#fff}
 @media(min-width:1280px) and (max-width:1439px){.hero{--hpad:52px;--hfs:56px}}
 /* Team photo panel (Nov 13): replaces the El train (no repeat of the hero). Faces sit in the upper half, so the copy
    moves to the bottom-left over the table, with the eyebrow up top and a closing line under the three. */
-.train-panel>img{object-position:42% 40%}
+.train-panel>img{object-position:52% 40%}
 .train-panel.scene:after{background:linear-gradient(0deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.55) 34%,rgba(0,0,0,0) 62%),linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 18%)!important}
 .train-panel .train-copy{top:auto;bottom:30px;left:32px;right:120px}
 .train-panel .train-copy p{font-size:clamp(24px,2.4vw,34px)}
