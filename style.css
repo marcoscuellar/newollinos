@@ -752,3 +752,7 @@ html,body{background:#fff}
 @media(min-width:1061px){
   .hero-tablet .go-first{font:800 1.6em/1.1 Archivo,Inter,sans-serif!important;letter-spacing:-.02em!important}
 }
+/* Campaign heading matches the "Grounded in 3 facts" label exactly: IBM Plex Mono, tracked caps, same size (Nov 13). */
+@media(min-width:1061px){
+  .hero-tablet .go-first{font:600 .95em 'IBM Plex Mono',monospace!important;letter-spacing:.16em!important;color:#fff!important}
+}
