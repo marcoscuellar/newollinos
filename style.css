@@ -748,3 +748,7 @@ html,body{background:#fff}
   .hero-tablet .go-draft{position:relative}
   .hero-tablet .go-draft .go-tog{position:absolute;top:1em;right:1.2em}
 }
+/* Campaign heading in brand type (Nov 13): Archivo 800, tight tracking, same as "GRACE KIM" on the sheet. */
+@media(min-width:1061px){
+  .hero-tablet .go-first{font:800 1.6em/1.1 Archivo,Inter,sans-serif!important;letter-spacing:-.02em!important}
+}
