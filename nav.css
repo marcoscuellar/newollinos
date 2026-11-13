@@ -113,3 +113,4 @@ html{scroll-padding-top:96px}
 .workflow-icon svg [fill="#FFE14D"]{transition:fill .25s ease}
 .checks li.is-lit .workflow-icon{background:#ffe14d;color:#000000}
 .checks li.is-lit .workflow-icon svg [fill="#FFE14D"]{fill:#000000}
+@media(min-width:601px){.sn-bar{padding-left:clamp(24px,4vw,64px);padding-right:clamp(24px,4vw,64px)}}

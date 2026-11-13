@@ -675,4 +675,44 @@ html,body{background:#fff}
 .train-earn{font-size:clamp(16px,1.35vw,20px);margin-top:16px}
 @media(max-width:600px){.train-panel .train-copy p{font-size:27px}.train-earn{font-size:15px}}
 /* Crosswalk El photo (Nov 13): zoomed and shifted so the train runs right above the headline. */
-@media(min-width:1061px){.hero-media.scene>img{position:absolute;left:-7.5%!important;top:-15%!important;width:115%!important;height:115%!important;max-width:none;object-fit:cover;object-position:50% 50%}}
+@media(min-width:1061px){.hero-media.scene>img{position:absolute;left:-34%!important;top:-24%!important;width:135%!important;height:135%!important;max-width:none;object-fit:cover;object-position:50% 50%}}
+/* Phone and iPad share one bottom line (Nov 13). */
+@media(min-width:1280px){
+  .hero{--devbottom:clamp(96px,12vh,140px)}
+  .hero .hero-proof{bottom:var(--devbottom)!important}
+  .hero-tablet{bottom:var(--devbottom)!important}
+}
+/* Even side padding (Nov 13): the iPad's right edge sits the same distance from the hero edge as the headline's left edge.
+   The phone hangs off the iPad's left side with the same small overlap. */
+@media(min-width:1280px){
+  .hero{--hp:clamp(220px,17vw,330px)}
+  .hero-tablet{left:auto!important;right:var(--hpad)!important}
+  .hero .hero-proof{left:auto!important;right:calc(var(--hpad) + var(--hp) * 1.67)!important}
+}
+@media(min-width:1441px){.hero{--hp:250px}}
+/* Side padding throughout the site (Nov 13): wider page gutters on desktop and tablet, a bit more on phones.
+   The nav lines up with the same gutter so the logo sits over the hero's left edge. */
+@media(min-width:601px){main{padding:0 clamp(24px,4vw,64px)}}
+@media(max-width:600px){main{padding:0 16px}}
+@media(min-width:1280px){.hero{--hp:clamp(210px,16vw,250px)}}
+@media(min-width:1441px){.hero{--hp:clamp(210px,16vw,250px)}}
+/* Fit with the wider gutters (Nov 13): iPad back to full size so its card reads, phone (264px) overlaps it by 16px,
+   headline scales a touch smaller between 1280 and 1600 so nothing touches. */
+@media(min-width:1280px){
+  .hero{--hp:250px;--hfs:clamp(50px,3.8vw,66px)}
+  .hero-tablet{width:430px!important}
+  .hero .hero-proof{width:264px!important;right:calc(var(--hpad) + 414px)!important}
+}
+/* 1280–1439 wide: shrink the phone + iPad pair 20% so it clears the headline (offsets divided by the zoom). */
+@media(min-width:1280px) and (max-width:1439px){
+  .hero-tablet,.hero .hero-proof{zoom:.8}
+  .hero-tablet{right:calc(var(--hpad) / .8)!important;bottom:calc(var(--devbottom) / .8)!important}
+  .hero .hero-proof{right:calc(var(--hpad) / .8 + 414px)!important;bottom:calc(var(--devbottom) / .8)!important}
+}
+/* Phone clearly smaller than the iPad (Nov 13): phone at 82% of its size, still bottom-aligned, overlapping the iPad by ~16px. */
+@media(min-width:1440px){
+  .hero .hero-proof{zoom:.82;right:calc((var(--hpad) + 414px) / .82)!important;bottom:calc(var(--devbottom) / .82)!important}
+}
+@media(min-width:1280px) and (max-width:1439px){
+  .hero .hero-proof{zoom:.656;right:calc((var(--hpad) + 331px) / .656)!important;bottom:calc(var(--devbottom) / .656)!important}
+}
