@@ -716,3 +716,13 @@ html,body{background:#fff}
 @media(min-width:1280px) and (max-width:1439px){
   .hero .hero-proof{zoom:.656;right:calc((var(--hpad) + 331px) / .656)!important;bottom:calc(var(--devbottom) / .656)!important}
 }
+/* iPad draft message block in black (Nov 13), matching the app's black frame. */
+@media(min-width:1061px){
+  .hero-tablet .go-draft{background:#000;border-color:#000;color:#fff}
+  .hero-tablet .go-draft .go-eb{color:#9ba1ab}
+  .hero-tablet .go-msg{background:#0d0d0f;border-color:#2a2c30;color:#e6e8eb}
+  .hero-tablet .go-tog{background:#0d0d0f;border-color:#2a2c30}
+  .hero-tablet .go-tog span{color:#c3c8d0}.hero-tablet .go-tog .on{color:#000}
+  .hero-tablet .go-days span{border-color:#2a2c30;color:#c3c8d0}
+  .hero-tablet .go-days .on{background:#FFE14D;border-color:#FFE14D;color:#000}
+}
