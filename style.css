@@ -569,3 +569,42 @@ html,body{background:#fff}
   .go-msg{padding:1em 1.1em;border:1px solid #e3e5e8;border-radius:.8em;background:#fff;font-size:1.1em;line-height:1.5;color:#2a2c30}
 }
 @media(min-width:1280px){.go-days{display:flex;gap:.5em}.go-days span{flex:1;padding:.6em 0;text-align:center;border:1px solid #e3e5e8;border-radius:2em;font:600 1em Inter,sans-serif}.go-days .on{background:#000;color:#FFE14D;border-color:#000}}
+/* Full devices (Nov 13): nothing cropped. The phone keeps its live look (titanium rail, island, glass) but now stands whole,
+   bottom corners and home bar included. The iPad is rebuilt as a real iPad Pro: thin aluminum band, even black bezel,
+   landscape-edge camera, soft contact shadow. Both stand above the hero's bottom rule, iPad taller and just behind. */
+@media(min-width:1061px){
+  .hero-cta{margin-top:28px;position:relative;z-index:2}
+}
+@media(min-width:1280px){
+  .hero{--hp:clamp(220px,15vw,320px)}
+  .hero .hero-proof{bottom:clamp(96px,12vh,140px)!important;width:var(--hp)}
+  .hero-proof .hp-screen{aspect-ratio:9/19.3;position:relative}
+  .hero-proof .hp-home{position:absolute;left:50%;bottom:7px;width:36%;height:4px;margin-left:-18%;border-radius:3px;background:rgba(0,0,0,.85);z-index:8}
+  .hero-proof .hp-screen:after{content:"";position:absolute;left:0;right:0;bottom:0;height:46px;background:linear-gradient(180deg,rgba(253,250,236,0),#fdfaec 70%);pointer-events:none;z-index:7}
+  .hero-proof .hp-phone{box-shadow:0 0 0 .5px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(0,0,0,.6),
+    -22px 34px 60px -14px rgba(0,0,0,.6),0 10px 18px rgba(0,0,0,.35)}
+  /* iPad Pro */
+  .hero-tablet{width:calc(var(--hp) * 1.7);left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px + var(--hp) * .82);bottom:clamp(96px,12vh,140px)}
+  .ht-frame{padding:3.1%;border-radius:6.2% / 4.4%;background:#050505;
+    box-shadow:0 0 0 1.5px #1b1c1f,0 0 0 3px #6f7378,0 0 0 3.6px #c4c7cc,0 0 0 4.4px #3a3c40,
+      -26px 40px 70px -16px rgba(0,0,0,.6),0 12px 22px rgba(0,0,0,.35)}
+  .ht-frame:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:4;
+    background:linear-gradient(125deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,.03) 22%,rgba(255,255,255,0) 40%)}
+  .ht-cam{top:50%;left:auto;right:1.2%;margin:0;margin-top:-3px;width:6px;height:6px}
+  .ht-screen{border-radius:3.6% / 2.5%}
+  .ht-screen:after{display:none}
+  .ht-home{position:absolute;left:50%;bottom:calc(3.1% + 6px);width:26%;height:4px;margin-left:-13%;border-radius:3px;background:rgba(0,0,0,.8);z-index:5}
+  .ht-btn{background:linear-gradient(90deg,#4a4d52,#c4c7cc 50%,#5d6066)}
+  .ht-top{top:-5.5px;right:10%;width:9%;height:2.5px;background:linear-gradient(180deg,#c4c7cc,#4a4d52)}
+  .ht-v1{right:-5.5px;top:7%;width:2.5px;height:5%}.ht-v2{right:-5.5px;top:13%;width:2.5px;height:5%}
+  .go-sheet{border-radius:1.2em}
+}
+@media(min-width:1280px){
+  .hero-proof .hp-phone{-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)!important}
+  .hero-tablet{width:calc(var(--hp) * 1.95);left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px + var(--hp) * .9)}
+}
+@media(min-width:1280px){
+  .hero{--hp:clamp(250px,17vw,330px)}
+  .hero .hero-proof{width:var(--hp)!important}
+  .hero-tablet{width:calc(var(--hp) * 1.72);left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px + var(--hp) * .95)}
+}
