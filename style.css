@@ -670,3 +670,26 @@ html,body{background:#fff}
 .train-earn{display:block;margin-top:12px;font:500 15px/1.4 Inter,Arial,sans-serif;color:#fff;opacity:.9}
 .train-panel .train-caption{top:30px;bottom:auto}
 @media(max-width:600px){.train-panel .train-copy{left:26px;bottom:24px;right:90px}.train-panel .train-copy p{font-size:23px}.train-earn{font-size:13px}.train-panel .train-caption{top:24px}}
+/* Split photo card (Nov 13): copy on a black strip (1/3), the photo fills the other 2/3, so text never sits on people.
+   The photo fades into the black at its left edge. Phones: photo on top (2/3 of the card), copy below. */
+.train-panel.scene{background:#000}
+.train-panel>img{position:absolute;top:0;bottom:0;right:0;left:auto;width:66.667%!important;height:100%!important;object-fit:cover;object-position:52% 40%}
+.train-panel.scene:after{left:33.333%;background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.55) 9%,rgba(0,0,0,0) 22%)!important}
+.train-panel .train-copy{top:auto;bottom:30px;left:32px;right:auto;width:calc(33.333% - 48px)}
+.train-panel .train-copy p{font-size:clamp(22px,2.05vw,30px);text-shadow:none}
+.train-earn{font-size:14px;margin-top:14px;color:#c9ccd1;opacity:1}
+.train-panel .train-caption{top:30px;left:32px;max-width:calc(33.333% - 48px)}
+@media(max-width:600px){
+  .train-panel.scene{height:auto;min-height:0;display:flex;flex-direction:column}
+  .train-panel>img{position:relative;width:100%!important;height:260px!important}
+  .train-panel.scene:after{left:0;top:auto;height:260px;bottom:auto;background:linear-gradient(0deg,#000 0%,rgba(0,0,0,0) 30%)!important}
+  .train-panel .train-copy{position:relative;width:auto;left:0;bottom:0;padding:18px 24px 26px}
+  .train-panel .train-copy p{font-size:26px}
+  .train-panel .train-caption{top:20px;left:20px;max-width:none}
+}
+@media(min-width:601px){.train-panel .train-copy p{font-size:clamp(20px,1.85vw,27px)}}
+@media(max-width:600px){
+  .train-panel .train-signal-badge{top:16px;right:16px;bottom:auto}
+  .train-panel.scene:before{content:"";position:absolute;left:0;right:0;top:0;height:90px;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,0))}
+  .train-panel .train-copy{padding-right:24px}
+}
