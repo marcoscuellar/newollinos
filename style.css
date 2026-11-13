@@ -756,3 +756,17 @@ html,body{background:#fff}
 @media(min-width:1061px){
   .hero-tablet .go-first{font:600 .95em 'IBM Plex Mono',monospace!important;letter-spacing:.16em!important;color:#fff!important}
 }
+/* Phone on the right (Nov 13): the iPad sits left, the phone overlaps the iPad's right edge, both on one bottom line.
+   Pair slightly smaller so the headline's "signal." never runs under the iPad. */
+@media(min-width:1440px){
+  .hero{--hfs:64px}
+  .hero-tablet{width:410px!important;right:calc(var(--hpad) + 190px)!important}
+  .hero .hero-proof{zoom:.78;right:calc(var(--hpad) / .78)!important;bottom:calc(var(--devbottom) / .78)!important}
+}
+@media(min-width:1280px) and (max-width:1439px){
+  .hero-tablet{width:410px!important;right:calc((var(--hpad) + 152px) / .8)!important}
+  .hero .hero-proof{zoom:.624;right:calc(var(--hpad) / .624)!important;bottom:calc(var(--devbottom) / .624)!important}
+}
+/* Keep the headline clear of the iPad (Nov 13): copy starts on the page gutter, headline a touch smaller on wide screens. */
+@media(min-width:1280px){.hero .hero-message,.hero .hero-bottom{left:var(--hpad)!important}}
+@media(min-width:1440px){.hero{--hfs:58px}}
