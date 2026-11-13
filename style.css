@@ -482,3 +482,16 @@ html,body{background:#fff}
 .hero-proof .hp-reflect,.hero-proof .hp-fade,.hero-proof .hp-edge{display:none}
 @media(max-width:1240px){.hero-proof{width:280px;right:40px;bottom:-130px}}
 @media(max-width:1060px){.hero-proof{display:none}}
+/* Full-screen-ish hero (Nov 13, desktop): the hero fills the window under the nav and runs almost edge to edge,
+   keeping a 14px gutter and the rounded corners. Phones and tablets keep their stacked layout. */
+@media(min-width:1061px){
+  html{overflow-x:clip}
+  .hero.panel{width:calc(100vw - 28px);margin-left:calc(50% - 50vw + 14px);margin-right:0;
+    min-height:max(650px,calc(100svh - var(--hero-top,96px) - 14px))}
+  .hero .hero-message{left:clamp(64px,6vw,120px)}
+  .hero .hero-bottom{left:clamp(64px,6vw,120px);right:clamp(64px,6vw,120px)}
+  .hero-proof{right:clamp(76px,7vw,160px);width:clamp(300px,20vw,380px)}
+  .hero .hero-message{max-width:min(42vw,900px)}
+  .hero .hero-message h1{font-size:clamp(64px,4.2vw,96px);max-width:none}
+  .hero .hero-sub{font-size:clamp(17px,1.05vw,21px);max-width:27em}
+}
