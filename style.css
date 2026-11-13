@@ -495,3 +495,142 @@ html,body{background:#fff}
   .hero .hero-message h1{font-size:clamp(64px,4.2vw,96px);max-width:none}
   .hero .hero-sub{font-size:clamp(17px,1.05vw,21px);max-width:27em}
 }
+/* Phone sits right beside the copy (Nov 13, desktop): its left edge follows the headline's width
+   (about 8.5em of Archivo at the headline size) plus a 48px gap, so it moves with the type as the screen grows. */
+@media(min-width:1061px){
+  .hero{--hpad:clamp(64px,6vw,120px);--hfs:clamp(64px,4.2vw,96px)}
+  .hero-proof{left:calc(var(--hpad) + var(--hfs) * 8.5 + 48px);right:auto}
+}
+/* City hero, no people (Nov 13): Chicago L street scene, bigger bolder headline, phone beside the copy. */
+@media(min-width:1061px){
+  .hero{--hfs:clamp(72px,5.4vw,124px)}
+  .hero-media.scene>img{object-position:center 55%}
+  .hero .hero-message{max-width:calc(var(--hfs) * 9.2)}
+  .hero .hero-message h1{font-size:var(--hfs);line-height:.98;letter-spacing:-.045em}
+  .hero-proof{left:calc(var(--hpad) + var(--hfs) * 8.5 + 56px)}
+}
+@media(min-width:1061px) and (max-width:1240px){.hero{--hfs:60px}}
+/* iPad beside the phone (Nov 13, desktop ≥1280): a portrait tablet running the ŌLLIN GO Up Next view (live layout, Pulse logo),
+   standing just right of the phone and overlapping it slightly. Taller than the phone, so it shows above it.
+   Screen UI is sized in em off the tablet screen's own width (1em = width/60). */
+.hero-tablet{display:none}
+@media(min-width:1280px){
+  .hero{--hfs:clamp(64px,4.6vw,124px);--hp:clamp(230px,16.5vw,340px)}
+  .hero-proof{width:var(--hp);left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px);bottom:calc(var(--hp) * -.62)}
+  .hero-proof .hp-name{font-size:calc(var(--hp) * .083)}
+  .hero-tablet{display:block;position:absolute;z-index:2;width:calc(var(--hp) * 1.62);
+    left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px + var(--hp) * .86);bottom:calc(var(--hp) * .1)}
+  .ht-frame{position:relative;padding:4.2%;border-radius:7.5% / 5.4%;background:#060606;
+    box-shadow:0 0 0 2.5px #3c3e42,0 0 0 3.5px #8c8f95,0 0 0 4.5px #2a2c30,-24px 34px 60px -12px rgba(0,0,0,.55)}
+  .ht-cam{position:absolute;top:1.9%;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#2e3a55,#07080a 70%)}
+  .ht-screen{position:relative;aspect-ratio:1640/2360;overflow:hidden;border-radius:4.2% / 2.9%;background:#000;container-type:inline-size}
+  .ht-screen:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.13),rgba(255,255,255,0) 32%)}
+  .ht-btn{position:absolute;background:linear-gradient(90deg,#2a2c30,#8e9197 50%,#3a3c40);border-radius:2px}
+  .ht-top{top:-6px;right:14%;width:12%;height:3px;background:linear-gradient(180deg,#8e9197,#2a2c30)}
+  .ht-v1{right:-6.5px;top:9%;width:3px;height:6%}.ht-v2{right:-6.5px;top:16.5%;width:3px;height:6%}
+  /* the app, portrait */
+  .go{font-size:calc(100cqw / 60);height:100%;display:flex;flex-direction:column;background:#000;color:#fff;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+  .go-status{display:flex;justify-content:space-between;align-items:center;padding:1em 2em .3em;font:600 .95em Inter,sans-serif}
+  .go-status span:nth-child(2){margin-right:auto;margin-left:.8em;color:#9ba1ab}
+  .go-batt{width:2em;height:1em;border:1px solid rgba(255,255,255,.45);border-radius:.25em;padding:.1em}.go-batt i{display:block;height:100%;width:80%;border-radius:.15em;background:#fff}
+  .go-top{display:flex;align-items:center;gap:1.2em;padding:.8em 2em}
+  .go-logo{display:flex;align-items:center;gap:.5em}.go-pulse{width:1.3em;height:1.6em}
+  .go-logo b{font:800 1.7em Archivo,Inter,sans-serif;letter-spacing:-.02em}.go-logo u{text-decoration:none;padding-left:.45em;border-left:1px solid #3a3c40;font:400 1.6em Inter,sans-serif;color:#8b9099}
+  .go-sent{margin-left:auto;font-size:1em;color:#c3c8d0}.go-sent b{color:#FFE14D;margin-right:.3em}
+  .go-btn{padding:.5em 1em;border:1px solid #3a3c40;border-radius:2em;font:600 1em Inter,sans-serif}
+  .go-tabs{display:flex;gap:.2em;margin:.2em 2em .4em;padding:.3em;border:1px solid #2a2c30;border-radius:2em}
+  .go-tabs span{flex:1;text-align:center;padding:.5em 0;border-radius:1.5em;font-size:1em;color:#c3c8d0}.go-tabs .on{background:#1d1e21;color:#fff}
+  .go-filters{display:flex;align-items:center;gap:.6em;padding:.8em 2em .6em}
+  .go-eb{font:600 .8em 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#9ba1ab}.go-eb b{color:#000}
+  .go-filters .go-eb{margin-right:auto;color:#c3c8d0}
+  .go-chip{padding:.4em .9em;border-radius:2em;border:1px solid #2a2c30;font:600 .95em Inter,sans-serif}.go-chip b{margin-left:.4em;color:#8b9099}
+  .go-chip.on{background:#FFE14D;border-color:#FFE14D;color:#000}.go-chip.on b{color:#000}
+  .go-list{display:grid;grid-template-columns:repeat(3,1fr);gap:.7em;padding:0 2em 1.2em}
+  .go-card{padding:.9em 1em;border-radius:.7em;background:#121315;border:1px solid #232427;min-width:0}
+  .go-card.on{background:#fff;color:#000;box-shadow:0 0 0 .2em #FFE14D}
+  .go-card b{display:block;font:800 1.2em Archivo,Inter,sans-serif;letter-spacing:-.02em;white-space:nowrap}
+  .go-card small,.go-card span{display:block;font-size:.85em;color:#9ba1ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .go-card span{margin-top:.3em;color:inherit}
+  .go-sheet{flex:1;margin:0 2em;border-radius:1.2em 1.2em 0 0;background:#fff;color:#000;overflow:hidden}
+  .go-head{position:relative;padding:1.8em 2em 1.3em;border-bottom:1px solid #ececec}
+  .go-ver{position:absolute;top:1.6em;right:1.8em;display:flex;flex-direction:column;align-items:center;gap:.4em}
+  .go-ver .go-pulse{width:2em;height:2.4em}.go-ver small{font:600 .6em 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#5b6068}
+  .go-head h3{margin:.5em 0 .2em;font:800 4.2em/1 Archivo,Inter,sans-serif;letter-spacing:-.04em;color:#000}
+  .go-role{margin:0;font:600 1.15em Inter,sans-serif}.go-role b{color:#7a6600}
+  .go-meta{margin:.6em 0;font:500 .8em 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#5b6068}
+  .go-mush{display:inline-block;padding:.4em .9em;border:1px solid #d6d8dc;border-radius:2em;font:600 .75em 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#5b6068}.go-mush b{color:#000}
+  .go-know{padding:1.2em 2em .4em}.go-know .go-eb b{margin-right:.5em}
+  .go-k{display:grid;grid-template-columns:5.5em 1fr;gap:1em;padding:.9em 0;border-bottom:1px solid #ececec}
+  .go-k i{font:700 .75em 'IBM Plex Mono',monospace;font-style:normal;letter-spacing:.1em}
+  .go-k span{font-size:1.1em;line-height:1.4;color:#2a2c30}.go-k small{margin-left:.5em;font:600 .6em 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8b9099}
+  .go-draft{display:flex;flex-direction:column;gap:.8em;margin:.6em 2em;padding:1.2em;border-radius:.9em;background:#fafafa;border:1px solid #ececec}
+  .go-tog{display:inline-flex;align-self:flex-start;padding:.3em;border:1px solid #e3e5e8;border-radius:.6em;background:#fff}
+  .go-tog span{padding:.5em 1em;border-radius:.4em;font:600 1em Inter,sans-serif}.go-tog .on{background:#FFE14D}
+  .go-msg{padding:1em 1.1em;border:1px solid #e3e5e8;border-radius:.8em;background:#fff;font-size:1.1em;line-height:1.5;color:#2a2c30}
+}
+@media(min-width:1280px){.go-days{display:flex;gap:.5em}.go-days span{flex:1;padding:.6em 0;text-align:center;border:1px solid #e3e5e8;border-radius:2em;font:600 1em Inter,sans-serif}.go-days .on{background:#000;color:#FFE14D;border-color:#000}}
+/* Full devices (Nov 13): nothing cropped. The phone keeps its live look (titanium rail, island, glass) but now stands whole,
+   bottom corners and home bar included. The iPad is rebuilt as a real iPad Pro: thin aluminum band, even black bezel,
+   landscape-edge camera, soft contact shadow. Both stand above the hero's bottom rule, iPad taller and just behind. */
+@media(min-width:1061px){
+  .hero-cta{margin-top:28px;position:relative;z-index:2}
+}
+@media(min-width:1280px){
+  .hero{--hp:clamp(220px,15vw,320px)}
+  .hero .hero-proof{bottom:clamp(96px,12vh,140px)!important;width:var(--hp)}
+  .hero-proof .hp-screen{aspect-ratio:9/19.3;position:relative}
+  .hero-proof .hp-home{position:absolute;left:50%;bottom:7px;width:36%;height:4px;margin-left:-18%;border-radius:3px;background:rgba(0,0,0,.85);z-index:8}
+  .hero-proof .hp-screen:after{content:"";position:absolute;left:0;right:0;bottom:0;height:46px;background:linear-gradient(180deg,rgba(253,250,236,0),#fdfaec 70%);pointer-events:none;z-index:7}
+  .hero-proof .hp-phone{box-shadow:0 0 0 .5px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(0,0,0,.6),
+    -22px 34px 60px -14px rgba(0,0,0,.6),0 10px 18px rgba(0,0,0,.35)}
+  /* iPad Pro */
+  .hero-tablet{width:calc(var(--hp) * 1.7);left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px + var(--hp) * .82);bottom:clamp(96px,12vh,140px)}
+  .ht-frame{padding:3.1%;border-radius:6.2% / 4.4%;background:#050505;
+    box-shadow:0 0 0 1.5px #1b1c1f,0 0 0 3px #6f7378,0 0 0 3.6px #c4c7cc,0 0 0 4.4px #3a3c40,
+      -26px 40px 70px -16px rgba(0,0,0,.6),0 12px 22px rgba(0,0,0,.35)}
+  .ht-frame:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:4;
+    background:linear-gradient(125deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,.03) 22%,rgba(255,255,255,0) 40%)}
+  .ht-cam{top:50%;left:auto;right:1.2%;margin:0;margin-top:-3px;width:6px;height:6px}
+  .ht-screen{border-radius:3.6% / 2.5%}
+  .ht-screen:after{display:none}
+  .ht-home{position:absolute;left:50%;bottom:calc(3.1% + 6px);width:26%;height:4px;margin-left:-13%;border-radius:3px;background:rgba(0,0,0,.8);z-index:5}
+  .ht-btn{background:linear-gradient(90deg,#4a4d52,#c4c7cc 50%,#5d6066)}
+  .ht-top{top:-5.5px;right:10%;width:9%;height:2.5px;background:linear-gradient(180deg,#c4c7cc,#4a4d52)}
+  .ht-v1{right:-5.5px;top:7%;width:2.5px;height:5%}.ht-v2{right:-5.5px;top:13%;width:2.5px;height:5%}
+  .go-sheet{border-radius:1.2em}
+}
+@media(min-width:1280px){
+  .hero-proof .hp-phone{-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)!important}
+  .hero-tablet{width:calc(var(--hp) * 1.95);left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px + var(--hp) * .9)}
+}
+@media(min-width:1280px){
+  .hero{--hp:clamp(250px,17vw,330px)}
+  .hero .hero-proof{width:var(--hp)!important}
+  .hero-tablet{width:calc(var(--hp) * 1.72);left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px + var(--hp) * .95)}
+}
+/* Black textured hero (Nov 13, desktop): no photo. True black with a soft, blurred Signal Yellow glow behind the
+   devices, a faint white haze, and film grain over everything, like the ŌLLIN GO app cards. */
+@media(min-width:1061px){
+  .hero.panel{background:#000;isolation:isolate}
+  .hero .hero-media{display:none}
+  .hero.panel:before,.hero.panel:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0}
+  .hero.panel:before{
+    background:
+      radial-gradient(38% 52% at 74% 46%,rgba(255,225,77,.30) 0%,rgba(255,225,77,.10) 45%,rgba(255,225,77,0) 75%),
+      radial-gradient(30% 40% at 92% 92%,rgba(255,196,40,.18) 0%,rgba(255,196,40,0) 70%),
+      radial-gradient(34% 46% at 18% 18%,rgba(255,255,255,.07) 0%,rgba(255,255,255,0) 70%),
+      radial-gradient(60% 60% at 50% 110%,rgba(255,255,255,.05) 0%,rgba(255,255,255,0) 70%);
+    filter:blur(30px)}
+  .hero.panel:after{opacity:.16;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:220px 220px}
+  .hero .hero-message,.hero .hero-bottom,.hero-proof,.hero-tablet{z-index:3}
+}
+@media(min-width:1061px){
+  .hero.panel:before{filter:blur(40px);background:
+    radial-gradient(42% 60% at 62% 26%,rgba(255,225,77,.26) 0%,rgba(255,225,77,.08) 50%,rgba(255,225,77,0) 78%),
+    radial-gradient(36% 50% at 96% 86%,rgba(255,200,50,.24) 0%,rgba(255,200,50,0) 72%),
+    radial-gradient(40% 55% at 8% 96%,rgba(255,255,255,.08) 0%,rgba(255,255,255,0) 70%),
+    radial-gradient(32% 44% at 30% 4%,rgba(120,124,130,.22) 0%,rgba(120,124,130,0) 72%)}
+  .hero.panel:after{opacity:.24}
+}
