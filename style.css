@@ -648,5 +648,5 @@ html,body{background:#fff}
   .hero .hero-media{display:block}
   .hero.panel:before,.hero.panel:after{display:none}
 }
-/* Show the El train (Nov 13): photo zoomed and shifted so the train's front sits in the gap between the headline and the phone. */
-@media(min-width:1061px){.hero-media.scene>img{position:absolute;width:140%!important;height:140%!important;max-width:none;left:-30%;top:-14%;object-fit:cover;object-position:center}}
+/* Show the El train (Nov 13): photo zoomed and shifted so the train sits right above the word "signal.". */
+@media(min-width:1061px){.hero-media.scene>img{position:absolute;width:140%!important;height:140%!important;max-width:none;left:-37.5%;top:-33%;object-fit:cover;object-position:center}}
