@@ -608,3 +608,29 @@ html,body{background:#fff}
   .hero .hero-proof{width:var(--hp)!important}
   .hero-tablet{width:calc(var(--hp) * 1.72);left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px + var(--hp) * .95)}
 }
+/* Black textured hero (Nov 13, desktop): no photo. True black with a soft, blurred Signal Yellow glow behind the
+   devices, a faint white haze, and film grain over everything, like the ŌLLIN GO app cards. */
+@media(min-width:1061px){
+  .hero.panel{background:#000;isolation:isolate}
+  .hero .hero-media{display:none}
+  .hero.panel:before,.hero.panel:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0}
+  .hero.panel:before{
+    background:
+      radial-gradient(38% 52% at 74% 46%,rgba(255,225,77,.30) 0%,rgba(255,225,77,.10) 45%,rgba(255,225,77,0) 75%),
+      radial-gradient(30% 40% at 92% 92%,rgba(255,196,40,.18) 0%,rgba(255,196,40,0) 70%),
+      radial-gradient(34% 46% at 18% 18%,rgba(255,255,255,.07) 0%,rgba(255,255,255,0) 70%),
+      radial-gradient(60% 60% at 50% 110%,rgba(255,255,255,.05) 0%,rgba(255,255,255,0) 70%);
+    filter:blur(30px)}
+  .hero.panel:after{opacity:.16;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:220px 220px}
+  .hero .hero-message,.hero .hero-bottom,.hero-proof,.hero-tablet{z-index:3}
+}
+@media(min-width:1061px){
+  .hero.panel:before{filter:blur(40px);background:
+    radial-gradient(42% 60% at 62% 26%,rgba(255,225,77,.26) 0%,rgba(255,225,77,.08) 50%,rgba(255,225,77,0) 78%),
+    radial-gradient(36% 50% at 96% 86%,rgba(255,200,50,.24) 0%,rgba(255,200,50,0) 72%),
+    radial-gradient(40% 55% at 8% 96%,rgba(255,255,255,.08) 0%,rgba(255,255,255,0) 70%),
+    radial-gradient(32% 44% at 30% 4%,rgba(120,124,130,.22) 0%,rgba(120,124,130,0) 72%)}
+  .hero.panel:after{opacity:.24}
+}
