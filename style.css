@@ -495,3 +495,9 @@ html,body{background:#fff}
   .hero .hero-message h1{font-size:clamp(64px,4.2vw,96px);max-width:none}
   .hero .hero-sub{font-size:clamp(17px,1.05vw,21px);max-width:27em}
 }
+/* Phone sits right beside the copy (Nov 13, desktop): its left edge follows the headline's width
+   (about 8.5em of Archivo at the headline size) plus a 48px gap, so it moves with the type as the screen grows. */
+@media(min-width:1061px){
+  .hero{--hpad:clamp(64px,6vw,120px);--hfs:clamp(64px,4.2vw,96px)}
+  .hero-proof{left:calc(var(--hpad) + var(--hfs) * 8.5 + 48px);right:auto}
+}
