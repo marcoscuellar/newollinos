@@ -643,3 +643,8 @@ html,body{background:#fff}
   .hero{--hpad:72px;--hfs:66px;--hp:250px}
   .hero .hero-sub{font-size:16px}
 }
+/* Final pick (Nov 13): the Chicago El photo behind the phone + iPad (not the black texture). */
+@media(min-width:1061px){
+  .hero .hero-media{display:block}
+  .hero.panel:before,.hero.panel:after{display:none}
+}
