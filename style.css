@@ -650,3 +650,14 @@ html,body{background:#fff}
 }
 /* Show the El train (Nov 13): photo zoomed and shifted so the train sits right above the word "signal.". */
 @media(min-width:1061px){.hero-media.scene>img{position:absolute;width:140%!important;height:140%!important;max-width:none;left:-37.5%;top:-33%;object-fit:cover;object-position:center}}
+/* Lift the black off the top (Nov 13): no dark band above "We find…", so the train reads. The shade now sits only
+   right behind the headline block, plus a light fade at the very bottom for the ŌLLIN OS + ŌLLIN GO line. */
+@media(min-width:1061px){
+  .hero-media.scene:after{background:
+    radial-gradient(46% 44% at 22% 64%,rgba(0,0,0,.78) 0%,rgba(0,0,0,.55) 50%,rgba(0,0,0,0) 100%),
+    linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 72%,rgba(0,0,0,.55) 100%)!important}
+}
+/* Copy sits lower (Nov 13) so the train has open sky above "We find the signal." */
+@media(min-width:1061px){.hero .hero-message{translate:0 80px}}
+/* 1280–1440 wide: shrink the phone + iPad pair so the iPad never runs past the hero's right edge. */
+@media(min-width:1280px) and (max-width:1439px){.hero{--hpad:52px;--hfs:56px}}
