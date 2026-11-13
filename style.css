@@ -735,3 +735,5 @@ html,body{background:#fff}
   .hero-tablet .go-days span{background:#fff;border-color:#fff;color:#000}
   .hero-tablet .go-days .on{background:#FFE14D;border-color:#FFE14D;color:#000}
 }
+/* iPad message container in soft ink grey (Nov 13), same as the Up Next cards. */
+@media(min-width:1061px){.hero-tablet .go-draft{background:#121315;border-color:#232427}}
