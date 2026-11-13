@@ -674,3 +674,5 @@ html,body{background:#fff}
 .train-panel .train-copy p{font-size:clamp(30px,3.1vw,46px);line-height:1.08}
 .train-earn{font-size:clamp(16px,1.35vw,20px);margin-top:16px}
 @media(max-width:600px){.train-panel .train-copy p{font-size:27px}.train-earn{font-size:15px}}
+/* Crosswalk El photo (Nov 13): zoomed and shifted so the train runs right above the headline. */
+@media(min-width:1061px){.hero-media.scene>img{position:absolute;left:-7.5%!important;top:-15%!important;width:115%!important;height:115%!important;max-width:none;object-fit:cover;object-position:50% 50%}}
