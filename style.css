@@ -726,3 +726,12 @@ html,body{background:#fff}
   .hero-tablet .go-days span{border-color:#2a2c30;color:#c3c8d0}
   .hero-tablet .go-days .on{background:#FFE14D;border-color:#FFE14D;color:#000}
 }
+/* iPad message block (Nov 13): black block, white buttons, white typing box. Selected buttons are black on white-outlined. */
+@media(min-width:1061px){
+  .hero-tablet .go-msg{background:#fff;border-color:#fff;color:#2a2c30}
+  .hero-tablet .go-tog{background:#fff;border-color:#fff}
+  .hero-tablet .go-tog span{color:#000}
+  .hero-tablet .go-tog .on{background:#FFE14D;color:#000}
+  .hero-tablet .go-days span{background:#fff;border-color:#fff;color:#000}
+  .hero-tablet .go-days .on{background:#FFE14D;border-color:#FFE14D;color:#000}
+}
