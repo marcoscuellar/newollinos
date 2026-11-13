@@ -510,86 +510,62 @@ html,body{background:#fff}
   .hero-proof{left:calc(var(--hpad) + var(--hfs) * 8.5 + 56px)}
 }
 @media(min-width:1061px) and (max-width:1240px){.hero{--hfs:60px}}
-/* Laptop behind the phone (Nov 13, desktop ≥1280): an ŌLLIN OS workspace on a space-black laptop, sitting right of the copy,
-   with the phone in front over its lower-left corner. The screen UI is sized in em off the screen's own width (1em = width/96). */
-.hero-laptop{display:none}
+/* iPad beside the phone (Nov 13, desktop ≥1280): a portrait tablet running the ŌLLIN GO Up Next view (live layout, Pulse logo),
+   standing just right of the phone and overlapping it slightly. Taller than the phone, so it shows above it.
+   Screen UI is sized in em off the tablet screen's own width (1em = width/60). */
+.hero-tablet{display:none}
 @media(min-width:1280px){
   .hero{--hfs:clamp(64px,4.6vw,124px);--hp:clamp(230px,16.5vw,340px)}
   .hero-proof{width:var(--hp);left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px);bottom:calc(var(--hp) * -.62)}
   .hero-proof .hp-name{font-size:calc(var(--hp) * .083)}
-  .hero-laptop{display:block;position:absolute;z-index:2;bottom:clamp(170px,26vh,330px);
-    left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px + var(--hp) * .3);right:clamp(40px,3.5vw,100px);max-width:860px}
-  .hl-lid{position:relative;margin:0 5.5%;padding:.45%;border-radius:2.2% / 3.4%;
-    background:linear-gradient(180deg,#5b5e63,#2a2c30 6%,#1b1c1f 94%,#3a3c40);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
-  .hl-bezel{position:relative;padding:2.2% 1.6% 2.6%;border-radius:1.8% / 2.8%;background:#050505}
-  .hl-notch{position:absolute;top:0;left:50%;width:8%;height:2.6%;transform:translateX(-50%);border-radius:0 0 6px 6px;background:#050505;z-index:3}
-  .hl-notch:after{content:"";position:absolute;left:50%;top:30%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#2e3a55,#07080a 70%)}
-  .hl-screen{position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:4px;background:#fff;container-type:inline-size}
-  .hl-screen:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,rgba(255,255,255,.14),rgba(255,255,255,0) 35%)}
-  .hl-base{position:relative;height:0;padding-bottom:3.1%;border-radius:0 0 14px 14px / 0 0 22px 22px;
-    background:linear-gradient(180deg,#6d7076 0%,#3a3c40 18%,#232427 60%,#121315 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
-  .hl-base span{position:absolute;top:0;left:50%;width:15%;height:38%;transform:translateX(-50%);border-radius:0 0 8px 8px;background:linear-gradient(180deg,#1a1b1e,#2c2e32)}
-  .hl-base:after{content:"";position:absolute;left:4%;right:4%;bottom:-14px;height:14px;border-radius:50%;background:radial-gradient(ellipse at 50% 0,rgba(0,0,0,.55),transparent 70%)}
-  /* the app: ŌLLIN GO "Up Next" view, rebuilt from the live go.ollinos.com layout with the Pulse logo */
-  .go{font-size:calc(100cqw / 100);height:100%;display:flex;flex-direction:column;background:#000;color:#fff;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
-  .go-top{display:flex;align-items:center;gap:1.6em;height:5em;padding:0 2.2em;border-bottom:1px solid #1d1e21;flex-shrink:0}
-  .go-logo{display:flex;align-items:center;gap:.5em}.go-pulse{width:1.25em;height:1.5em}
+  .hero-tablet{display:block;position:absolute;z-index:2;width:calc(var(--hp) * 1.62);
+    left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px + var(--hp) * .86);bottom:calc(var(--hp) * .1)}
+  .ht-frame{position:relative;padding:4.2%;border-radius:7.5% / 5.4%;background:#060606;
+    box-shadow:0 0 0 2.5px #3c3e42,0 0 0 3.5px #8c8f95,0 0 0 4.5px #2a2c30,-24px 34px 60px -12px rgba(0,0,0,.55)}
+  .ht-cam{position:absolute;top:1.9%;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#2e3a55,#07080a 70%)}
+  .ht-screen{position:relative;aspect-ratio:1640/2360;overflow:hidden;border-radius:4.2% / 2.9%;background:#000;container-type:inline-size}
+  .ht-screen:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.13),rgba(255,255,255,0) 32%)}
+  .ht-btn{position:absolute;background:linear-gradient(90deg,#2a2c30,#8e9197 50%,#3a3c40);border-radius:2px}
+  .ht-top{top:-6px;right:14%;width:12%;height:3px;background:linear-gradient(180deg,#8e9197,#2a2c30)}
+  .ht-v1{right:-6.5px;top:9%;width:3px;height:6%}.ht-v2{right:-6.5px;top:16.5%;width:3px;height:6%}
+  /* the app, portrait */
+  .go{font-size:calc(100cqw / 60);height:100%;display:flex;flex-direction:column;background:#000;color:#fff;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+  .go-status{display:flex;justify-content:space-between;align-items:center;padding:1em 2em .3em;font:600 .95em Inter,sans-serif}
+  .go-status span:nth-child(2){margin-right:auto;margin-left:.8em;color:#9ba1ab}
+  .go-batt{width:2em;height:1em;border:1px solid rgba(255,255,255,.45);border-radius:.25em;padding:.1em}.go-batt i{display:block;height:100%;width:80%;border-radius:.15em;background:#fff}
+  .go-top{display:flex;align-items:center;gap:1.2em;padding:.8em 2em}
+  .go-logo{display:flex;align-items:center;gap:.5em}.go-pulse{width:1.3em;height:1.6em}
   .go-logo b{font:800 1.7em Archivo,Inter,sans-serif;letter-spacing:-.02em}.go-logo u{text-decoration:none;padding-left:.45em;border-left:1px solid #3a3c40;font:400 1.6em Inter,sans-serif;color:#8b9099}
-  .go-tabs{display:flex;gap:.2em;padding:.35em;border:1px solid #2a2c30;border-radius:2em}
-  .go-tabs span{padding:.45em .9em;border-radius:1.5em;font-size:1.05em;color:#c3c8d0}.go-tabs .on{background:#1d1e21;color:#fff}
   .go-sent{margin-left:auto;font-size:1em;color:#c3c8d0}.go-sent b{color:#FFE14D;margin-right:.3em}
-  .go-btn{padding:.55em 1.1em;border:1px solid #3a3c40;border-radius:2em;font:600 1em Inter,sans-serif}
-  .go-filters{display:flex;align-items:center;gap:.7em;padding:1.3em 2.2em .6em}
+  .go-btn{padding:.5em 1em;border:1px solid #3a3c40;border-radius:2em;font:600 1em Inter,sans-serif}
+  .go-tabs{display:flex;gap:.2em;margin:.2em 2em .4em;padding:.3em;border:1px solid #2a2c30;border-radius:2em}
+  .go-tabs span{flex:1;text-align:center;padding:.5em 0;border-radius:1.5em;font-size:1em;color:#c3c8d0}.go-tabs .on{background:#1d1e21;color:#fff}
+  .go-filters{display:flex;align-items:center;gap:.6em;padding:.8em 2em .6em}
   .go-eb{font:600 .8em 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#9ba1ab}.go-eb b{color:#000}
   .go-filters .go-eb{margin-right:auto;color:#c3c8d0}
-  .go-chip{padding:.45em .9em;border-radius:2em;border:1px solid #2a2c30;font:600 .95em Inter,sans-serif}.go-chip b{margin-left:.4em;color:#8b9099}
+  .go-chip{padding:.4em .9em;border-radius:2em;border:1px solid #2a2c30;font:600 .95em Inter,sans-serif}.go-chip b{margin-left:.4em;color:#8b9099}
   .go-chip.on{background:#FFE14D;border-color:#FFE14D;color:#000}.go-chip.on b{color:#000}
-  .go-main{flex:1;display:grid;grid-template-columns:24em 1fr;gap:1.4em;padding:.6em 2.2em 0;min-height:0}
-  .go-list{display:flex;flex-direction:column;gap:.7em}
-  .go-card{position:relative;padding:1em 1.2em;border-radius:.7em;background:#121315;border:1px solid #232427}
+  .go-list{display:grid;grid-template-columns:repeat(3,1fr);gap:.7em;padding:0 2em 1.2em}
+  .go-card{padding:.9em 1em;border-radius:.7em;background:#121315;border:1px solid #232427;min-width:0}
   .go-card.on{background:#fff;color:#000;box-shadow:0 0 0 .2em #FFE14D}
-  .go-card b{display:block;font:800 1.35em Archivo,Inter,sans-serif;letter-spacing:-.02em}
-  .go-card small{display:block;margin:.15em 0 .45em;font-size:.95em;color:#9ba1ab}
-  .go-card span{display:flex;align-items:center;gap:.5em;font-size:.95em}
-  .go-card span i{display:grid;place-items:center;width:1.4em;height:1.4em;border-radius:.3em;background:#232427;font:700 .7em Inter,sans-serif;font-style:normal;color:#c3c8d0}
-  .go-card.on span i{background:#eee;color:#000}
-  .go-card em{position:absolute;top:1em;right:1em;padding:.3em .5em;border-radius:.3em;background:#000;border:1px solid #2a2c30;font:600 .6em 'IBM Plex Mono',monospace;font-style:normal;letter-spacing:.1em;color:#FFE14D}
-  .go-sheet{border-radius:1.2em 1.2em 0 0;background:#fff;color:#000;overflow:hidden}
-  .go-head{position:relative;padding:2em 2.4em 1.4em;border-bottom:1px solid #ececec}
-  .go-ver{position:absolute;top:1.8em;right:2.2em;display:flex;flex-direction:column;align-items:center;gap:.4em}
+  .go-card b{display:block;font:800 1.2em Archivo,Inter,sans-serif;letter-spacing:-.02em;white-space:nowrap}
+  .go-card small,.go-card span{display:block;font-size:.85em;color:#9ba1ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .go-card span{margin-top:.3em;color:inherit}
+  .go-sheet{flex:1;margin:0 2em;border-radius:1.2em 1.2em 0 0;background:#fff;color:#000;overflow:hidden}
+  .go-head{position:relative;padding:1.8em 2em 1.3em;border-bottom:1px solid #ececec}
+  .go-ver{position:absolute;top:1.6em;right:1.8em;display:flex;flex-direction:column;align-items:center;gap:.4em}
   .go-ver .go-pulse{width:2em;height:2.4em}.go-ver small{font:600 .6em 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#5b6068}
-  .go-head h3{margin:.5em 0 .2em;font:800 4em/1 Archivo,Inter,sans-serif;letter-spacing:-.04em;color:#000}
-  .go-role{margin:0;font:600 1.25em Inter,sans-serif}.go-role b{color:#7a6600}
+  .go-head h3{margin:.5em 0 .2em;font:800 4.2em/1 Archivo,Inter,sans-serif;letter-spacing:-.04em;color:#000}
+  .go-role{margin:0;font:600 1.15em Inter,sans-serif}.go-role b{color:#7a6600}
   .go-meta{margin:.6em 0;font:500 .8em 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#5b6068}
   .go-mush{display:inline-block;padding:.4em .9em;border:1px solid #d6d8dc;border-radius:2em;font:600 .75em 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#5b6068}.go-mush b{color:#000}
-  .go-cols{display:grid;grid-template-columns:1fr 1fr}
-  .go-know{padding:1.4em 2.4em;border-right:1px solid #ececec}.go-know .go-eb b{margin-right:.5em}
-  .go-k{display:grid;grid-template-columns:5.5em 1fr;gap:1em;padding:1em 0;border-bottom:1px solid #ececec}
+  .go-know{padding:1.2em 2em .4em}.go-know .go-eb b{margin-right:.5em}
+  .go-k{display:grid;grid-template-columns:5.5em 1fr;gap:1em;padding:.9em 0;border-bottom:1px solid #ececec}
   .go-k i{font:700 .75em 'IBM Plex Mono',monospace;font-style:normal;letter-spacing:.1em}
   .go-k span{font-size:1.1em;line-height:1.4;color:#2a2c30}.go-k small{margin-left:.5em;font:600 .6em 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8b9099}
-  .go-draft{display:flex;flex-direction:column;gap:.8em;padding:1.4em 2em;background:#fafafa}
+  .go-draft{display:flex;flex-direction:column;gap:.8em;margin:.6em 2em;padding:1.2em;border-radius:.9em;background:#fafafa;border:1px solid #ececec}
   .go-tog{display:inline-flex;align-self:flex-start;padding:.3em;border:1px solid #e3e5e8;border-radius:.6em;background:#fff}
   .go-tog span{padding:.5em 1em;border-radius:.4em;font:600 1em Inter,sans-serif}.go-tog .on{background:#FFE14D}
-  .go-msg{padding:1.1em 1.2em;border:1px solid #e3e5e8;border-radius:.8em;background:#fff;font-size:1.1em;line-height:1.5;color:#2a2c30}
-  .go-days{display:flex;gap:.5em}.go-days span{flex:1;padding:.6em 0;text-align:center;border:1px solid #e3e5e8;border-radius:2em;font:600 1em Inter,sans-serif}
-  .go-days .on{background:#000;color:#FFE14D;border-color:#000}
+  .go-msg{padding:1em 1.1em;border:1px solid #e3e5e8;border-radius:.8em;background:#fff;font-size:1.1em;line-height:1.5;color:#2a2c30}
 }
-
-/* Monitor instead of laptop (Nov 13): a studio-style display on a stand, taller than the phone. */
-@media(min-width:1280px){
-  .hero-laptop{bottom:-2px;right:clamp(36px,3vw,90px);max-width:900px}
-  .hl-lid{margin:0;padding:.55%;border-radius:1.6% / 2.6%;
-    background:linear-gradient(180deg,#d9dbde,#9a9da3 3%,#7d8086 50%,#9a9da3 97%,#c7c9cd);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35),0 30px 60px -20px rgba(0,0,0,.6)}
-  .hl-bezel{padding:1.5%;border-radius:1.2% / 2%;background:#050505}
-  .hl-screen{aspect-ratio:16/10;border-radius:2px}
-  .hl-stand{position:relative;height:0;padding-bottom:17%}
-  .hl-neck{position:absolute;top:0;left:50%;width:20%;height:82%;transform:translateX(-50%);
-    clip-path:polygon(8% 0,92% 0,100% 100%,0 100%);background:linear-gradient(90deg,#6d7076,#c9cbcf 35%,#a3a6ab 65%,#5d6066)}
-  .hl-neck:before{content:"";position:absolute;inset:0 0 auto;height:14%;background:linear-gradient(180deg,rgba(0,0,0,.45),transparent)}
-  .hl-foot{position:absolute;bottom:0;left:50%;width:34%;height:18%;transform:translateX(-50%);border-radius:10px 10px 4px 4px;
-    background:linear-gradient(180deg,#d4d6d9,#8e9197 40%,#5d6066);box-shadow:0 10px 22px rgba(0,0,0,.55)}
-}
-@media(min-width:1280px){
-  .hero-laptop{left:calc(var(--hpad) + var(--hfs) * 8.5 + 40px + var(--hp) * .45)}
-  .hl-stand{padding-bottom:24%}
-}
+@media(min-width:1280px){.go-days{display:flex;gap:.5em}.go-days span{flex:1;padding:.6em 0;text-align:center;border:1px solid #e3e5e8;border-radius:2em;font:600 1em Inter,sans-serif}.go-days .on{background:#000;color:#FFE14D;border-color:#000}}
