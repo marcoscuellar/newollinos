@@ -443,3 +443,42 @@ html,body{background:#fff}
 
 /* Focus on dark panels: Signal Yellow (Nov 7) */
 .dark a:focus-visible,.dark button:focus-visible,.dark input:focus-visible,.dark select:focus-visible,.dark textarea:focus-visible{outline-color:#ffe14d}
+/* Hero phone, hyper-real (Nov 12): straight-on, rising out of the hero's bottom edge and cropped by it.
+   Real build: brushed titanium rail, black glass bezel, Dynamic Island with lens, side buttons and antenna lines,
+   glass glare, and a soft directional shadow that throws left like the window light in the photo. Hidden under 1060px. */
+.hero-proof{position:absolute;right:76px;bottom:-120px;top:auto;z-index:3;width:300px;perspective:none}
+.hero-proof .hp-phone{position:relative;padding:3.5px;border-radius:52px;transform:none;
+  background:linear-gradient(90deg,#3a3c40 0%,#9a9da3 1.4%,#5d6066 3%,#2b2d31 6%,#2b2d31 94%,#5d6066 97%,#a7aab0 98.6%,#3a3c40 100%);
+  box-shadow:0 0 0 .5px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(0,0,0,.6),
+    -30px 40px 70px -10px rgba(0,0,0,.55),-10px 16px 28px rgba(0,0,0,.35),-2px 4px 6px rgba(0,0,0,.3)}
+.hero-proof .hp-phone:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 8%,rgba(255,255,255,0) 92%,rgba(255,255,255,.1));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:3.5px}
+.hero-proof .hp-bezel{position:relative;padding:9px;border-radius:48.5px;background:#030303;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),inset 0 0 0 2px #000}
+.hero-proof .hp-screen{position:relative;border-radius:40px;overflow:hidden;background:#fff;-webkit-font-smoothing:antialiased}
+.hero-proof .hp-island{top:20px;left:50%;transform:translateX(-50%);width:86px;height:25px;border-radius:14px;background:#000;z-index:6;
+  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.05)}
+.hero-proof .hp-island i{position:absolute;right:9px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#3b4a6b 0%,#141a26 45%,#050608 70%);box-shadow:0 0 0 1px #0d0e10,inset 0 0 1px rgba(120,150,220,.5)}
+.hero-proof .hp-glare{display:block;position:absolute;inset:9px;border-radius:40px;pointer-events:none;z-index:7;transform:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.05) 22%,rgba(255,255,255,0) 38%,rgba(255,255,255,0) 100%),
+    radial-gradient(120% 60% at 100% 0%,rgba(255,255,255,.07),transparent 60%)}
+.hero-proof .hp-btn{position:absolute;width:3px;border-radius:2px;z-index:0;
+  background:linear-gradient(90deg,#26282c,#8e9197 45%,#45484d)}
+.hero-proof .hp-act{left:-2.5px;top:118px;height:30px}
+.hero-proof .hp-vup{left:-2.5px;top:170px;height:54px}
+.hero-proof .hp-vdn{left:-2.5px;top:236px;height:54px}
+.hero-proof .hp-pwr{right:-2.5px;top:190px;height:86px;background:linear-gradient(270deg,#26282c,#8e9197 45%,#45484d)}
+.hero-proof .hp-cam{right:-2px;top:390px;height:42px;width:2.5px;background:linear-gradient(270deg,#1d1f22,#5a5d62)}
+.hero-proof .hp-ant{position:absolute;width:3.5px;height:5px;z-index:2;background:#1b1c1f}
+.hero-proof .hp-ant1{left:0;top:66px}.hero-proof .hp-ant2{right:0;top:66px}
+.hero-proof .hp-status{padding:17px 26px 6px;font:600 12.5px Inter,sans-serif;letter-spacing:-.01em}
+.hero-proof .hp-sys{display:flex;align-items:center;gap:5px}
+.hero-proof .hp-batt{position:relative;display:block;width:21px;height:10px;border:1px solid rgba(255,255,255,.45);border-radius:3px;padding:1px}
+.hero-proof .hp-batt:after{content:"";position:absolute;right:-3px;top:3px;width:1.5px;height:3px;border-radius:0 1px 1px 0;background:rgba(255,255,255,.45)}
+.hero-proof .hp-batt i{display:block;height:100%;width:80%;border-radius:1.5px;background:#fff}
+.hero-proof .hp-bar{padding:8px 18px 10px}
+.hero-proof .hp-reflect,.hero-proof .hp-fade,.hero-proof .hp-edge{display:none}
+@media(max-width:1240px){.hero-proof{width:280px;right:40px;bottom:-130px}}
+@media(max-width:1060px){.hero-proof{display:none}}
