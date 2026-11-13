@@ -527,3 +527,39 @@ html,body{background:#fff}
   .hero .hero-stage .hero-proof{width:210px;left:-6%}
 }
 @media(min-width:1061px){.go-eb2{display:block;margin-top:1.6em}}
+/* Strict palette pass (Nov 13): true black, white, Signal Yellow only on the headline period and primary actions.
+   The Pulse logo stays yellow (it is the brand mark). Everything else in the hero UI is black, white or neutral grey. */
+@media(min-width:1061px){
+  .hero-cta{margin-top:30px;position:relative;z-index:2}
+  .hs-glass{border-radius:26px;background:#000;-webkit-backdrop-filter:none;backdrop-filter:none;
+    box-shadow:0 2px 6px rgba(0,0,0,.4),0 28px 70px -24px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.04)}
+  .hs-glass>.go{border-radius:18px}
+  .go-tabs .on{background:#fff;color:#000}
+  .go-sent b{color:#fff}
+  .go-card.on{box-shadow:0 0 0 .15em #fff}
+  .go-card em{color:#fff;border-color:#3a3c40}
+  .go-role b{box-shadow:none;text-decoration:underline;text-underline-offset:.2em}
+  .go-tog .on{background:#000;color:#fff}
+  .go-days .on{color:#fff}
+  .go-send{display:block;padding:.75em 0;text-align:center;border-radius:.6em;background:#FFE14D;color:#000;font:600 1.05em Inter,sans-serif}
+  .hero .hero-stage .hero-proof{border-radius:26px}
+  .hs-card-top em{color:#fff}.hs-card-top em i{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.18)}
+  .hero-stage .hp-eyebrow{color:#9ba1ab}.hero-stage .hp-eyebrow.hp-grey{color:#5b6068}
+  .hero-stage .hp-title{color:#fff}
+  .hero-stage .hp-src i{background:#9ba1ab}
+  .hero-stage .hp-chain b{background:#000;color:#fff}
+  .hero-media.scene>img{filter:grayscale(1) contrast(1.05) brightness(.6);opacity:.5}
+}
+/* Finish the cards (Nov 13): panel sizes to its content, sheet and list cards end with rounded corners, no cut-off edges. */
+@media(min-width:1061px){
+  .hs-glass>.go{aspect-ratio:auto}
+  .go-main{padding-bottom:2.2em;align-items:start}
+  .go-sheet{border-radius:1.2em}
+  .go-know{padding-bottom:1.8em}.go-know .go-k:last-child{border-bottom:0}
+  .go-draft{border-radius:0 0 1.2em 0;align-self:stretch}
+  .go-list{padding-bottom:0}
+}
+@media(min-width:1061px){
+  .hero-stage{transform:translateY(-64%)}
+  .hero .hero-stage .hero-proof{bottom:-36%;left:-7%}
+}
