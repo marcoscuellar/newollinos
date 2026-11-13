@@ -15,6 +15,7 @@ const hero = document.querySelector(".hero");
 const media = hero && hero.querySelector(".hero-media");
 const img = media && media.querySelector("img");
 const card = hero && hero.querySelector(".hero-proof");
+const tablet = hero && hero.querySelector(".hero-tablet");
 
 if (img) main();
 
@@ -119,6 +120,7 @@ function main() {
   if (reduce) {
     media.classList.add("sig-on", "sig-still");
     if (card) card.style.transform = "none";
+    if (tablet) tablet.style.transform = "none";
     return;
   }
 
@@ -145,6 +147,10 @@ function main() {
     // The dashboard rises out of the bottom edge, then fills itself in
     if (card) {
       animate(card, { y: [170, 0], opacity: [0, 1] }, { duration: 1, delay: .9, ease: EASE });
+    }
+    // The iPad rises just behind it, a beat later, so the two land as a pair
+    if (tablet) {
+      animate(tablet, { y: [200, 0], opacity: [0, 1] }, { duration: 1.1, delay: 1.05, ease: EASE });
       
     }
   }

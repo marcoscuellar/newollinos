@@ -634,3 +634,12 @@ html,body{background:#fff}
     radial-gradient(32% 44% at 30% 4%,rgba(120,124,130,.22) 0%,rgba(120,124,130,0) 72%)}
   .hero.panel:after{opacity:.24}
 }
+/* Hero stays in step with the page (Nov 13): same width as the sections below it, and past 1440px wide (or when
+   zoomed out) it stops growing — the type, phone and iPad hold their 1440 sizes instead of scaling with the window. */
+@media(min-width:1061px){
+  .hero.panel{width:auto;margin-left:0;margin-right:0;min-height:min(max(680px,calc(100svh - 110px)),860px)}
+}
+@media(min-width:1441px){
+  .hero{--hpad:72px;--hfs:66px;--hp:250px}
+  .hero .hero-sub{font-size:16px}
+}
