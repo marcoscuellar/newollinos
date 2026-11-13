@@ -670,3 +670,7 @@ html,body{background:#fff}
 .train-earn{display:block;margin-top:12px;font:500 15px/1.4 Inter,Arial,sans-serif;color:#fff;opacity:.9}
 .train-panel .train-caption{top:30px;bottom:auto}
 @media(max-width:600px){.train-panel .train-copy{left:26px;bottom:24px;right:90px}.train-panel .train-copy p{font-size:23px}.train-earn{font-size:13px}.train-panel .train-caption{top:24px}}
+/* Bigger photo-card copy (Nov 13). */
+.train-panel .train-copy p{font-size:clamp(30px,3.1vw,46px);line-height:1.08}
+.train-earn{font-size:clamp(16px,1.35vw,20px);margin-top:16px}
+@media(max-width:600px){.train-panel .train-copy p{font-size:27px}.train-earn{font-size:15px}}
