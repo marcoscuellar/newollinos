@@ -775,3 +775,11 @@ html,body{background:#fff}
   .hero .hero-media.scene>img{object-position:0% 70%}
   .hero .hero-media.scene:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.6) 30%,rgba(0,0,0,.12) 52%,transparent 70%),linear-gradient(180deg,transparent 60%,rgba(0,0,0,.55) 100%)}
 }
+/* Nov 20: office meeting photo. People sit right; headline on the window side, left. */
+.hero .hero-media.scene>img{object-position:72% 50%}
+@media(min-width:1061px){.hero .hero-media.scene>img{inset:0 auto auto 0!important;left:0!important;right:auto!important;transform:none!important;translate:none!important;object-position:0% 50%!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:none!important;scale:1!important}}
+@media(min-width:1061px){
+  .hero .hero-media.scene:after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.55) 30%,rgba(0,0,0,.12) 50%,transparent 62%),
+               linear-gradient(180deg,transparent 62%,rgba(0,0,0,.5) 100%)}
+}
