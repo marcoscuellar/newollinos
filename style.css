@@ -799,3 +799,4 @@ html,body{background:#fff}
 }
 @media(max-width:1060px){.hero .hero-message h1{font-size:clamp(44px,12vw,60px)!important;line-height:.96!important;letter-spacing:-.045em!important}
   .hero .hero-media.scene>img{filter:brightness(.85) contrast(1.1)}}
+@media(max-width:1060px){.hero .hero-media.scene>img{object-position:78% 50%!important}}
