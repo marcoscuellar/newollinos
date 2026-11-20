@@ -770,3 +770,8 @@ html,body{background:#fff}
 /* Keep the headline clear of the iPad (Nov 13): copy starts on the page gutter, headline a touch smaller on wide screens. */
 @media(min-width:1280px){.hero .hero-message,.hero .hero-bottom{left:var(--hpad)!important}}
 @media(min-width:1440px){.hero{--hfs:58px}}
+/* Nov 20: rooftop photo, no devices. Keep the faces clear of the headline. */
+@media(min-width:1061px){
+  .hero .hero-media.scene>img{object-position:0% 70%}
+  .hero .hero-media.scene:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.6) 30%,rgba(0,0,0,.12) 52%,transparent 70%),linear-gradient(180deg,transparent 60%,rgba(0,0,0,.55) 100%)}
+}
