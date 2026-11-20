@@ -783,3 +783,19 @@ html,body{background:#fff}
     background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.55) 30%,rgba(0,0,0,.12) 50%,transparent 62%),
                linear-gradient(180deg,transparent 62%,rgba(0,0,0,.5) 100%)}
 }
+/* Nov 20: hero impact pass. Moodier photo, much bigger headline (4 lines on desktop). */
+.hero h1 br.hb{display:none}
+@media(min-width:1061px){
+  .hero h1 br.hb{display:inline}
+  .hero .hero-media.scene>img{filter:brightness(.78) contrast(1.12) saturate(1.05)}
+  .hero .hero-media.scene:after{background:
+    linear-gradient(90deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.62) 32%,rgba(0,0,0,.18) 52%,transparent 64%),
+    linear-gradient(180deg,rgba(0,0,0,.25) 0%,transparent 30%,transparent 62%,rgba(0,0,0,.6) 100%)!important}
+  .hero{--hfs:clamp(76px,6.2vw,104px)}
+  .hero .hero-message{max-width:none!important;top:50%!important;bottom:auto!important;translate:0 0!important;transform:translateY(-54%)!important;margin-top:0!important}
+  .hero .hero-message h1{font-size:var(--hfs)!important;line-height:.94!important;letter-spacing:-.05em!important}
+  .hero .hero-message .hero-sub{font-size:20px;line-height:1.5;max-width:520px;margin-top:26px}
+  .hero .hero-cta{font-size:18px;padding:16px 30px;margin-top:6px}
+}
+@media(max-width:1060px){.hero .hero-message h1{font-size:clamp(44px,12vw,60px)!important;line-height:.96!important;letter-spacing:-.045em!important}
+  .hero .hero-media.scene>img{filter:brightness(.85) contrast(1.1)}}
