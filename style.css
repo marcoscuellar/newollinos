@@ -770,8 +770,18 @@ html,body{background:#fff}
 /* Keep the headline clear of the iPad (Nov 13): copy starts on the page gutter, headline a touch smaller on wide screens. */
 @media(min-width:1280px){.hero .hero-message,.hero .hero-bottom{left:var(--hpad)!important}}
 @media(min-width:1440px){.hero{--hfs:58px}}
-/* Nov 20: rooftop photo, no devices. Keep the faces clear of the headline. */
+/* Nov 20: rooftop photo, no devices. People smaller (photo sits bottom-right and
+   melts into true black), copy bigger and up top where it reads on black. */
 @media(min-width:1061px){
-  .hero .hero-media.scene>img{object-position:0% 70%}
-  .hero .hero-media.scene:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.6) 30%,rgba(0,0,0,.12) 52%,transparent 70%),linear-gradient(180deg,transparent 60%,rgba(0,0,0,.55) 100%)}
+  .hero{background:#000}
+  .hero .hero-media.scene{background:#000}
+  .hero .hero-media.scene>img{position:absolute!important;inset:auto 0 0 auto!important;width:86%!important;height:auto!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;scale:1!important;object-fit:initial!important;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 26%),linear-gradient(180deg,transparent 0%,#000 22%);
+    -webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0%,#000 26%),linear-gradient(180deg,transparent 0%,#000 22%);mask-composite:intersect}
+  .hero .hero-media.scene:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.25) 34%,transparent 55%)}
+  .hero .hero-message{translate:0 0!important;transform:none!important;margin-top:0!important;top:64px!important;bottom:auto!important}
+  .hero{--hfs:clamp(72px,6vw,96px)}
+  .hero .hero-message{max-width:calc(var(--hfs) * 8.6)}
+  .hero .hero-message .hero-sub{font-size:21px;line-height:1.5;max-width:560px}
+  .hero .hero-cta{font-size:18px;padding:16px 30px}
 }
